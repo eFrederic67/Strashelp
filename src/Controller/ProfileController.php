@@ -117,7 +117,6 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $profile = $profileManager->selectOneById($id);
-
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 }

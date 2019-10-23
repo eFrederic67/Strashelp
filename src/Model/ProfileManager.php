@@ -72,10 +72,6 @@ class ProfileManager extends AbstractManager
         return $statement->execute();
     }
 
-    public function get()
-    {
-        $requete = 'SELECT * FROM $this->table';
-        $profile = $this->pdo->query($requete)->fetchAll();
-        return $profile;
-    }
+
+
 }
