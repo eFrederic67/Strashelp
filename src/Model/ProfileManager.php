@@ -63,7 +63,6 @@ class ProfileManager extends AbstractManager
 
     public function update(array $profile):bool
     {
-
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table SET `title` = :title WHERE id=:id");
         $statement->bindValue('id', $profile['id'], \PDO::PARAM_INT);
@@ -71,7 +70,4 @@ class ProfileManager extends AbstractManager
 
         return $statement->execute();
     }
-
-
-
 }
