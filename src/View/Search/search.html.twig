@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <table>
+    {% for searchid in search %}
+        <tr>
+        <td>{{ searchid.title }}</td>
+        <td>{{ searchid.start_hour }}</td>
+        <td>{{ searchid.end_hour }}</td>
+        <td>{{ searchid.date_publication }} </td>
+        <td>{{ searchid.text_annoucement }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
