@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <table id="myTable" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Date de publication</th>
+            <th>Contenu</th>
+            <th>Annonceur</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for searchid in search %}
+            <tr>
+                <td>{{ searchid.title }}</td>
+                <td>{{ searchid.start_hour }}</td>
+                <td>{{ searchid.end_hour }}</td>
+                <td>{{ searchid.date_publication }} </td>
+                <td>{{ searchid.text_annoucement }}</td>
+                <td>{{ searchid.id_user }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+{% endblock %}
