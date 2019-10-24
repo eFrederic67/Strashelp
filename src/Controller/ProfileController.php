@@ -53,30 +53,6 @@ class ProfileController extends AbstractController
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 
-
-    /**
-     * Display profile edition page specified by $id
-     *
-     * @param int $id
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function edit(int $id): string
-    {
-        $profileManager = new profileManager();
-        $profile = $profileManager->selectOneById($id);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $profile['title'] = $_POST['title'];
-            $profileManager->update($profile);
-        }
-
-        return $this->twig->render('profile/edit.html.twig', ['profile' => $profile]);
-    }
-
-
     /**
      * Display profile creation page
      *
@@ -118,5 +94,21 @@ class ProfileController extends AbstractController
         $profileManager = new profileManager();
         $profile = $profileManager->selectOneById($id);
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
+    }
+
+    public function myprofile()
+    {
+        $profileManager = new profileManager();
+        $profiles = $profileManager->selectAll();
+
+        return $this->twig->render('Profile/myprofile.html.twig', ['profiles' => $profiles]);
+    }
+
+    public function edit()
+    {
+        $profileManager = new profileManager();
+        $profiles = $profileManager->selectAll();
+
+        return $this->twig->render('Profile/edit.html.twig', ['profiles' => $profiles]);
     }
 }
