@@ -9,6 +9,7 @@ class SearchController extends AbstractController
     {
         $searchManager = new SearchManager();
         $search = $searchManager->selectAll();
+
         return $this->twig->render(
             'Search/search.html.twig',
             [
@@ -16,6 +17,7 @@ class SearchController extends AbstractController
             ]
         );
     }
+
     public function date()
     {
         $searchManager = new SearchManager();
