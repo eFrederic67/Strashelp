@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    {{ message }}
+    <h1>Formulaire d'inscription</h1>
+    <form class="Session_form" target="" method="POST">
+        <div>
+            <label  for="login">Choississez un login</label><br/>
+            <input  type="text"  id="login"  name="login"  /> {# <?php if(isset($_POST['user_name'])) echo ('value="'.$_POST['user_name'].'"'); ?> /><?php if(isset($errors['user_name'])) echo ' '.$errors['user_name']; ?>#}
+        </div>
+        <div>
+            <label  for="lastname">Nom</label><br/>
+            <input  type="text"  id="lastname"  name="lastname"  /> {# <?php if(isset($_POST['user_name'])) echo ('value="'.$_POST['user_name'].'"'); ?> /><?php if(isset($errors['user_name'])) echo ' '.$errors['user_name']; ?>#}
+        </div>
+        <div>
+            <label  for="firstname">Prénom</label><br/>
+            <input  type="text"  id="firstname"  name="firstname"  /> {# <?php if(isset($_POST['user_name'])) echo ('value="'.$_POST['user_name'].'"'); ?> /><?php if(isset($errors['user_name'])) echo ' '.$errors['user_name']; ?>#}
+        </div>
+        <div>
+            <label  for="password">Saississez un mot de passe</label><br/>
+            <input  type="password"  id="password"  name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="passwordConf">Confirmez votre mot de passe</label><br/>
+            <input  type="password"  id="passwordConf"  name="passwordConf" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+
+        <div>
+            <label  for="adresse_1">Adresse</label><br/>
+            <input  type="text"  id="adresse_1" name="adresse_1"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="adresse_2">Adresse complément <i>(optionnel)</i></label><br/>
+            <input  type="text"  id="adresse_2" name="adresse_2"/> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="zipcode">Code postal</label><br/>
+            <input  type="text"  id="zipcode" name="zipcode"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="city">Ville</label><br/>
+            <input  type="text"  id="city" name="city"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="phone">Téléphone <i>(fixe ou portable)</i></label><br/>
+            <input  type="text"  id="phone" name="phone" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}" minlength="10" maxlength="15" placeholder="0612345678"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="phone">Date de naissance <i>(format jj-mm-aaaa)</i></label><br/>
+            <input  type="text"  id="phone" name="phone" pattern="[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{4}" minlength="8" maxlength="8" placeholder="23-10-1979"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+        </div>
+        <div>
+            <label  for="avatar">Changer de photo de profil<br/>
+            <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+            <img src="/assets/images/profil.png" alt="profil">
+            </label><br/>
+            <input  type="file"  id="avatar" name="avatar" /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+            <label>max 2 Mo</label><br/>
+        </div>
+
+
+        <div  class="button">
+            <button  type="submit">Envoyer</button>
+        </div>
+    </form>
+{% endblock %}
