@@ -6,8 +6,6 @@
         <tr>
             <th>Titre</th>
             <th>Date de début</th>
-            <th>Date de fin</th>
-            <th>Date de publication</th>
             <th>Contenu</th>
             <th>Annonceur</th>
         </tr>
@@ -15,12 +13,10 @@
         <tbody>
         {% for searchid in search %}
             <tr>
-                <td>{{ searchid.title }}</td>
+                <td><a href="search.html.twig"> {{ searchid.title }}</a></td>
                 <td>{{ searchid.start_hour }}</td>
-                <td>{{ searchid.end_hour }}</td>
-                <td>{{ searchid.date_publication }} </td>
                 <td>{{ searchid.text_annoucement }}</td>
-                <td>{{ searchid.id_user }}</td>
+                <td><a href="../Home/index.html.twig">{{ searchid.id_user }}</a></td>
             </tr>
         {% endfor %}
         </tbody>

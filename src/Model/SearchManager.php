@@ -11,19 +11,13 @@ class SearchManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function search(string $name)
+    public function search()
     {
-        $select = $this->pdo->prepare("SELECT * FROM ".self::TABLE." WHERE id=:post");
-        $select->bindValue('post', $name, \PDO::PARAM_STR);
-        $select->execute();
-        return $select->fetchAll();
-    }
-
-    public function searchDate()
-    {
-        $select = $this->pdo->prepare("SELECT * FROM ".self::TABLE." WHERE start_hour BETWEEN :targ1 AND :targ2");
-        $select->bindValue('targ1', '2019-07-23 14:00:00', \PDO::PARAM_STR);
-        $select->bindValue('targ2', '2019-11-18 20:00:00', \PDO::PARAM_STR);
+        $select = $this->pdo->prepare("SELECT id, type, title, id_category, 
+    DATE_FORMAT(start_hour, '%a %b %H %i') AS 
+    start_hour, DATE_FORMAT(end_hour, '%a %b %H %i') AS end_hour, id_user,
+    DATE_FORMAT(date_publication, '%a %b %H %i') AS date_publication,text_annoucement, nbmin, nbmax FROM ".self::TABLE);
+        // $select->bindValue('post', $name, \PDO::PARAM_STR);
         $select->execute();
         return $select->fetchAll();
     }
