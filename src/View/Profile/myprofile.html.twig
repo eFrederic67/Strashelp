@@ -4,9 +4,10 @@
 
     <div>
         <div>
-            <h2>Profil de {{ myprofile.nickname }}</h2>
+            <h2>Mon profil</h2>
             <img src="{{ myprofile.avatar }}" alt="avatar">
             <div>
+                <p>{{ myprofile.nickname }}</p>
                 <p>{{ myprofile.firstname }} {{ myprofile.lastname }}</p>
                 <p>{{ myprofile.birthday }}</p>
                 <p>{{ myprofile.city }}</p>
@@ -23,6 +24,9 @@
         <div>
             <p>{{ myprofile.description }}</p>
         </div>
+
+        <a href="/profile/edit/1">Modifier mon profil</a>
+
     </div>
 
 

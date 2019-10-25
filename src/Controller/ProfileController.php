@@ -96,19 +96,25 @@ class ProfileController extends AbstractController
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 
-    public function myprofile()
+    public function myprofile(int $id)
     {
         $profileManager = new profileManager();
-        $profiles = $profileManager->selectAll();
+        $myprofile = $profileManager->selectOneById($id);
 
-        return $this->twig->render('Profile/myprofile.html.twig', ['profiles' => $profiles]);
+        return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile]);
     }
 
-    public function edit()
+    public function edit(int $id): string
     {
         $profileManager = new profileManager();
-        $profiles = $profileManager->selectAll();
+        $myprofile = $profileManager->selectOneById($id);
 
-        return $this->twig->render('Profile/edit.html.twig', ['profiles' => $profiles]);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $myprofile['email'] = $_POST['email'];
+            $profileManager->update($myprofile);
+            return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile]);
+        }
+
+        return $this->twig->render('Profile/edit.html.twig', ['myprofile' => $myprofile]);
     }
 }
