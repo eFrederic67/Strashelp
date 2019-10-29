@@ -17,4 +17,18 @@ class SearchController extends AbstractController
             ]
         );
     }
+
+    public function addPost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $itemManager = new SearchManager();
+            $item = [
+                'add' => $_POST['add'],
+            ];
+            $id = $itemManager->addPost($item);
+            header('Location:/Search/add/' . $id);
+        }
+
+        return $this->twig->render('Search/add.html.twig');
+    }
 }

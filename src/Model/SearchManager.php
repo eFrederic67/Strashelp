@@ -22,4 +22,11 @@ class SearchManager extends AbstractManager
         $select->execute();
         return $select->fetchAll();
     }
+
+    public function addPost($item):string
+    {
+        $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE." VALUES (:title)");
+        $statement->bindValue('add', $item['add'], \PDO::PARAM_STR);
+        $statement->execute();
+    }
 }
