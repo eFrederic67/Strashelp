@@ -57,7 +57,7 @@ class ProfileManager extends AbstractManager
 
 
     /**
-     * @param array $profile
+     * @param array $myprofile
      * @return bool
      */
 
