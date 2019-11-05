@@ -22,13 +22,12 @@ class SearchController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $itemManager = new SearchManager();
-            $item = [
+            /*$item = [
                 'add' => $_POST['add'],
-            ];
-            $id = $itemManager->addPost($item);
-            header('Location:/Search/add/' . $id);
+            ];*/
+            $bazar = $itemManager->addPost($_POST);
+            // header('Location:/Search/add/' . $id);
+            return $this->twig->render('Search/add.html.twig', ['bazar'=>$bazar]);
         }
-
-        return $this->twig->render('Search/add.html.twig');
     }
 }

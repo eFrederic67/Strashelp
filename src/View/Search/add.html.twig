@@ -1,9 +1,19 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-
+{{ bazar }}
 <form method="post" action="">
-    <input type="text" value="" name="add" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
+    <input type="text" value="" name="type" style="border: solid 1px black;" placeholder="Entrer une type d'annonce">
+    <input type="text" value="" name="title" style="border: solid 1px black;" placeholder="Entrer un titre">
+    <input type="text" value="" name="id_category" style="border: solid 1px black;" placeholder="Entrer une categorie">
+    <input type="text" value="" name="id_keyword" style="border: solid 1px black;" placeholder="Entrer une clé">
+    <input type="text" value="" name="start_hour" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
+    <input type="text" value="" name="end_hour" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
+    <input type="text" value="" name="id_user" style="border: solid 1px black;" placeholder="Entrer un user">
+    <input type="text" value="" name="date_publication" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
+    <textarea type="text" value="" name="text_annoucement" style="border: solid 1px black;" placeholder="Entrer"></textarea>
+    <input type="text" value="" name="nbmin" style="border: solid 1px black;" placeholder="Entrer une Mini">
+    <input type="text" value="" name="nbmax" style="border: solid 1px black;" placeholder="Entrer une max">
     <input type="submit" value="search">
 </form>
 
