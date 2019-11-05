@@ -40,27 +40,21 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
         //une boucle for qui concatene les entrées de TUPLE formatée avec les :
         // var_dump($item);
         $error = 0;
+        $placeholder = "";
         foreach (self::TUPLES as $value) {
             if (empty($item[$value])) {
                 $error++;
             }
-        }
-        // if ($error = 0) {
-            $placeholder = "";
-        foreach (self::TUPLES as $value) {
             $placeholder.=":".$value.", ";
         }
+            $placeholder = substr($placeholder, 0, strlen($placeholder)-2);
             $bidule = implode(',', self::TUPLES);
-            $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . "(".$bidule.")
-                VALUES ('.$placeholder.')");
+            $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE."(".$bidule.")
+                VALUES ($placeholder)");
         foreach (self::TUPLES as $value) {
             $statement->bindValue($value, $item[$value], \PDO::PARAM_STR);
         }
-            // $statement->execute();
+            $statement->execute();
             var_dump($statement);
     }
-    //}
 }
-/*if (!empty($_POST['title'])) {
-
-        }*/
