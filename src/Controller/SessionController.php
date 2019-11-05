@@ -3,12 +3,10 @@
 
 namespace App\Controller;
 
-
 use App\Model\SessionManager;
 
 class SessionController extends AbstractController
 {
-
     public function index()
     {
         $message = '';
@@ -24,19 +22,16 @@ class SessionController extends AbstractController
                 );
                 header("Location:/");
                 exit;
-            }
-            else{
+            } else {
                 $message = "les identifiants ne sont pas reconnus";
             }
-        }
-        else {
+        } else {
             $resultats = $loginManager->login('');
         }
 
 
 
-        return $this->twig->render('Session/index.html.twig',['message' => $message]);
-
+        return $this->twig->render('Session/index.html.twig', ['message' => $message]);
     }
 
     public function logout()
@@ -50,27 +45,17 @@ class SessionController extends AbstractController
     public function signup()
     {
         if (!empty($_POST)) {
-
             $loginManager = new SessionManager();
             $test = $loginManager->signup($_POST);
 
-            if($test) { // quand il y a des erreurs
-
-            }
-            else { //Quand tout va bien pour l'inscription
+            if ($test) { // quand il y a des erreurs
+            } else { //Quand tout va bien pour l'inscription
                 // il faut entrer les infos dans la base
                 // puis remettre un message comme quoi tout s'est bien passé
                 // et envoyer un mail de confirmation.
-
             }
-
-
-        }
-        else
-        {
+        } else {
             return $this->twig->render('Session/signup.html.twig');
         }
-
     }
-
 }

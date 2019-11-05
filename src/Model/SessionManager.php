@@ -3,7 +3,6 @@
 
 namespace App\Model;
 
-
 class SessionManager extends AbstractManager
 {
 
@@ -19,19 +18,19 @@ class SessionManager extends AbstractManager
         return $this->pdo->query('SELECT * FROM ' . $this->table)->fetchAll();
     }
 */
-    public function login($post) {
+    public function login($post)
+    {
 
         if (is_array($post)) {
-        $message = '';
-        $errors = array();
-            if(count($errors)==0 && isset($post) && !empty($post['login']) && !empty($post['password'])) {
+            $message = '';
+            $errors = array();
+            if (count($errors)==0 && isset($post) && !empty($post['login']) && !empty($post['password'])) {
                 extract($post);
                 $pass = sha1($password);
                 $test = '';
-                if (strpos($login,'@')) {
+                if (strpos($login, '@')) {
                     $test = 'email';
-                }
-                else {
+                } else {
                     $test ='nickname';
                 }
 
@@ -39,7 +38,6 @@ class SessionManager extends AbstractManager
                 return $this->pdo->query($sql)->fetchAll();
             }
         }
-
     }
 
     public function logout():bool
@@ -60,11 +58,10 @@ class SessionManager extends AbstractManager
         //var_dump($tableau);
         if ($this->testLogin($tableau['login'])) {
             $errors['login'] = true;
-        }
-        else {
+        } else {
             //return false;
         }
-        if ($this->testAdresse($tableau['zipcode'],$tableau['city'])) {
+        if ($this->testAdresse($tableau['zipcode'], $tableau['city'])) {
             $errors['adresse'] = true;
         }
         //var_dump($errors);
@@ -83,15 +80,13 @@ class SessionManager extends AbstractManager
             }
         }
         return false;
-
     }
 
     private function testAdresse(string $CP, string $ville):bool
     {
-        if ($CP != "67000" || strtolower($ville) != "strasbourg" ) {
+        if ($CP != "67000" || strtolower($ville) != "strasbourg") {
             return true;
         }
         return false;
     }
-
-    }
+}
