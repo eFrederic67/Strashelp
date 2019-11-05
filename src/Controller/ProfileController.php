@@ -111,9 +111,17 @@ class ProfileController extends AbstractController
         $session = $profileManager->session();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $myprofile['avatar'] = $_POST['avatar'];
             $myprofile['email'] = $_POST['email'];
+            $myprofile['nickname'] = $_POST['nickname'];
+            $myprofile['adresse_1'] = $_POST['adresse_1'];
+            $myprofile['adresse_2'] = $_POST['adresse_2'];
+            $myprofile['phone'] = $_POST['phone'];
+            $myprofile['description'] = $_POST['description'];
+
+
             $profileManager->update($myprofile);
-            return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile]);
+            header('Location:/profile/myprofile');
         }
         return $this->twig->render('Profile/edit.html.twig', ['session' => $session]);
     }

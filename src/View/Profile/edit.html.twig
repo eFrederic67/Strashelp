@@ -5,7 +5,6 @@
 
     {% for session in session %}
     <form method="post">
-        <input type="hidden" value="{{ session.id }}" name="id">
         <div>
             <label  for="avatar">Changer de photo de profil<br/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
@@ -24,19 +23,19 @@
         </div>
         <div>
             <label for="adresse1">Adresse_1 :</label>
-            <input type="text" value="{{ session.adresse_1 }}" name="adresse1" id="adresse1">
+            <input type="text" value="{{ session.adresse_1 }}" name="adresse_1" id="adresse1">
         </div>
         <div>
             <label for="adresse2">Adresse_2 :</label>
-            <input type="text" value="{{ session.adresse_2 }}" name="adresse2" id="adresse2">
+            <input type="text" value="{{ session.adresse_2 }}" name="adresse_2" id="adresse2">
         </div>
         <div>
             <label for="phone">Numéro de téléphone :</label>
             <input type="text" value="{{ session.phone }}" name="phone" id="phone">
         </div>
         <div>
-            <label for="description">Votre description :</label>
-            <textarea name="description" id="description" placeholder="{{ session.description }}" cols="30" rows="5"></textarea>
+            <label for="description">Présentation :</label>
+            <textarea name="description" id="description" cols="30" rows="5">{{ session.description }}</textarea>
         </div>
 
         <div>

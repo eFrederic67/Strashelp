@@ -61,12 +61,18 @@ class ProfileManager extends AbstractManager
      * @return bool
      */
 
-    public function update():bool
+    public function update(array $myprofile):bool
     {
         // prepared request
-        $statement = $this->pdo->prepare("UPDATE $this->table SET `email` = :email WHERE id=:id");
-        $statement->bindValue('id', $profile['id'], \PDO::PARAM_INT);
-        $statement->bindValue('email', $profile['email'], \PDO::PARAM_STR);
+        $statement = $this->pdo->prepare("UPDATE $this->table SET `avatar`=:avatar, `email` = :email, `nickname`=:nickname, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2, `phone`=:phone, `description`=:description WHERE password=:pass");
+        $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
+        $statement->bindValue('avatar', $myprofile['avatar'], \PDO::PARAM_STR);
+        $statement->bindValue('email', $myprofile['email'], \PDO::PARAM_STR);
+        $statement->bindValue('nickname', $myprofile['nickname'], \PDO::PARAM_STR);
+        $statement->bindValue('adresse_1', $myprofile['adresse_1'], \PDO::PARAM_STR);
+        $statement->bindValue('adresse_2', $myprofile['adresse_2'], \PDO::PARAM_STR);
+        $statement->bindValue('phone', $myprofile['phone'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $myprofile['description'], \PDO::PARAM_STR);
 
 
 
