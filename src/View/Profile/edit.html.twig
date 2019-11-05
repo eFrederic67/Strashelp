@@ -3,29 +3,48 @@
 {% block content %}
     <h1>Edit profile</h1>
 
+    {% for session in session %}
     <form method="post">
-        <input type="hidden" value="{{ myprofile.id }}" name="id">
+        <input type="hidden" value="{{ session.id }}" name="id">
+        <div>
+            <label  for="avatar">Changer de photo de profil<br/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                <img src="/assets/images/profil.png" alt="profil">
+            </label><br/>
+            <input  type="file"  id="avatar" name="avatar" /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
+            <label>max 2 Mo</label><br/>
+        </div>
         <div>
             <label for="email">Adresse e-mail :</label>
-            <input type="text" value="{{ myprofile.email }}" name="email" id="email">
+            <input type="text" value="{{ session.email }}" name="email" id="email">
+        </div>
+        <div>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" value="{{ session.nickname }}" name="nickname" id="pseudo">
         </div>
         <div>
             <label for="adresse1">Adresse_1 :</label>
-            <input type="text" value="{{ myprofile.adresse_1 }}" name="adresse1" id="adresse1">
+            <input type="text" value="{{ session.adresse_1 }}" name="adresse1" id="adresse1">
         </div>
         <div>
             <label for="adresse2">Adresse_2 :</label>
-            <input type="text" value="{{ myprofile.asdresse_2 }}" name="adresse2" id="adresse2">
+            <input type="text" value="{{ session.adresse_2 }}" name="adresse2" id="adresse2">
         </div>
         <div>
-            <label for="phone">Numéro de téléphone</label>
-            <input type="text" value="{{ myprofile.phone }}" name="phone" id="phone">
+            <label for="phone">Numéro de téléphone :</label>
+            <input type="text" value="{{ session.phone }}" name="phone" id="phone">
+        </div>
+        <div>
+            <label for="description">Votre description :</label>
+            <textarea name="description" id="description" placeholder="{{ session.description }}" cols="30" rows="5"></textarea>
         </div>
 
         <div>
         <input type="submit" value="Mettre a jour">
         </div>
     </form>
+    {% endfor %}
+
 
     <a href="/profile/myprofile/1">Back</a>
 {% endblock %}

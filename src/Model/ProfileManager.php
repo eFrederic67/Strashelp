@@ -61,7 +61,7 @@ class ProfileManager extends AbstractManager
      * @return bool
      */
 
-    public function update(array $profile):bool
+    public function update():bool
     {
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table SET `email` = :email WHERE id=:id");
@@ -73,4 +73,13 @@ class ProfileManager extends AbstractManager
 
         return $statement->execute() ;
     }
+
+    public function session(){
+        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE `password`=:pass");
+        $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+
+    }
+
 }

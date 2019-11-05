@@ -3,6 +3,7 @@
 {% block content %}
 
     <div>
+        {% for myprofile in session %}
         <div>
             <h2>Mon profil</h2>
             <img src="{{ myprofile.avatar }}" alt="avatar">
@@ -24,7 +25,7 @@
         <div>
             <p>{{ myprofile.description }}</p>
         </div>
-
+        {% endfor %}
         <a href="/profile/edit/1">Modifier mon profil</a>
 
     </div>

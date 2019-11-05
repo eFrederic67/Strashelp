@@ -19,7 +19,7 @@ class SessionController extends AbstractController
             if (($resultats)) {
                 //A faire : setcookie()
                 $_SESSION['Auth'] = array(
-                  'login' => $_POST['login'],
+                  'login' => $_PentrerOST['login'],
                   'pass' => sha1($_POST['password']),
                 );
                 header("Location:/");
