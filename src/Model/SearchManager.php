@@ -22,7 +22,6 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
         AS start_hour, DATE_FORMAT(end_hour, '%a %c %b %H %i') AS end_hour, id_user,
         DATE_FORMAT(date_publication, '%a %c %b  %H %i') AS date_publication,text_annoucement, nbmin, nbmax FROM ".
         self::TABLE);
-        // $select->bindValue('post', $name, \PDO::PARAM_STR);
         $select->execute();
         return $select->fetchAll();
     }
@@ -49,5 +48,6 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
             $statement->bindValue($value, $item[$value], \PDO::PARAM_STR);
         }
             $statement->execute();
+            var_dump($statement);
     }
 }
