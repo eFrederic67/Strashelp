@@ -1,55 +1,21 @@
-<div class="logonav row no-gutters">
-    <div class="col-2 home">
-        <div class="logos">
-            <a href="#home"><img class="logo" src="/assets/images/logo.png" alt="logo de l'association"></a>
+<div class="background">
+    <div class="font-icon-example">
+        <div class="item home"><a href="#"><i class="fas fa-home"></i><span>HOME</span></a></div>
+        <div class="item profile">
+            <a href="#" data-toggle="dropdown" aria-haspopup="true"><i class="fas fa-user-alt nav-item dropdown account" aria-expanded="false" title="Mon compte"></i>
+                <span>PROFILE</span>
+                    <div class="dropdown-menu account" aria-labelledby="dropdownAccount">
+                        <a class="dropdown-item" href="/profile/myprofile/1">Mon compte</a>
+                        <a class="dropdown-item" href="?page=">Ma messagerie</a>
+                        <a class="dropdown-item" href="?page=">Gérer mes rendez-vous</a>
+                        <a class="dropdown-item" href="?page=">Préférences</a>
+                        <a class="dropdown-item" href="/Session/logout">Déconnexion</a>
+                    </div>
+            </a>
         </div>
-        <div class="logos">
-            <a href="#home"><img class="logo" src="/assets/images/strashelp.png" alt="Stras'Help"></a>
-        </div>
+        <div class="item statistics"><a href="#"><i class="far fa-calendar"></i><span>CALENDAR</span></a></div>
+        <div class="item about"><a href="#"><i class="fas fa-info-circle"></i><span>ABOUT</span></a></div>
+        <div class="item contact"><a href="#"><i class="fa fa-phone"></i><span>CONTACT US</span></a></div>
+        <div class="item search"><a href="#"><i class="fas fa-search"></i><span>SEARCH</span></a></div>
     </div>
-
-    <div class="col-6 offset-1 mobile">
-        <ul>
-            <li>
-                <a class="nav-link" href="/" title="Rendez-vous">
-                    <img alt="Logo à cliquer pour gérer mes rendez-vous" src="/assets/images/rappel.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="/" id="dropdownBookmarks" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Mes favoris" class="nav-link dropdown-toggle">
-                    <img alt="Logo à cliquer pour accéder à mes favoris" src="/assets/images/star.png"/>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownBookmarks">
-                    <a class="dropdown-item" href="?page=liste">Annonces sauvegardées</a>
-                    <a class="dropdown-item" href="?page=add">Helpeurs favoris</a>
-                </div>
-            </li>
-            <li>
-                <a class="nav-link" href="/" title="Recherche">
-                    <img alt="Logo à cliquer pour effectuer une recherche" src="/assets/images/loupe.png"/>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link" href="/" title="Poster une annonce">
-                    <img alt="Logo à cliquer pour poster une annonce" src="/assets/images/nouvelleOffre.png"/>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="col-1 offset-1 avatar">
-            <div class="nav-item dropdown account">
-                <a href="/" id="dropdownAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Mon compte" class="nav-link dropdown-toggle">
-                    <img alt="Logo à cliquer pour ouvrir les options de mon compte" src="/assets/images/profil.png"/>
-                </a>
-                <div class="dropdown-menu account" aria-labelledby="dropdownAccount">
-                    <a class="dropdown-item" href="/profile/myprofile/1">Mon compte</a>
-                    <a class="dropdown-item" href="?page=">Ma messagerie</a>
-                    <a class="dropdown-item" href="?page=">Gérer mes rendez-vous</a>
-                    <a class="dropdown-item" href="?page=">Préférences</a>
-                    <a class="dropdown-item" href="/Session/logout">Déconnexion</a>
-                </div>
-            </div>
-    </div>
-
 </div>

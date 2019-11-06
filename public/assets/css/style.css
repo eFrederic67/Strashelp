@@ -1,5 +1,5 @@
 .logonav {
-    background-color: #1CA0C5;
+    background-color: #c1bac5;
     height: 150px;
 }
 
@@ -11,23 +11,15 @@
 .home ul,
 .logonav ul {
     list-style:none;
-    margin-left:0;
-    padding-left:0;
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 100%;
-}
-
-.logos {
-    height: 100%;
-    width: auto;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .logos img {
     height: 135px;
     width: auto;
+    padding-left: 80px;
 }
 
 .mobile ul,
@@ -37,9 +29,8 @@
     flex-direction: row;
 }
 
-.mobile li,
-.account {
-    justify-content: center;
+.avatar .account{
+    margin-top: 20px;
 }
 
 /* enlever les flèches qui déroulent les petits menus */
@@ -49,7 +40,8 @@ a#dropdownAccount.nav-link.dropdown-toggle::after {
 }
 
 footer {
-    background-color: #FFA84F;
+    background: #7597ff;
+    position: absolute;
     color: #02546B;
     bottom: 0;
     width:100%;

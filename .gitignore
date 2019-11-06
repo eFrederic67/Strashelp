@@ -4,3 +4,7 @@
 *.cache
 db.php
 .idea
+src/View/.DS_Store
+src/.DS_Store
+.DS_Store
+.gitignore
