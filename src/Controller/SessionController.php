@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Model\SessionManager;
@@ -27,9 +26,6 @@ class SessionController extends AbstractController
         } else {
             $resultats = $loginManager->login('');
         }
-
-
-
         return $this->twig->render('Session/index.html.twig', ['message' => $message]);
     }
 
