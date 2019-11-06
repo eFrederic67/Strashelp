@@ -7,12 +7,12 @@
         <h3>
             Signaler le profil utilisateur
         </h3>
-        <input type="hidden" value="{{ $id }}" name="signaled_user_id">
-        <input type="hidden" value="{{ $signaledUserLogin }}" name="signaled_user_login">
-        <input type="hidden" value="{{ $userId }}" name="user_id">
-        <input type="hidden" value="{{ $userLogin }}" name="user_login">
-        <input type="hidden" value="{{ $date }}" name="alert_date">
-        <label for="{{ $alertMessage }}">Motif du signalement</label>
+        <input type="hidden" value="" name="signaled_user_id">
+        <input type="hidden" value="" name="signaled_user_login">
+        <input type="hidden" value="" name="user_id">
+        <input type="hidden" value="" name="user_login">
+        <input type="hidden" value="" name="alert_date">
+        <label for="alert">Motif du signalement</label>
         <input type="text" id="alert" name="alert_message" required><br>
         <div class="button">
             <input type="submit" value="Valider">

@@ -14,7 +14,7 @@ use PDO;
 
 class SignaluserManager extends AbstractManager
 {
-    const TABLE = 'item';
+    const TABLE = 'useralert';
 
     // Initializes this class.
     public function __construct()
@@ -31,7 +31,7 @@ class SignaluserManager extends AbstractManager
                 $signaledUserLogin = trim($_POST['signaled_user_login']);
                 $alertMessage = trim($_POST['alert_message']);
                 $alertDate = trim($_POST['alert_date']);
-                $query = "INSERT INTO alert VALUES (NULL, :user_id, :user_login, :signaled_user_id, :signaled_user_login, :alert_message)";
+                $query = "INSERT INTO $this->table VALUES (NULL, :user_id, :user_login, :signaled_user_id, :signaled_user_login, :alert_message)";
                 $statement = $this->pdo->prepare($query);
 
                 $statement->bindValue(':user_id', $signalingUserId, PDO::PARAM_STR);

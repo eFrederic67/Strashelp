@@ -9,9 +9,10 @@
 
 namespace App\Controller;
 
+use App\Model\SignaluserManager;
 use App\Model\SignalpostManager;
 
-class SignalpostController extends AbstractController
+class SignalController extends AbstractController
 {
     /**
      * Display item informations specified by $id
@@ -22,7 +23,14 @@ class SignalpostController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function signal(int $id)
+    public function signalUser(int $id)
+    {
+        $signaluserManager = new SignaluserManager();
+        $user = $signaluserManager->selectOneById($id);
+
+        return $this->twig->render('Signal/signaluser.html.twig', ['signaluser' => $user]);
+    }
+    public function signalPost(int $id)
     {
         $signalpostManager = new SignalpostManager();
         $post = $signalpostManager->selectOneById($id);
