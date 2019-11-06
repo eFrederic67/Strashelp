@@ -49,6 +49,7 @@ class SessionController extends AbstractController
                 // il faut entrer les infos dans la base
                 // puis remettre un message comme quoi tout s'est bien passé
                 // et envoyer un mail de confirmation.
+                echo '';
             }
         } else {
             return $this->twig->render('Session/signup.html.twig');
