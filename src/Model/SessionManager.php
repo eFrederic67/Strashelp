@@ -21,7 +21,6 @@ class SessionManager extends AbstractManager
 
     public function login($post)
     {
-
         if (is_array($post)) {
             $this->messageAlert = '';
 
