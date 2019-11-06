@@ -32,6 +32,7 @@ class SessionController extends AbstractController
     public function logout()
     {
         $loginManager = new SessionManager();
+
         if ($loginManager->logout()) {
             header("location:/");
         }
