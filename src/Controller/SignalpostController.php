@@ -9,33 +9,10 @@
 
 namespace App\Controller;
 
-use App\Model\SignalformManager;
+use App\Model\SignalpostManager;
 
-/**
- * Class ItemController
- *
- */
-class ItemController extends AbstractController
+class SignalpostController extends AbstractController
 {
-
-
-    /**
-     * Display item listing
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function index()
-    {
-        $itemManager = new ItemManager();
-        $items = $itemManager->selectAll();
-
-        return $this->twig->render('Item/index.html.twig', ['items' => $items]);
-    }
-
-
     /**
      * Display item informations specified by $id
      *
@@ -48,69 +25,9 @@ class ItemController extends AbstractController
     public function signal(int $id)
     {
         $signalpostManager = new SignalpostManager();
-        $item = $signalpostManager->selectOneById($id);
+        $post = $signalpostManager->selectOneById($id);
 
-        $signal = $signalpostManager->signalPost($id);
-        return $this->twig->render('Item/signalpost.html.twig', ['item' => $item]);
-    }
-
-
-    /**
-     * Display item edition page specified by $id
-     *
-     * @param int $id
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function edit(int $id): string
-    {
-        $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $item['title'] = $_POST['title'];
-            $itemManager->update($item);
-        }
-
-        return $this->twig->render('Item/edit.html.twig', ['item' => $item]);
-    }
-
-
-    /**
-     * Display item creation page
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function add()
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $itemManager = new ItemManager();
-            $item = [
-                'title' => $_POST['title'],
-            ];
-            $id = $itemManager->insert($item);
-            header('Location:/item/show/' . $id);
-        }
-
-        return $this->twig->render('Item/add.html.twig');
-    }
-
-
-    /**
-     * Handle item deletion
-     *
-     * @param int $id
-     */
-    public function delete(int $id)
-    {
-        $itemManager = new ItemManager();
-        $itemManager->delete($id);
-        header('Location:/item/index');
+        // $signal = $signalpostManager->signalPost($id);
+        return $this->twig->render('Signal/signalpost.html.twig', ['signalpost' => $post]);
     }
 }

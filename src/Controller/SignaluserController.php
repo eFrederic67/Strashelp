@@ -9,33 +9,10 @@
 
 namespace App\Controller;
 
-use App\Model\SignalformManager;
+use App\Model\SignaluserManager;
 
-/**
- * Class ItemController
- *
- */
-class ItemController extends AbstractController
+class SignaluserController extends AbstractController
 {
-
-
-    /**
-     * Display item listing
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function index()
-    {
-        $itemManager = new ItemManager();
-        $items = $itemManager->selectAll();
-
-        return $this->twig->render('Item/index.html.twig', ['items' => $items]);
-    }
-
-
     /**
      * Display item informations specified by $id
      *
@@ -47,70 +24,9 @@ class ItemController extends AbstractController
      */
     public function signal(int $id)
     {
-        $signalformManager = new SignalformManager();
-        $item = $signalformManager->selectOneById($id);
+        $signaluserManager = new SignaluserManager();
+        $user = $signaluserManager->selectOneById($id);
 
-        $signal = $signalformManager->signalUser($id);
-        return $this->twig->render('Item/signaluser.html.twig', ['item' => $item]);
-    }
-
-
-    /**
-     * Display item edition page specified by $id
-     *
-     * @param int $id
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function edit(int $id): string
-    {
-        $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $item['title'] = $_POST['title'];
-            $itemManager->update($item);
-        }
-
-        return $this->twig->render('Item/edit.html.twig', ['item' => $item]);
-    }
-
-
-    /**
-     * Display item creation page
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function add()
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $itemManager = new ItemManager();
-            $item = [
-                'title' => $_POST['title'],
-            ];
-            $id = $itemManager->insert($item);
-            header('Location:/item/show/' . $id);
-        }
-
-        return $this->twig->render('Item/add.html.twig');
-    }
-
-
-    /**
-     * Handle item deletion
-     *
-     * @param int $id
-     */
-    public function delete(int $id)
-    {
-        $itemManager = new ItemManager();
-        $itemManager->delete($id);
-        header('Location:/item/index');
+        return $this->twig->render('Signal/signaluser.html.twig', ['signaluser' => $user]);
     }
 }
