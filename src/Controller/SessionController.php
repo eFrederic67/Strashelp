@@ -21,7 +21,6 @@ class SessionController extends AbstractController
                   'pass' => sha1($_POST['password']),
                 );
                 header("Location:/");
-                exit;
             } else {
                 $message = "les identifiants ne sont pas reconnus";
             }
