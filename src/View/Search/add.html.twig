@@ -2,18 +2,68 @@
 
 {% block content %}
 {{ bazar }}
-<form method="POST" action="">
-    <input type="text" value="" name="type" style="border: solid 1px black;" placeholder="Entrer une type d'annonce">
-    <input type="text" value="" name="title" style="border: solid 1px black;" placeholder="Entrer un titre">
-    <input type="text" value="" name="id_category" style="border: solid 1px black;" placeholder="Entrer une categorie">
-    <input type="text" value="" name="id_keyword" style="border: solid 1px black;" placeholder="Entrer une clé">
-    <input type="text" value="" name="start_hour" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
-    <input type="text" value="" name="end_hour" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
-    <input type="text" value="" name="id_user" style="border: solid 1px black;" placeholder="Entrer un user">
-    <input type="text" value="" name="date_publication" style="border: solid 1px black;" placeholder="Entrer une date type(YY-MM-DD)">
-    <textarea type="text" value="" name="text_annoucement" style="border: solid 1px black;" placeholder="Entrer"></textarea>
-    <input type="text" value="" name="nbmin" style="border: solid 1px black;" placeholder="Entrer une Mini">
-    <input type="text" value="" name="nbmax" style="border: solid 1px black;" placeholder="Entrer une max">
-    <input type="submit" value="search">
-</form>
+    <!-- Extended default form grid -->
+    <form class="my-5 offset-4 col-3" method="post" style="background: lightskyblue; opacity: 65%">
+        <!-- Grid row -->
+        <div class="form-row">
+            <!-- Default input -->
+            <div class=" form-group col-md-6">
+                <label for="inputEmail4">Titre</label>
+                <input type="text" class="form-control" name="title" id="inputEmail4" placeholder="Titre">
+            </div>
+            <!-- Default input -->
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Type d'annonce</label>
+                <input type="text" class="form-control" name="type" id="inputPassword4" placeholder="Type">
+            </div>
+        </div>
+        <!-- Grid row -->
+
+        <!-- Default input -->
+        <div class="form-group">
+            <label for="inputAddress">Message</label>
+            <textarea type="text" class="form-control" id="inputAddress" name="text_annoucement" placeholder="Your Annonce"></textarea>
+        </div>
+        <!-- Default input -->
+        <div class="form-group">
+            <label for="inputAddress2">Keyword</label>
+            <input type="text" class="form-control" name="id_keyword" id="inputAddress2" placeholder="Mots Clés">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">id_Categorie</label>
+            <input type="text" class="form-control" name="id_category" id="inputAddress2" placeholder="ID de la categorie">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">Date de la publication</label>
+            <input type="text" class="form-control" name="date_publication" id="inputAddress2" placeholder="0000-00-00">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">id_user</label>
+            <input type="text" class="form-control" name="id_user" id="inputAddress2" placeholder="id de l'user">
+        </div>
+        <!-- Grid row -->
+        <div class="form-row">
+            <!-- Default input -->
+            <div class="form-group col-md-6">
+                <label for="inputCity">Horaire de début</label>
+                <input type="text" name="start_hour" class="form-control" id="inputCity" placeholder="0000-00-00">
+            </div>
+            <!-- Default input -->
+            <div class="form-group col-md-6">
+                <label for="inputZip">Horaire de fin</label>
+                <input type="text" name="end_hour" class="form-control" id="inputZip" placeholder="0000-00-00">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputZip">Nombre Minimum</label>
+                <input type="text" name="nbmin" class="form-control" id="inputZip" placeholder="Minimal Personne">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputZip">Nombre Maximum</label>
+                <input type="text" name="nbmax" class="form-control" id="inputZip" placeholder="Maximum Personne">
+            </div>
+        </div>
+        <!-- Grid row -->
+        <button type="submit" class="btn btn-primary btn-md col-6 offset-3">Envoyer</button>
+    </form>
+    <!-- Extended default form grid -->
 {% endblock %}
