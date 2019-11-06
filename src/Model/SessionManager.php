@@ -26,7 +26,7 @@ class SessionManager extends AbstractManager
             $this->messageAlert = '';
 
             $errors = array();
-            if (count($errors) == 0 && isset($post) && !empty($post['login']) && !empty($post['password'])) {
+            if (count($errors) == 0 && !empty($post['login']) && !empty($post['password'])) {
                 extract($post);
                 $this->pass = sha1($post['password']);
                 // $test = '';
@@ -77,7 +77,7 @@ class SessionManager extends AbstractManager
 
         $tableau = ($this->pdo->query($sql)->fetchAll());
 
-        foreach ($tableau as $key => $value) {
+        foreach ($tableau as $value) {
             if (ucfirst($login) == $value['nickname']) {
                 return true;
             }
