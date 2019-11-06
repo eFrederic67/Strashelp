@@ -113,7 +113,7 @@ class ProfileController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $myprofile['avatar'] = $_POST['avatar'];
             $myprofile['email'] = $_POST['email'];
-            $myprofile['nickname'] = $_POST['nickname'];
+            $myprofile['login'] = $_POST['login'];
             $myprofile['adresse_1'] = $_POST['adresse_1'];
             $myprofile['adresse_2'] = $_POST['adresse_2'];
             $myprofile['phone'] = $_POST['phone'];

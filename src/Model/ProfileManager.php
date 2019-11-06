@@ -64,11 +64,11 @@ class ProfileManager extends AbstractManager
     public function update(array $myprofile):bool
     {
         // prepared request
-        $statement = $this->pdo->prepare("UPDATE $this->table SET `avatar`=:avatar, `email` = :email, `nickname`=:nickname, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2, `phone`=:phone, `description`=:description WHERE password=:pass");
+        $statement = $this->pdo->prepare("UPDATE $this->table SET `avatar`=:avatar, `email` = :email, `login`=:login, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2, `phone`=:phone, `description`=:description WHERE password=:pass");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
         $statement->bindValue('avatar', $myprofile['avatar'], \PDO::PARAM_STR);
         $statement->bindValue('email', $myprofile['email'], \PDO::PARAM_STR);
-        $statement->bindValue('nickname', $myprofile['nickname'], \PDO::PARAM_STR);
+        $statement->bindValue('login', $myprofile['login'], \PDO::PARAM_STR);
         $statement->bindValue('adresse_1', $myprofile['adresse_1'], \PDO::PARAM_STR);
         $statement->bindValue('adresse_2', $myprofile['adresse_2'], \PDO::PARAM_STR);
         $statement->bindValue('phone', $myprofile['phone'], \PDO::PARAM_STR);
@@ -76,16 +76,14 @@ class ProfileManager extends AbstractManager
 
 
 
-
         return $statement->execute() ;
     }
 
-    public function session(){
+    public function session()
+    {
         $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE `password`=:pass");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
-
     }
-
 }
