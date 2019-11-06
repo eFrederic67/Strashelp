@@ -29,9 +29,10 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
 
     public function addPost(array $item)
     {
-        //une fonction qui teste si tous les champs de la constante TUPLE sont remplis et si c'est bon
-        //une boucle for qui concatene les entrées de TUPLE formatée avec les :
-        // var_dump($item);
+        /*
+         Fonction qui permet d'ajouter une annonce qui prends une constante des champs de la table post
+         et ceux grace a un foreach !
+         */
         $error = 0;
         $placeholder = "";
         foreach (self::TUPLES as $value) {
