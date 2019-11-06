@@ -19,12 +19,6 @@ class SessionManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    /*
-        public function selectAll(): array
-        {
-            return $this->pdo->query('SELECT * FROM ' . $this->table)->fetchAll();
-        }
-    */
     public function login($post)
     {
 
@@ -68,6 +62,7 @@ class SessionManager extends AbstractManager
             $errors['login'] = true;
         } else {
             //return false;
+            echo '';
         }
         if ($this->testAdresse($tableau['zipcode'], $tableau['city'])) {
             $errors['adresse'] = true;
