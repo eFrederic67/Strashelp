@@ -27,13 +27,6 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
         return $select->fetchAll();
     }
 
-    /*public function addPost($item):string
-    {
-        $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE." VALUES (:title)");
-        $statement->bindValue('add', $item['add'], \PDO::PARAM_STR);
-        $statement->execute();
-    }*/
-
     public function addPost(array $item)
     {
         //une fonction qui teste si tous les champs de la constante TUPLE sont remplis et si c'est bon
@@ -55,6 +48,5 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
             $statement->bindValue($value, $item[$value], \PDO::PARAM_STR);
         }
             $statement->execute();
-            var_dump($statement);
     }
 }
