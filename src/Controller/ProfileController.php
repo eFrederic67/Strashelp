@@ -96,25 +96,33 @@ class ProfileController extends AbstractController
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 
-    public function myprofile(int $id)
+    public function myprofile()
     {
         $profileManager = new profileManager();
-        $myprofile = $profileManager->selectOneById($id);
+        $session = $profileManager->session();
 
-        return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile]);
+        return $this->twig->render('Profile/myprofile.html.twig', ['session' => $session]);
     }
 
-    public function edit(int $id): string
+    public function edit(): string
     {
         $profileManager = new profileManager();
-        $myprofile = $profileManager->selectOneById($id);
+        $myprofile = $profileManager->selectAll();
+        $session = $profileManager->session();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $myprofile['avatar'] = $_POST['avatar'];
             $myprofile['email'] = $_POST['email'];
-            $profileManager->update($myprofile);
-            return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile]);
-        }
+            $myprofile['login'] = $_POST['login'];
+            $myprofile['adresse_1'] = $_POST['adresse_1'];
+            $myprofile['adresse_2'] = $_POST['adresse_2'];
+            $myprofile['phone'] = $_POST['phone'];
+            $myprofile['description'] = $_POST['description'];
 
-        return $this->twig->render('Profile/edit.html.twig', ['myprofile' => $myprofile]);
+
+            $profileManager->update($myprofile);
+            header('Location:/profile/myprofile');
+        }
+        return $this->twig->render('Profile/edit.html.twig', ['session' => $session]);
     }
 }
