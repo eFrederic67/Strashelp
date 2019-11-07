@@ -5,6 +5,9 @@ html {
 body {
   height: 100%;
 }
+#myTable{
+  z-index: 1;
+}
 
 .background {
   background: #7597ff;
@@ -19,6 +22,7 @@ body {
   height: 120px;
   display: table;
   padding: 20px 10px 0;
+  z-index: 2;
 }
 
 .font-icon-example .item {
@@ -46,7 +50,6 @@ body {
   display: initial;
   color: inherit;
   opacity: 1;
-
 }
 
 .font-icon-example .item i {
