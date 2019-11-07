@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Model\SessionManager;
 
 class SessionController extends AbstractController
 {
-
     public function index()
     {
         $message = '';
@@ -22,7 +20,6 @@ class SessionController extends AbstractController
                   'pass' => sha1($_POST['password']),
                 );
                 header("Location:/");
-                exit;
             } else {
                 $message = "les identifiants ne sont pas reconnus";
             }
@@ -30,14 +27,13 @@ class SessionController extends AbstractController
             $resultats = $loginManager->login('');
         }
 
-
-
         return $this->twig->render('Session/index.html.twig', ['message' => $message]);
     }
 
     public function logout()
     {
         $loginManager = new SessionManager();
+
         if ($loginManager->logout()) {
             header("location:/");
         }
