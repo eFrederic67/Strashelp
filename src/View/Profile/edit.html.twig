@@ -9,7 +9,7 @@
 
     {% for session in session %}
 
-        <form method="post" class="edit_profil"  style="background:lightskyblue; opacity: 65%">
+        <form method="post" class="edit_profil">
             <div class="form-group">
                 <label  for="avatar">Changer de photo de profil<br/>
                     <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <!-- Grid row -->
-            <button type="submit" class="btn btn-primary btn-md">Modifier</button>
+            <button type="submit" class="btn btn-primary btn-md edit_submit">Modifier</button>
         </form>
 
     {% endfor %}

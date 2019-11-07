@@ -2,12 +2,18 @@
     width: 80%;
     text-align: center;
     margin-left: 10%;
+    background-color: white;
+    border-radius: 1em;
 }
 
 .input_center{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.edit_submit{
+    margin: 10px;
 }
 
 .h1_center{
