@@ -14,17 +14,7 @@ if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SES
     // Si l'utilisateur est loggué
         $controller = 'App\Controller\\' . ucfirst($routeParts[0] ?? '') . 'Controller';
         $method = $routeParts[1] ?? '';
-}
-else{
-/*    if (($routeParts[0]=="home" && $routeParts[1]=="index")) {
-        $controller = 'App\Controller\HomeController';
-        $method = 'index';
-    }
-    else {
-        $controller = 'App\Controller\SessionController';
-        $method = 'index';
-    }*/
-
+} else {
     switch ($routeParts[0]) {
         case "home":
             $controller = 'App\Controller\HomeController';
@@ -39,7 +29,6 @@ else{
             $method = 'login';
             break;
     }
-
 }
 
         $vars = array_slice($routeParts, 2);
@@ -47,10 +36,7 @@ else{
 
 if (class_exists($controller) && method_exists(new $controller(), $method)) {
         echo call_user_func_array([new $controller(), $method], $vars);
-}
-
-
-else {
+} else {
     header("HTTP/1.0 404 Not Found");
     echo '<html>
     <body>
@@ -62,4 +48,3 @@ else {
 </html>';
     exit();
 }
-

@@ -2,9 +2,9 @@
 
 
 namespace App\Model;
+
 use DateInterval;
 use DateTime;
-
 
 class SessionManager extends AbstractManager
 {
@@ -16,19 +16,19 @@ class SessionManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function login($post) {
-
+    public function login($post)
+    {
+        $login="";
+        $password="";
         if (is_array($post)) {
-
-        $errors = array();
-            if(count($errors)==0 && isset($post) && !empty($post['login']) && !empty($post['password'])) {
+            $errors = array();
+            if (count($errors)==0 && !empty($post['login']) && !empty($post['password'])) {
                 extract($post);
                 $pass = sha1($password);
 
-                if (strpos($login,'@')) {
+                if (strpos($login, '@')) {
                     $test = 'email';
-                }
-                else {
+                } else {
                     $test ='login';
                 }
 
@@ -36,7 +36,6 @@ class SessionManager extends AbstractManager
                 return $this->pdo->query($sql)->fetchAll();
             }
         }
-
     }
 
     public function logout():bool
@@ -46,82 +45,37 @@ class SessionManager extends AbstractManager
         return true;
     }
 
-    public function signup()
-    {
-
-    }
-
     public function testErrorInForm($post)
     {
-
         $errors = array();
-        if (empty($post['login'])) {
-            $errors['login'] = "Pseudonyme obligatoire";
+        if ($this->testDoublon('login', $post['login'])) {
+            $errors['login'] = "Le login que vous avez choisi est déjà utilisé";
+        }
+
+        if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
         } else {
-            if ($this->testDoublon('login',$post['login'])) {
-                $errors['login'] = "Le login que vous avez choisi est déjà utilisé";
-            }
+            $errors['email'] = $post['email'] . " n'est pas une adresse valide !";
         }
-        if (empty($post['email'])) {
-            $errors['email'] = "Adresse e-mail obligatoire";
-        } else {
-            if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
-            } else {
-                $errors['email'] = $post['email'] . " n'est pas une adresse valide !";
-            }
-        }
-        if (empty($post['emailConf'])) {
-            $errors['login'] = "les deux adresses mails entrées ne sont pas identiques";
-        }
+
         if ($post['emailConf']!= $post['email']) {
             $errors['login'] = "les deux adresses mails entrées sont différentes";
         }
 
-        if (empty($post['lastname'])) {
-            $errors['lastname'] = "Nom obligatoire";
-        }
-        if (empty($post['firstname'])) {
-            $errors['firstname'] = "Prénom obligatoire";
-        }
-
-        if (empty($post['adresse_1'])) {
-            $errors['adresse_1'] = "L'adresse est obligatoire";
-        }
-        if (empty($post['zipcode'])) {
-            $errors['zipcode'] = "Merci de remplir votre code postal";
-        }
-        if (empty($post['city'])) {
-            $errors['city'] = "Merci de remplir votre ville";
-        }
-        if (empty($post['phone'])) {
-            $errors['phone'] = "Numéro de téléphone obligatoire";
-        }
-
-        if (empty($post['dayOfBirth'])) {
-            $errors['dateOfBirth'] = "Merci d'indiquez votre date de naissance";
-        }
-        if (empty($post['monthOfBirth'])) {
-            $errors['dateOfBirth'] = "Merci d'indiquez votre date de naissance";
-        }
-        if (empty($post['yearOfBirth'])) {
-            $errors['dateOfBirth'] = "Merci d'indiquez votre date de naissance";
-        }
-        if (!isset($errors['dateOfBirth'])) {
-            if (checkdate($post['monthOfBirth'], $post['dayOfBirth'], $post['yearOfBirth'])) {
-                $date_naissance = $post['yearOfBirth']."-".$post['monthOfBirth']."-".$post['dayOfBirth'];
-                $date = new DateTime( date('m/d/Y h:i:s a', time()));//$post['monthOfBirth']."-".$post['dayOfBirth']."-".$post['yearOfBirth']));
-                $date_18 = $date->sub(new DateInterval('P18Y'));
-                if ($date_naissance < $date_18) {
-                    $errors['dateOfBirth'] = "Désolé, vous devez être majeur(e) pour pouvoir vous inscrire";
-                }
+        if (checkdate($post['monthOfBirth'], $post['dayOfBirth'], $post['yearOfBirth'])) {
+            $bidule = $post['yearOfBirth']."/".$post['monthOfBirth']."/".$post['dayOfBirth'];
+            $dateNaissance = DateTime::createFromFormat('Y/m/d', $bidule);
+            $date = new DateTime(date('m/d/Y h:i:s a', time()));//$post['monthOfBirth']."-".$post['dayOfBirth']."-".$post['yearOfBirth']));
+            $date18 = $date->sub(new DateInterval('P18Y'));
+            if ($dateNaissance > $date18) {
+                $errors['dateOfBirth'] = "Désolé, vous devez être majeur(e) pour pouvoir vous inscrire";
             }
-        } else {
-            $errors['dateOfBirth'] = "Merci d'indiquez votre date de naissance valide";
         }
+
         return $errors;
     }
 
-    public function requete($post){
+    public function requete($post)
+    {
         //donc là, il faut préparer une requête pour insérer les champs dans la base de données
 
         // On récupère les champs de la table self::TABLE
@@ -133,31 +87,31 @@ class SessionManager extends AbstractManager
         $champsAInserer=[];
         $requete ="INSERT INTO ".self::TABLE."(";
 
-        for($i = 1;$i<count($champs);$i++){
-            array_push($champsAInserer,$champs[$i]['Field']);
+        $lenTemp = count($champs);
+        for ($i = 1; $i<$lenTemp; $i++) {
+            array_push($champsAInserer, $champs[$i]['Field']);
             $requete .= $champs[$i]['Field'].", ";
         }
 
-        $requete = substr($requete,0,strlen($requete)-2);
+        $requete = substr($requete, 0, strlen($requete)-2);
         $requete .= ") VALUES (";
 
         foreach ($champsAInserer as $value) {
-            if (Null !== ($post[$value])){
+            if (null !== ($post[$value])) {
                 $requete .= ":".$value.", ";
             }
         }
-        $requete = substr($requete,0,strlen($requete)-2);
+        $requete = substr($requete, 0, strlen($requete)-2);
         $requete .= ")";
         $insertion = $this->pdo->prepare($requete);
-        foreach($champsAInserer as $value) {
+        foreach ($champsAInserer as $value) {
             $insertion->bindValue($value, $post[$value], \PDO::PARAM_STR);
         }
-
         // ajouter un test pour être sûr que ça s'est bien passé et un return
         $insertion->execute();
     }
 
-    public function testDoublon($field,$valeur)
+    public function testDoublon($field, $valeur)
     {
         $requete = "SELECT " . $field . " FROM " . self::TABLE . " WHERE " . $field . "='" . $valeur."'";
         $insertion = $this->pdo->prepare($requete);
@@ -166,5 +120,4 @@ class SessionManager extends AbstractManager
             return (count($insertion->fetchAll())>0) ? true : false;
         }
     }
-
 }
