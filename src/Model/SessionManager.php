@@ -64,7 +64,7 @@ class SessionManager extends AbstractManager
         if (checkdate($post['monthOfBirth'], $post['dayOfBirth'], $post['yearOfBirth'])) {
             $bidule = $post['yearOfBirth']."/".$post['monthOfBirth']."/".$post['dayOfBirth'];
             $dateNaissance = DateTime::createFromFormat('Y/m/d', $bidule);
-            $date = new DateTime(date('m/d/Y h:i:s a', time()));//$post['monthOfBirth']."-".$post['dayOfBirth']."-".$post['yearOfBirth']));
+            $date = new DateTime(date('m/d/Y h:i:s a', time()));
             $date18 = $date->sub(new DateInterval('P18Y'));
             if ($dateNaissance > $date18) {
                 $errors['dateOfBirth'] = "Désolé, vous devez être majeur(e) pour pouvoir vous inscrire";
