@@ -56,7 +56,6 @@ class SessionManager extends AbstractManager
         // test de la taille de l'image envoyée
         // Si c'est bon on envoie vers la page de configuration des skills
         $errors = [];
-        //var_dump($tableau);
         if ($this->testLogin($tableau['login'])) {
             $errors['login'] = true;
         } else {
@@ -88,7 +87,6 @@ class SessionManager extends AbstractManager
     {
 
         if ($CP != "67000" || strtolower($ville) != "strasbourg") {
-
             return true;
         }
         return false;
