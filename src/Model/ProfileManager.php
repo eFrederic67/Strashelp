@@ -64,7 +64,9 @@ class ProfileManager extends AbstractManager
     public function update(array $myprofile):bool
     {
         // prepared request
-        $statement = $this->pdo->prepare("UPDATE $this->table SET `avatar`=:avatar, `email` = :email, `login`=:login, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2, `phone`=:phone, `description`=:description WHERE password=:pass");
+        $statement = $this->pdo->prepare("UPDATE $this->table 
+        SET `avatar`=:avatar, `email` = :email, `login`=:login, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
+        `phone`=:phone, `description`=:description WHERE password=:pass");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
         $statement->bindValue('avatar', $myprofile['avatar'], \PDO::PARAM_STR);
         $statement->bindValue('email', $myprofile['email'], \PDO::PARAM_STR);
