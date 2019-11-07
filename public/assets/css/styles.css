@@ -61,27 +61,27 @@ body {
 }
 
 .font-icon-example .item.home:hover {
-  color: #FFA84F;
+  color: #02546B;
 }
 
 .font-icon-example .item.profile:hover {
-  color: #FFA84F;
+  color: #02546B;
 }
 
 .font-icon-example .item.statistics:hover {
-  color: #FFA84F;
+  color: #02546B;
 }
 
 .font-icon-example .item.about:hover {
-  color: #FFA84F;
+  color: #02546B;
 }
 
 .font-icon-example .item.contact:hover {
-  color: #FFA84F;
+  color: #02546B;
 }
 
 .font-icon-example .item.search:hover {
-  color: #FFA84F;
+  color: #02546B;
 }
 
 @media (min-width: 768px) {
