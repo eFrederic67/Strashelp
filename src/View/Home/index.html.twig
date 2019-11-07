@@ -1,7 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Vous êtes connecté</h1>
-    <a href="/Session/logout">Me déconnecter</a>
-    <meta http-equiv="refresh" content="2; URL=/search/search" />
+
+        <h1 class="h1 text-center col-4 offset-4">Stras'Help</h1>
+        <a class="btn btn-info btn-block col-4 offset-4" href="/Session/login">Se connecter</a><br/>
+        <a class="btn btn-info btn-block col-4 offset-4" href="/Session/signup">M'inscrire</a>
+
 {% endblock %}

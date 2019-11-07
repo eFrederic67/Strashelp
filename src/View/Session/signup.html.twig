@@ -1,66 +1,198 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    {{ message }}
-    <h1>Formulaire d'inscription</h1>
-    <form class="Session_form" target="" method="POST">
-        <div>
-            <label  for="login">Choississez un login</label><br/>
-            <input  type="text"  id="login"  name="login"  /> {# <?php if(isset($_POST['user_name'])) echo ('value="'.$_POST['user_name'].'"'); ?> /><?php if(isset($errors['user_name'])) echo ' '.$errors['user_name']; ?>#}
-        </div>
-        <div>
-            <label  for="lastname">Nom</label><br/>
-            <input  type="text"  id="lastname"  name="lastname"  /> {# <?php if(isset($_POST['user_name'])) echo ('value="'.$_POST['user_name'].'"'); ?> /><?php if(isset($errors['user_name'])) echo ' '.$errors['user_name']; ?>#}
-        </div>
-        <div>
-            <label  for="firstname">Prénom</label><br/>
-            <input  type="text"  id="firstname"  name="firstname"  /> {# <?php if(isset($_POST['user_name'])) echo ('value="'.$_POST['user_name'].'"'); ?> /><?php if(isset($errors['user_name'])) echo ' '.$errors['user_name']; ?>#}
-        </div>
-        <div>
-            <label  for="password">Saississez un mot de passe</label><br/>
-            <input  type="password"  id="password"  name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="passwordConf">Confirmez votre mot de passe</label><br/>
-            <input  type="password"  id="passwordConf"  name="passwordConf" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
 
-        <div>
-            <label  for="adresse_1">Adresse</label><br/>
-            <input  type="text"  id="adresse_1" name="adresse_1"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="adresse_2">Adresse complément <i>(optionnel)</i></label><br/>
-            <input  type="text"  id="adresse_2" name="adresse_2"/> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="zipcode">Code postal</label><br/>
-            <input  type="text"  id="zipcode" name="zipcode"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="city">Ville</label><br/>
-            <input  type="text"  id="city" name="city"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="phone">Téléphone <i>(fixe ou portable)</i></label><br/>
-            <input  type="text"  id="phone" name="phone" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}" minlength="10" maxlength="15" placeholder="0612345678"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="phone">Date de naissance <i>(format jj-mm-aaaa)</i></label><br/>
-            <input  type="text"  id="phone" name="phone" pattern="[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{4}" minlength="8" maxlength="8" placeholder="23-10-1979"  /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-        </div>
-        <div>
-            <label  for="avatar">Changer de photo de profil<br/>
-            <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
-            <img src="/assets/images/profil.png" alt="profil">
-            </label><br/>
-            <input  type="file"  id="avatar" name="avatar" /> {#<?php if(isset($_POST['user_firstname'])) echo ('value="'.$_POST['user_firstname'].'"'); ?> /><?php if(isset($errors['user_firstname'])) echo ' '.$errors['user_firstname']; ?>#}
-            <label>max 2 Mo</label><br/>
-        </div>
+<div class="signup" id="signup" style="display: {{display}};">
+    <h1 class="h3 text-center mt-2">Formulaire d'inscription</h1>
+    <form class="Session_form text-center border border-light p-4 col-4 offset-4" target="" method="POST">
+        <fieldset>
+            <div>
+                <fieldset>
+                    <legend>Votre date de naissance</legend>
+                    Vous devez être majeur pour vous inscrire.
+                    <span class="SignUpFormError">{{ errors.DateOfBirthError }}</span>
+                    <div class="form-row">
+                        <div class="form-group col-md-2 offset-2">
+                            <label for="dayOfBirth">Jour</label><br/>
+                            <input class="form-control text-center" type="text" id="dayOfBirth" name="dayOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" max="31" placeholder="jj" value="{{ dayOfBirth }}" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="monthOfBirth">Mois</label><br/>
+                            <input class="form-control text-center" type="text" id="monthOfBirth" name="monthOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" max="12" placeholder="mm" value="{{ monthOfBirth }}" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="yearOfBirth">Année</label><br/>
+                            <input class="form-control text-center" type="text" id="yearOfBirth" name="yearOfBirth" pattern="[0-9]{4}" minlength="4" maxlength="4"  max="2025" placeholder="aaaa" value="{{ yearOfBirth }}" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div>
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                <img class="profilPic" src="/assets/images/profil.png" alt="profilpic">
+                <input type="hidden" name="avatar" value="/assets/images/profil.png">
+            </div>
 
+            <div>
+                <label for="login">Choississez un login</label><br/>
+                <input class="form-control" type="text"  id="login"  name="login" value="{{ login }}" /> <span class="SignUpFormError">{{ errors.login }}</span>
+            </div>
+            <div>
+                <label for="email">Votre e-mail</label><br/>
+                <input class="form-control" type="email"  id="email"  name="email" value="{{ email }}" /> <span class="EmailFormError">{{ errors.email }}</span>
+            </div>
+            <div>
+                <label for="emailConf">Confirmez votre e-mail</label><br/>
+                <input class="form-control" type="email"  id="emailConf"  name="emailConf" value="{{ emailConf }}" /> <span class="EmailFormError">{{ errors.emailConf }}</span>
+            </div>
+            <div>
+                <label for="password">Saississez un mot de passe</label><br/>
+                <input class="form-control" type="password"  id="password"  name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="{{ password }}" /><span class="SignUpFormError">{{ errors.password }}</span>
+            </div>
+            <div>
+                <label for="passwordConf">Confirmez votre mot de passe</label><br/>
+                <input class="form-control" type="password"  id="passwordConf"  name="passwordConf" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="{{ passwordConf }}" /><span class="SignUpFormError">{{ errors.passwordConf }}</span>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="lastname">Nom</label><br/>
+                    <input class="form-control" type="text"  id="lastname"  name="lastname" value="{{ lastname }}" /><span class="SignUpFormError">{{ errors.lastname }}</span>
+                </div class="form-group col-6">
+                    <div>
+                    <label for="firstname">Prénom</label><br/>
+                    <input class="form-control" type="text"  id="firstname"  name="firstname" value="{{ firstname }}" /><span class="SignUpFormError">{{ errors.firstname }}</span>
+                </div>
+            </div>
 
+            <div>
+                <label for="adresse_1">Adresse</label><br/>
+                <input class="form-control" type="text"  id="adresse_1" name="adresse_1" value="{{ adresse_1 }}"  /><span class="SignUpFormError">{{ errors.adresse_1 }}</span>
+            </div>
+            <div>
+                <label for="adresse_2">Adresse complément <i>(optionnel)</i></label><br/>
+                <input class="form-control" type="text"  id="adresse_2" name="adresse_2" value="{{ adresse_2 }}"/>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label for="zipcode">C.P.</label><br/>
+                    <input class="form-control" type="text"  id="zipcode" name="zipcode" minlength="5" maxlength="5" value="{{ zipcode }}" /><span class="SignUpFormError">{{ errors.zipcode }}</span>
+                </div>
+                <div class="form-group col-9">
+                    <label for="city">Ville</label><br/>
+                    <input class="form-control" type="text"  id="city" name="city" value="{{ city }}" /><span class="SignUpFormError">{{ errors.city }}</span>
+                </div>
+            </div>
+            <div>
+                <label for="phone">Téléphone <i>(fixe ou portable)</i></label><br/>
+                <input class="form-control text-center" type="text"  id="phone" name="phone" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}" minlength="10" maxlength="10" placeholder="0612345678" value="{{ phone }}"  /><span class="SignUpFormError">{{ erros.phone }}</span>
+            </div>
+
+            <div>
+                <textarea class="form-control my-4" name="description" id="description" rows="5" placeholder="Parlez de vous..."></textarea>
+            </div>
+        </fieldset>
         <div  class="button">
-            <button  type="submit">Envoyer</button>
+            <button class="btn btn-info btn-block mb-2" type="submit">Envoyer</button>
         </div>
     </form>
+</div>
+{#    <!--Section: Contact v.2-->
+    <section class="mb-4">
+
+        <!--Section heading-->
+        <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+        <!--Section description-->
+        <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+            a matter of hours to help you.</p>
+
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-9 mb-md-0 mb-5">
+                <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+
+                    <!--Grid row-->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <input type="text" id="name" name="name" class="form-control">
+                                <label for="name" class="">Your name</label>
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <input type="text" id="email" name="email" class="form-control">
+                                <label for="email" class="">Your email</label>
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form mb-0">
+                                <input type="text" id="subject" name="subject" class="form-control">
+                                <label for="subject" class="">Subject</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-md-12">
+
+                            <div class="md-form">
+                                <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                                <label for="message">Your message</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                </form>
+
+                <div class="text-center text-md-left">
+                    <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
+                </div>
+                <div class="status"></div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-3 text-center">
+                <ul class="list-unstyled mb-0">
+                    <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                        <p>San Francisco, CA 94126, USA</p>
+                    </li>
+
+                    <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                        <p>+ 01 234 567 89</p>
+                    </li>
+
+                    <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                        <p>contact@mdbootstrap.com</p>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+
+        </div>
+
+    </section>
+    <!--Section: Contact v.2-->#}
 {% endblock %}

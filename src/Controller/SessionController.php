@@ -3,13 +3,12 @@
 
 namespace App\Controller;
 
-
 use App\Model\SessionManager;
 
 class SessionController extends AbstractController
 {
 
-    public function index()
+    public function login()
     {
         $message = '';
         $loginManager = new SessionManager();
@@ -22,21 +21,17 @@ class SessionController extends AbstractController
                   'login' => $_POST['login'],
                   'pass' => sha1($_POST['password']),
                 );
-                header("Location:/");
+
+                header("location:/");//.$_SERVER['REQUEST_URI']);
                 exit;
-            }
-            else{
+            } else {
                 $message = "les identifiants ne sont pas reconnus";
             }
-        }
-        else {
+        } else {
             $resultats = $loginManager->login('');
         }
 
-
-
-        return $this->twig->render('Session/index.html.twig',['message' => $message]);
-
+        return $this->twig->render('Session/login.html.twig', ['message' => $message]);
     }
 
     public function logout()
@@ -49,28 +44,20 @@ class SessionController extends AbstractController
 
     public function signup()
     {
-        if (!empty($_POST)) {
+        var_dump($_POST);
 
-            $loginManager = new SessionManager();
-            $test = $loginManager->signup($_POST);
+        $signUpManager = new SessionManager();
+        $errors = $signUpManager->testErrorInForm($_POST);
+        var_dump($errors);
+        return $this->twig->render('Session/signup.html.twig', [
+            'post' => $_POST,
+            'errors' => $errors
+        ]);
+    }
 
-            if($test) { // quand il y a des erreurs
-
-            }
-            else { //Quand tout va bien pour l'inscription
-                // il faut entrer les infos dans la base
-                // puis remettre un message comme quoi tout s'est bien passé
-                // et envoyer un mail de confirmation.
-
-            }
-
-
-        }
-        else
-        {
-            return $this->twig->render('Session/signup.html.twig');
-        }
-
+    public function recovery()
+    {
+        return $this->twig->render('Session/recovery.html.twig');
     }
 
 }
