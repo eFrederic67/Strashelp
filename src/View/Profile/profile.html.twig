@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h2>Profil de {{ profile.nickname }}</h2>
+            <img src="{{ profile.avatar }}" alt="avatar">
+            <div>
+                <p>{{ profile.firstname }} {{ profile.lastname }}</p>
+                <p>{{ profile.birthday }}</p>
+                <p>{{ profile.city }}</p>
+            </div>
+            <div>
+                <p>{{ profile.adresse_1 }}</p>
+                <p>{{ profile.adresse_2 }}</p>
+            </div>
+            <div>
+                <p>{{ profile.phone }}</p>
+                <p>{{ profile.email }}</p>
+            </div>
+        </div>
+        <div>
+            <p>{{ profile.description }}</p>
+        </div>
+    </div>
+
+
+{% endblock %}
