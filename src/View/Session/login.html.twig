@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+Connexion
+{% endblock %}
+
+{% block content %}
+
+    <form class="Session_form text-center border border-light p-5"  target="" method="POST">
+        <p class="h4 col-4 offset-4">Connexion</p>
+        {% if message != "" %}
+            <h5 class="text-danger">{{ message }}</h5>
+        {% endif %}
+        <div>
+            <label  for="nom">Login ou adresse e-mail :</label><br/>
+            <input  class="form-control col-4 offset-4" type="text"  id="login"  name="login" required /> 
+        </div>
+        <div>
+            <label  for="password">Mot de passe :</label><br/>
+            <input   class="form-control col-4 offset-4" type="password"  id="password"  name="password" required /> 
+        </div>
+        <div class="text-center col-4 offset-4">
+            <p>
+                <a href="/Session/Recovery">J'ai oublié mon mot de passe</a>
+            </p>
+        </div>
+
+        <div  class="button">
+            <button class="btn btn-info btn-block col-4 offset-4" type="submit">Envoyer</button>
+        </div>
+    </form>
+
+    <div class="text-center col-4 offset-4">
+        <p>
+            Pas encore membre ? <a href="/Session/SignUp">S'inscrire</a>
+        </p>
+    </div>
+{% endblock %}

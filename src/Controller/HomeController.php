@@ -8,6 +8,10 @@
 
 namespace App\Controller;
 
+use App\Model\HomeManager;
+use DateInterval;
+use DateTime;
+
 class HomeController extends AbstractController
 {
 
@@ -21,10 +25,11 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        // Si le type EST loggué, on l'envoie sur la page d'accueil des loggués
         if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SESSION['Auth']['pass'])) {
-            return $this->twig->render('Home/index.html.twig');
+            return $this->twig->render('Home/homeLogged.html.twig');
         } else {
-            return $this->twig->render('Home/logged.html.twig');
+            return $this->twig->render('Home/index.html.twig');
         }
     }
 }
