@@ -100,7 +100,7 @@ class SessionController extends AbstractController
         return $this->twig->render('Session/recovery.html.twig');
     }
 
-    public function SignUpValidate()
+    public function signUpValidate()
     {
         return $this->twig->render('Session/SignUpValidate.html.twig');
     }
