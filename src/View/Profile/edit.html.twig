@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    {% include 'Profile/style.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="h1_center">Modifie ton profil</h1>
+
+    {% for session in session %}
+
+        <form method="post" class="edit_profil">
+            <div class="form-group">
+                <label  for="avatar">Changer de photo de profil<br/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
+                    <img src="{{ session.avatar }}" alt="profil">
+                </label><br/>
+                <input class="btn btn-primary btn-md" value="{{ session.avatar }}" type="file"  id="avatar" name="avatar" />
+                <label>max 2 Mo</label><br/>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail" value="{{ session.email }}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pseudo">Pseudo</label>
+                    <input type="text" class="form-control" name="login" id="pseudo" value="{{ session.login }}">
+                </div>
+            </div>
+            <!-- Grid row -->
+
+            <div class="form-group">
+                <label for="adresse1">Addresse</label>
+                <input type="text" class="form-control" id="adresse1" name="adresse_1" value="{{ session.adresse_1 }}">
+            </div>
+            <div class="form-group">
+                <label for="adresse2">Adresse complément <i>(optionnel)</i></label>
+                <input type="text" class="form-control" id="adresse2" name="adresse_2" value="{{ session.adresse_2 }}">
+            </div>
+            <!-- Grid row -->
+            <div class="form-group input_center">
+                <div class="form-group col-md-6">
+                    <label for="phone">Téléphone <i>(fixe ou portable)</i></label>
+                    <input type="text" class="form-control" id="phone" value="{{ session.phone }}" name="phone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="description">Présentation</label>
+                    <textarea class="form-control" id="description" name="description" rows="5">{{ session.description }}</textarea>
+                </div>
+            </div>
+            <!-- Grid row -->
+            <button type="submit" class="btn btn-primary btn-md edit_submit">Modifier</button>
+        </form>
+
+    {% endfor %}
+
+    <a href="/profile/myprofile">Back</a>
+
+{% endblock %}
+

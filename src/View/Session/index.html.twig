@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    {{ message }}
+
+    <form class="Session_form" target="" method="POST">
+        <div>
+            <label  for="nom">Login ou adresse e-mail :</label><br/>
+            <input  type="text"  id="login"  name="login" required />
+        </div>
+        <div>
+            <label  for="password">Mot de passe :</label><br/>
+            <input  type="password"  id="password"  name="password" required />
+        </div>
+
+        <div  class="button">
+            <button  type="submit">Envoyer</button>
+        </div>
+    </form>
+{% endblock %}
