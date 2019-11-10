@@ -61,11 +61,17 @@ function toggleInscription(classe) {
 
 }
 
-function profilePicChange(request) {
-    let el = document.getElementById('profilPicChange');
-    if (request == "in") {
-        el.style.display = "block";
-    } else {
-        el.style.display = "none"
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#profilPic')
+                .attr('src', e.target.result)
+                .width(150)
+                .height(150);
+        };
+
+        reader.readAsDataURL(input.files[0]);
     }
 }

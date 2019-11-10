@@ -10,7 +10,7 @@ Inscription
 </script>
     <div class="signup" id="signup" style="display: block;">
         <h1 class="h3 text-center mt-2">Formulaire d'inscription</h1>
-        <form class="Session_form text-center border border-light p-4 col-4 offset-4" target="" method="POST">
+        <form class="Session_form text-center border border-light p-4 col-4 offset-4" target="" method="POST" enctype="multipart/form-data">
                 <div>
                     <p>Vous devez être majeur et habiter Strasbourg<br/>
                         pour vous inscrire.</p>
@@ -37,28 +37,20 @@ Inscription
                 <div class="cachee" style="display: {{ display2 }}">
                     <hr/>
                     <div class="profilPic">
-                        <div class="overlay-image">
-                            <a href=""><img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" /></a>
+                        <div class="overlay-image" onclick="document.getElementById('profilPicSelect').click()">
+                            <a href="" ><img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" id="profilPic" /></a>
                             <div class="hover">
-                                <img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" />
+                                <img class="image" src="/assets/images/profil.png" alt="image de profil par défaut"  id="profilPic"/>
                                 <div class="fas fa-camera-retro text"></div>
                                 <div class="text2">Changer de photo</div>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
 
                             </div>
                         </div>
                     </div>
-{#
-
-                    <div>
-                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
-                        <a href="" onmouseover="profilePicChange('in');" onmouseout="profilePicChange('out');" >
-                            <img class="profilPic" src="/assets/images/profil.png" alt="profilpic">
-                            <div class="fas fa-camera-retro profilPicChange" id="profilPicChange"></div>
-                        </a>
-                        <input type="hidden" name="avatar" value="/assets/images/profil.png">
+                    <div style="display: none">
+                                <input type="file" name="fichier[]" multiple="multiple" id="profilPicSelect" onchange="readURL(this);" />
                     </div>
-
-#}
                     <hr/>
                     <div class="mt-2">
                         {% if errors.login != "" %}
