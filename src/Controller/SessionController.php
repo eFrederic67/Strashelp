@@ -74,10 +74,6 @@ class SessionController extends AbstractController
                         'pass' => $_POST['password'],
                         'firstname' => $_POST['firstname'],
                     );
-                    echo "<script>
-                    alert(\"Inscription prise en compte\");
-                    </script>";
-
                     header("Location:/Session/SignUpValidate");
                 }
             } else {
