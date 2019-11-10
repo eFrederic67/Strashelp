@@ -32,7 +32,7 @@ class SessionManager extends AbstractManager
                     $test ='login';
                 }
 
-                $sql = "SELECT id FROM ".$this->table ." WHERE ".trim($test)."='".$login."' AND password='".$pass."'";
+                $sql = "SELECT id,firstname FROM ".$this->table ." WHERE ".trim($test)."='".$login."' AND password='".$pass."'";
                 return $this->pdo->query($sql)->fetchAll();
             }
         }
@@ -141,42 +141,37 @@ class SessionManager extends AbstractManager
 
         $maxSize = 1024*1024;
 
-        echo "max size = ". $maxSize/1024/1024 ."mo<br/>";
+            $erreurSize = "";
+            $erreurType = "";
 
-        if (!empty($_FILES)) {
-            $totalFichier = count($_FILES['fichier']['name']);
-            for ($i = 0; $i < $totalFichier; $i++) {
-                $erreurSize = "";
-                $erreurType = "";
+            if ($_FILES['fichier']['size'] > $maxSize) {
+                $erreurSize = $_FILES['fichier']['name'];
+            }
 
-                if ($_FILES['fichier']['size'][$i] > $maxSize) {
-                    $erreurSize = $_FILES['fichier']['name'][$i];
-                }
+            if (!$this->testTypeMime($_FILES['fichier']['type'], $typeMimeAutorises, "image/")) {
+                $erreurType = $_FILES['fichier']['name'];
+            }
 
-                if (!$this->testTypeMime($_FILES['fichier']['type'][$i], $typeMimeAutorises, "image/")) {
-                    $erreurType = $_FILES['fichier']['name'][$i];
-                }
+            if ($erreurSize == '' && $erreurType == '') {
+                // on récupère l'extension, par exemple "pdf"
+                $extension = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);
+                // on concatène le nom de fichier unique avec l'extension récupérée
+                $filename = "avatar_".uniqid() . '.' . $extension;
 
-                if ($erreurSize == '' && $erreurType == '') {
-                    // on récupère l'extension, par exemple "pdf"
-                    $extension = pathinfo($_FILES['fichier']['name'][$i], PATHINFO_EXTENSION);
-                    // on concatène le nom de fichier unique avec l'extension récupérée
-                    $filename = "avatar_".uniqid() . '.' . $extension;
+                // chemin vers un dossier sur le serveur qui va recevoir les fichiers uploadés
+                // (attention ce dossier doit être accessible en écriture)
+                $uploadDir = 'assets/images/avatars/';
+                // on génère un nom de fichier à partir du nom de fichier sur le poste du client
+                // (mais vous pouvez générer ce nom autrement si vous le souhaitez)
+                $uploadFile = $uploadDir . $filename;//basename($_FILES['fichier']['name'][$i]);
 
-                    // chemin vers un dossier sur le serveur qui va recevoir les fichiers uploadés
-                    // (attention ce dossier doit être accessible en écriture)
-                    $uploadDir = 'assets/images/avatars/';
-                    // on génère un nom de fichier à partir du nom de fichier sur le poste du client
-                    // (mais vous pouvez générer ce nom autrement si vous le souhaitez)
-                    $uploadFile = $uploadDir . $filename;//basename($_FILES['fichier']['name'][$i]);
-
-                    // on déplace le fichier temporaire vers le nouvel emplacement sur le serveur.
-                    // Ca y est, le fichier est uploadé
-                    if (move_uploaded_file($_FILES['fichier']['tmp_name'][$i], $uploadFile)) {
-                        return $uploadFile;
-                    }
+                // on déplace le fichier temporaire vers le nouvel emplacement sur le serveur.
+                // Ca y est, le fichier est uploadé
+                if (move_uploaded_file($_FILES['fichier']['tmp_name'], $uploadFile)) {
+                    return $uploadFile;
                 }
             }
-        }
+
+
     }
 }

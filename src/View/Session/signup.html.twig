@@ -21,11 +21,11 @@ Inscription
                         <div class="form-row">
                             <div class="form-group col-md-3 offset-1">
                                 <label for="dayOfBirth">Jour</label><br/>
-                                <input class="form-control text-center" type="number" id="dayOfBirth" name="dayOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" max="31" placeholder="jj" value="{{ dayOfBirth }}" required autofocus>
+                                <input class="form-control text-center" type="number" id="dayOfBirth" name="dayOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" min="1" max="31" placeholder="jj" value="{{ dayOfBirth }}" required autofocus>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="monthOfBirth">Mois</label><br/>
-                                <input class="form-control text-center" type="number" id="monthOfBirth" name="monthOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" max="12" placeholder="mm" value="{{ monthOfBirth }}" required>
+                                <input class="form-control text-center" type="number" id="monthOfBirth" name="monthOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" min="1" max="12" placeholder="mm" value="{{ monthOfBirth }}" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="yearOfBirth">Année</label><br/>
@@ -38,9 +38,9 @@ Inscription
                     <hr/>
                     <div class="profilPic">
                         <div class="overlay-image" onclick="document.getElementById('avatar').click()">
-                            <a href="" ><img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" id="profilPic" /></a>
+                            <a href="" ><img class="image" src="{{ avatar }}" alt="image de profil par défaut" id="profilPic" /></a>
                             <div class="hover">
-                                <img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" id="profilPicHover"/>
+                                <img class="image" src="{{ avatar }}" alt="image de profil par défaut" id="profilPicHover"/>
                                 <div class="fas fa-camera-retro text"></div>
                                 <div class="text2">Changer de photo</div>
                                 <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
@@ -49,7 +49,7 @@ Inscription
                         </div>
                     </div>
                     <div style="display: none">
-                                <input type="file" name="fichier[]" multiple="multiple" id="avatar" onchange="readURL(this);" />
+                                <input type="file" name="fichier" id="avatar" onchange="readURL(this);"/>
                     </div>
                     <hr/>
                     <div class="mt-2">
@@ -145,7 +145,7 @@ Inscription
                 <div class="cachee" style="display: {{ display1 }}">
                     <div class="form-group col-10 offset-1">
                         <label for="zipcode">Votre code postal</label><br/>
-                        <input class="form-control text-center" type="number" id="zipcode2" name="zipcode2" pattern="[0-9]{5}" minlength="5" maxlength="5" value="{{ zipcode }}" required>
+                        <input class="form-control text-center" type="number" id="zipcode2" name="zipcode2" pattern="[0-9]{5}" minlength="5" maxlength="5"  min="67000" max="67200" step="100" value="{{ zipcode }}" required>
                     </div>
                     <div  class="button">
                         <button type="button" class="btn btn-info btn-block col-6 offset-3 mb-2" onmouseup="toggleInscription('cachee')">Suivant</button>
