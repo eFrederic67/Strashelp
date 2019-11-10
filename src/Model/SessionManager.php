@@ -53,12 +53,15 @@ class SessionManager extends AbstractManager
         }
 
         if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+            if ($this->testDoublon('email', $post['email'])) {
+                $errors['email'] = "Cette adresse mail est est déjà utilisée";
+            }
         } else {
             $errors['email'] = $post['email'] . " n'est pas une adresse valide !";
         }
 
         if ($post['emailConf']!= $post['email']) {
-            $errors['login'] = "les deux adresses mails entrées sont différentes";
+            $errors['email'] = "les deux adresses mails entrées sont différentes";
         }
 
         if (checkdate($post['monthOfBirth'], $post['dayOfBirth'], $post['yearOfBirth'])) {

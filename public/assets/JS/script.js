@@ -1,5 +1,5 @@
 
-    function verifDate(yd,md,bd) {
+function verifDate(yd,md,bd) {
     let today = new Date();
     let yt = today.getFullYear();
     let mt = today.getMonth()+1;
@@ -44,7 +44,6 @@ function toggleInscription(classe) {
             let cp2 = document.getElementById('zipcode');
             cp2.setAttribute("value", cp);
 
-
             let el = document.getElementsByClassName(classe);
             for (let i = 0; i < el.length; i++) {
                 if (el[i].style.display === 'block') {
@@ -55,13 +54,9 @@ function toggleInscription(classe) {
             }
         } else {
             alert('Cette association est réservée aux Strasbourgeois(es).');
-            document.location.href = "https://fr.wikipedia.org/wiki/Strasbourg";
-
-
-    }
+        }
     }else {
         alert("Veuillez remplir tous les champs")
-
     }
 
 }
