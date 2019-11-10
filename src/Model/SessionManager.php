@@ -124,8 +124,9 @@ class SessionManager extends AbstractManager
         }
     }
 
-    private function testTypeMime($fichier,$type,$agretator) :bool {
-        foreach ($type  as $item) {
+    private function testTypeMime($fichier, $type, $agretator) :bool
+    {
+        foreach ($type as $item) {
             if ($fichier == $agretator.$item) {
                 return true;
             }
@@ -142,17 +143,17 @@ class SessionManager extends AbstractManager
 
         echo "max size = ". $maxSize/1024/1024 ."mo<br/>";
 
-        if (isset($_FILES) && !empty($_FILES)) {
-
-            for ($i = 0; $i < count($_FILES['fichier']['name']); $i++){
+        if (!empty($_FILES)) {
+            $totalFichier = count($_FILES['fichier']['name']);
+            for ($i = 0; $i < $totalFichier; $i++) {
                 $erreurSize = "";
                 $erreurType = "";
 
-                if ($_FILES['fichier']['size'][$i] > $maxSize ) {
+                if ($_FILES['fichier']['size'][$i] > $maxSize) {
                     $erreurSize = $_FILES['fichier']['name'][$i];
                 }
 
-                if (!$this->testTypeMime($_FILES['fichier']['type'][$i],$typeMimeAutorises,"image/")) {
+                if (!$this->testTypeMime($_FILES['fichier']['type'][$i], $typeMimeAutorises, "image/")) {
                     $erreurType = $_FILES['fichier']['name'][$i];
                 }
 
@@ -173,23 +174,8 @@ class SessionManager extends AbstractManager
                     // Ca y est, le fichier est uploadé
                     if (move_uploaded_file($_FILES['fichier']['tmp_name'][$i], $uploadFile)) {
                         return $uploadFile;
-//                    } else {
-//                        echo "Une erreur s'est produite lors de l'upload du fichier "
-//                            .$_FILES['fichier']['name'][$i].", veuillez recommencer.<br/>";
                     }
-
-/*                } else {
-                    if ($erreurType != '') {
-                        echo "Le fichier(s) ".($erreurType)." n'a pas pu être uploadé 
-car ce n'est pas une image valide.<br/>";
-                    }
-
-                    if ($erreurSize != '') {
-                        echo "Le fichier(s) ".($erreurSize)." n'a pas pu être uploadé 
-car il est trop lourd (max 1mo par fichier).<br.>";
-                    }*/
                 }
-
             }
         }
     }

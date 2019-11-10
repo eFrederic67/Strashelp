@@ -62,11 +62,13 @@ class SessionController extends AbstractController
                     echo "<script>
                     alert(\"Inscription prise en compte\");
                     </script>";
-                if ($addressAvatar = $signUpManager->testImage()) {
+                if ($_FILES !== null) {
+                    $addressAvatar = $signUpManager->testImage();
                     $_POST['avatar'] = $addressAvatar;
-                    if ($signUpManager->requete($_POST)) {
-                        header("Location:/Session/SignUpValidate");
-                    }
+                }
+
+                if ($signUpManager->requete($_POST)) {
+                    header("Location:/Session/SignUpValidate");
                 }
             } else {
                 // s'il y a des erreurs on reloade la page
