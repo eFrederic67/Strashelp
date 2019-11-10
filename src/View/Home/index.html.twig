@@ -1,13 +1,46 @@
-{% extends 'layout.html.twig' %}
+<!doctype html>
+<html lang="fr">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+                        Bienvenue sur Stras'Help
+        </title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+        <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="icon" href="/assets/images/favicon.png">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/bootstrap_sup/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
+        <link rel="stylesheet" href="/assets/css/Footer-Dark.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <link rel="stylesheet" href="/assets/css/styles_footer.css">
 
-{% block title %}
-Bienvenue sur Stras'Help
-{% endblock %}
+        <script src="/assets/JS/script.js"></script>
+</head>
 
-{% block content %}
-
-        <h1 class="h1 text-center col-4 offset-4">Stras'Help</h1>
-        <a class="btn btn-info btn-block col-4 offset-4" href="/Session/login">Se connecter</a><br/>
-        <a class="btn btn-info btn-block col-4 offset-4" href="/Session/signup">M'inscrire</a>
-
-{% endblock %}
+<body>
+        <div class="background">
+                {# TODO : Remplacer le texte par une image #}
+                <h1 class="h1 text-center text-white offset-4">Stras'Help</h1>
+        </div>
+                <a class="btn btn-info btn-block col-4 offset-4 mt-4" href="/Session/login">Se connecter</a><br/>
+                <a class="btn btn-info btn-block col-4 offset-4" href="/Session/signup">M'inscrire</a>
+                <p class="col-4 text-justify">Stras'Help est une association <u>exclusivement Strasbourgeoise</u>
+                qui permet de mettre en relation des personnes pour l'échange de services <u>non-marchands.</u></p>
+                <img src="assets/images/UnloggedHomepage_Education.jpg">
+                <img src="assets/images/UnloggedHomepage_Education2.png">
+                <img src="assets/images/UnloggedHomepage_Education3.jpg">
+                <img src="assets/images/UnloggedHomepage_Cuisine.jpg">
+                <img src="assets/images/UnloggedHomepage_Bricolage.jpg">
+        ​</body>
+</html>

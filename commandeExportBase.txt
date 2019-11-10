@@ -1,0 +1,1 @@
+mysqldump -u non-root -p strashelp > ~/Documents/Dev/strashelp.sql
