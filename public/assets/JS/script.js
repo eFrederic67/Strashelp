@@ -61,6 +61,17 @@ function toggleInscription(classe) {
 
 }
 
+function countId(id) {
+    var counter = 0;
+    $("img").each(function() {
+        if(this.id==id) {
+            counter+=1;
+        }
+    });
+    alert(counter);
+}
+
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -68,8 +79,12 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#profilPic')
                 .attr('src', e.target.result)
-                .width(150)
-                .height(150);
+                .width(120)
+                .height(120);
+            $('#profilPicHover')
+                .attr('src', e.target.result)
+                .width(120)
+                .height(120);
         };
 
         reader.readAsDataURL(input.files[0]);
