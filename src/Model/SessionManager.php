@@ -123,4 +123,74 @@ class SessionManager extends AbstractManager
             return (count($insertion->fetchAll())>0) ? true : false;
         }
     }
+
+    private function testTypeMime($fichier,$type,$agretator) :bool {
+        foreach ($type  as $item) {
+            if ($fichier == $agretator.$item) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function testImage()
+    {
+
+        $typeMimeAutorises = ['png','gif','jpeg','jpg'];
+
+        $maxSize = 1024*1024;
+
+        echo "max size = ". $maxSize/1024/1024 ."mo<br/>";
+
+        if (isset($_FILES) && !empty($_FILES)) {
+
+            for ($i = 0; $i < count($_FILES['fichier']['name']); $i++){
+                $erreurSize = "";
+                $erreurType = "";
+
+                if ($_FILES['fichier']['size'][$i] > $maxSize ) {
+                    $erreurSize = $_FILES['fichier']['name'][$i];
+                }
+
+                if (!$this->testTypeMime($_FILES['fichier']['type'][$i],$typeMimeAutorises,"image/")) {
+                    $erreurType = $_FILES['fichier']['name'][$i];
+                }
+
+                if ($erreurSize == '' && $erreurType == '') {
+                    // on récupère l'extension, par exemple "pdf"
+                    $extension = pathinfo($_FILES['fichier']['name'][$i], PATHINFO_EXTENSION);
+                    // on concatène le nom de fichier unique avec l'extension récupérée
+                    $filename = "avatar_".uniqid() . '.' . $extension;
+
+                    // chemin vers un dossier sur le serveur qui va recevoir les fichiers uploadés
+                    // (attention ce dossier doit être accessible en écriture)
+                    $uploadDir = 'assets/images/avatars/';
+                    // on génère un nom de fichier à partir du nom de fichier sur le poste du client
+                    // (mais vous pouvez générer ce nom autrement si vous le souhaitez)
+                    $uploadFile = $uploadDir . $filename;//basename($_FILES['fichier']['name'][$i]);
+
+                    // on déplace le fichier temporaire vers le nouvel emplacement sur le serveur.
+                    // Ca y est, le fichier est uploadé
+                    if (move_uploaded_file($_FILES['fichier']['tmp_name'][$i], $uploadFile)) {
+                        return $uploadFile;
+//                    } else {
+//                        echo "Une erreur s'est produite lors de l'upload du fichier "
+//                            .$_FILES['fichier']['name'][$i].", veuillez recommencer.<br/>";
+                    }
+
+/*                } else {
+                    if ($erreurType != '') {
+                        echo "Le fichier(s) ".($erreurType)." n'a pas pu être uploadé 
+car ce n'est pas une image valide.<br/>";
+                    }
+
+                    if ($erreurSize != '') {
+                        echo "Le fichier(s) ".($erreurSize)." n'a pas pu être uploadé 
+car il est trop lourd (max 1mo par fichier).<br.>";
+                    }*/
+                }
+
+            }
+        }
+    }
 }

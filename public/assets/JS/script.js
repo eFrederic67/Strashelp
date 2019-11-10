@@ -79,12 +79,12 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#profilPic')
                 .attr('src', e.target.result)
-                .width(120)
-                .height(120);
+                // .width(150)
+                .height(150);
             $('#profilPicHover')
                 .attr('src', e.target.result)
-                .width(120)
-                .height(120);
+                // .width(150)
+                .height(150);
         };
 
         reader.readAsDataURL(input.files[0]);
