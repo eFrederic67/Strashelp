@@ -35,25 +35,44 @@ Inscription
                     </fieldset>
                 </div>
                 <div class="cachee" style="display: {{ display2 }}">
+                    <hr/>
+                    <div class="profilPic">
+                        <div class="overlay-image">
+                            <a href=""><img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" /></a>
+                            <div class="hover">
+                                <img class="image" src="/assets/images/profil.png" alt="image de profil par défaut" />
+                                <div class="fas fa-camera-retro text"></div>
+                                <div class="text2">Changer de photo</div>
+
+                            </div>
+                        </div>
+                    </div>
+{#
+
                     <div>
                         <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
-                        <img class="profilPic" src="/assets/images/profil.png" alt="profilpic">
+                        <a href="" onmouseover="profilePicChange('in');" onmouseout="profilePicChange('out');" >
+                            <img class="profilPic" src="/assets/images/profil.png" alt="profilpic">
+                            <div class="fas fa-camera-retro profilPicChange" id="profilPicChange"></div>
+                        </a>
                         <input type="hidden" name="avatar" value="/assets/images/profil.png">
                     </div>
 
+#}
+                    <hr/>
                     <div class="mt-2">
                         {% if errors.login != "" %}
                             <h5 class="h6 text-danger">{{ errors.login }}</h5>
                         {% endif %}
                         <label for="login">Choississez un login</label><br/>
-                        <input class="form-control" type="text" id="login"  name="login" value="{{ login }}" placeholder="login" required>
+                        <input class="form-control" type="text" id="login"  name="login" value="{{ login }}" placeholder="login" pattern="(?=.*\d)(?=.*A-Za-z0-9_-])" required>
                     </div>
                     <div class="mt-2">
                         {% if errors.email != "" %}
                             <h5 class="h6 text-danger">{{ errors.email }}</h5>
                         {% endif %}
                         <label for="email">Votre e-mail</label><br/>
-                        <input class="form-control" type="email" id="email"  name="email" value="{{ email }}" placeholder="monadresse@site.com"required>
+                        <input class="form-control" type="email" id="email"  name="email" value="{{ email }}" placeholder="monadresse@site.com" required>
                     </div>
                     <div class="mt-2">
                         <label for="emailConf">Confirmez votre e-mail</label><br/>

@@ -60,3 +60,12 @@ function toggleInscription(classe) {
     }
 
 }
+
+function profilePicChange(request) {
+    let el = document.getElementById('profilPicChange');
+    if (request == "in") {
+        el.style.display = "block";
+    } else {
+        el.style.display = "none"
+    }
+}
