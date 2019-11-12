@@ -49,4 +49,19 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
             $statement->execute();
             var_dump($statement);
     }
+
+    public function post(int $id)
+    {
+        $statement = $this->pdo->prepare("SELECT post.id, type, title, id_category, user.login,
+        DATE_FORMAT(start_hour, '%d/%m/%Y') AS start_day, DATE_FORMAT(start_hour, '%Hh%i') AS start_hour,
+        DATE_FORMAT(end_hour, '%Hh%i') AS end_hour, text_annoucement, nbmin, nbmax FROM ". self::TABLE."
+        JOIN user ON user.id = post.id_user WHERE post.id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch();
+        /*$post = $this->pdo->prepare("SELECT title, id, text_annoucement FROM ".self::TABLE." WHERE id=:item");
+        $post->bindValue('id', $id, \PDO::PARAM_INT);
+        $post->execute();
+        return $post->fetch()*/;
+    }
 }

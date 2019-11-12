@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="card text-center row-2">
+        <div class="card-header">
+            <h4 class="card-title">{{ item.title }}
+                <small>
+                    proposé par :
+                    <a href="/profile/profile/{{ item.id }}">{{ item.login }}</a>
+                </small>
+            </h4>
+            <h5>Le {{ item.start_day }} de {{ item.start_hour }} à {{ item.end_hour }}</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-justify">{{ item.text_annoucement }}</p>
+            <a href="#!" class="btn btn-dark">Prendre contact</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ item.id_category }}
+        </div>
+    </div>
+{% endblock %}
