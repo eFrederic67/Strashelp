@@ -26,16 +26,16 @@ class SignalController extends AbstractController
     public function signalUser(int $id)
     {
         $signaluserManager = new SignaluserManager();
-        $user = $signaluserManager->selectOneById($id);
+        $user = $signaluserManager->selectUserById($id);
 
-        return $this->twig->render('Signal/signaluser.html.twig', ['signaluser' => $user]);
+        return $this->twig->render('Signal/signaluser.html.twig', ['user' => $user]);
     }
+
     public function signalPost(int $id)
     {
         $signalpostManager = new SignalpostManager();
-        $post = $signalpostManager->selectOneById($id);
+        $post = $signalpostManager->selectPostById($id);
 
-        // $signal = $signalpostManager->signalPost($id);
-        return $this->twig->render('Signal/signalpost.html.twig', ['signalpost' => $post]);
+        return $this->twig->render('Signal/signalpost.html.twig', ['post' => $post]);
     }
 }
