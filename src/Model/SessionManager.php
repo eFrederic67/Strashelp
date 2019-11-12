@@ -111,9 +111,8 @@ class SessionManager extends AbstractManager
         foreach ($champsAInserer as $value) {
             $insertion->bindValue($value, $post[$value], \PDO::PARAM_STR);
         }
-        // ajouter un test pour être sûr que ça s'est bien passé et un return
-        $insertion->execute();
-        return true;
+        // un test pour être sûr que ça s'est bien passé et un return
+        return ($insertion->execute()) ? true : false;
     }
 
     public function testDoublon($field, $valeur)
