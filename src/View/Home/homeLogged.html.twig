@@ -7,6 +7,28 @@
 {% block content %}
     <h1 class="col-4">Bienvenue {{ firstname }}</h1>
     <h1 class="col-4">Vos Rendez-vous</h1>
+    <table>
+        <thead>
+        <tr>
+            <td>date</td>
+            <td>heure début</td>
+            <td>heure heure fin</td>
+            <td>titre</td>
+            <td>combien de personnes ont répondu</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rdv in rendezVous  %}
+            <tr>
+                <td>{{ rdv.start_hour|date("d/m/Y") }}</td>
+                <td>{{ rdv.start_hour|date('H:i:s') }}</td>
+                <td>{{ rdv.end_hour|date('H:i:s') }}</td>
+                <td>{{ rdv.title }}</td>
+                <td>{{ rdv.title }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <h1 class="col-4">Ils ont besoin de vous</h1>
     <h1 class="col-4">Dernières Annonces</h1>
     <h1 class="col-4">Top Actus</h1>
