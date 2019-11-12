@@ -22,7 +22,7 @@
         <!-- Default input -->
         <div class="form-group">
             <label for="inputAddress">Message</label>
-            <textarea type="text" class="form-control" id="inputAddress" name="text_annoucement" placeholder="Your Annonce"></textarea>
+            <textarea type="text" class="form-control" id="editor" name="text_annoucement" placeholder="Your Annonce"></textarea>
         </div>
         <!-- Default input -->
         <div class="form-group">
@@ -66,4 +66,13 @@
         <button type="submit" class="btn btn-primary btn-md col-6 offset-3">Envoyer</button>
     </form>
     <!-- Extended default form grid -->
+{% endblock %}
+{% block javascript %}
+<script>
+ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
 {% endblock %}
