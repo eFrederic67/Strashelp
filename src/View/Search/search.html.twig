@@ -13,18 +13,16 @@
             <th>Date</th>
             <th>Heure de début</th>
             <th>Heure de fin</th>
-            <th>Contenu</th>
             <th>Annonceur</th>
         </tr>
         </thead>
         <tbody style="background: #7597ff">
         {% for searchid in search %}
             <tr class="table-primary">
-                <td style="background: whitesmoke"><a href="" class="badge badge-warning"> {{ searchid.title }}</a></td>
+                <td style="background: whitesmoke"><a href="/Search/Posts/{{ searchid.id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
                 <td style="background: whitesmoke">{{ searchid.start_day }}</td>
                 <td style="background: whitesmoke">{{ searchid.start_hour }}</td>
                 <td style="background: whitesmoke">{{ searchid.end_hour }}</td>
-                <td style="background: whitesmoke">{{ searchid.text_annoucement }}</td>
                 <td style="background: whitesmoke"><a href="/profile/profile/{{ searchid.id }}" class="badge badge-warning">{{ searchid.login }}</a></td>
             </tr>
         {% endfor %}

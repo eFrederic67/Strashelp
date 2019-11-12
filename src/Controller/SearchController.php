@@ -33,4 +33,14 @@ class SearchController extends AbstractController
             );
         }
     }
+
+    public function posts(int $id):string
+    {
+        $itemManager = new SearchManager();
+        $item = $itemManager->post($id);
+        return $this->twig->render(
+            'Search/post.html.twig',
+            ['item' => $item]
+        );
+    }
 }
