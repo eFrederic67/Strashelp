@@ -7,9 +7,10 @@
 {% block content %}
     <h1 class="col-4">Bienvenue {{ firstname }}</h1>
     <h1 class="col-4">Vos Rendez-vous</h1>
-    <table>
+    <table border="1">
         <thead>
         <tr>
+            <td>Type</td>
             <td>date</td>
             <td>heure début</td>
             <td>heure heure fin</td>
@@ -20,6 +21,14 @@
         <tbody>
         {% for rdv in rendezVous  %}
             <tr>
+                <td>
+                    {% if rdv.type == 0 %}
+                        Offre
+                    {% else %}
+                        Demande
+                    {% endif %}
+                </td>
+                <td>{{  rdv.start_hour|date("d/m/Y") }}</td>
                 <td>{{ rdv.start_hour|date("d/m/Y") }}</td>
                 <td>{{ rdv.start_hour|date('H:i:s') }}</td>
                 <td>{{ rdv.end_hour|date('H:i:s') }}</td>

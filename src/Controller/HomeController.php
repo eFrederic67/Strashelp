@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         // Si le type EST loggué, on l'envoie sur la page d'accueil des loggués
         if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SESSION['Auth']['pass'])) {
             $homeManager = new HomeManager();
-            $myAppointments = $homeManager->selectBySection('post',$_SESSION['Auth']['id']);
+            $myAppointments = $homeManager->selectBySection('post', $_SESSION['Auth']['id']);
 
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],

@@ -17,8 +17,8 @@ class HomeManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectBySection($table,$id)
+    public function selectBySection($table, $id)
     {
-        return $this->pdo->query('SELECT * FROM ' . $table . ' WHERE id_user='.$id)->fetchAll();
+        return $this->pdo->query('SELECT * FROM ' . $table . ' WHERE id_user='.$id.' AND DATE(start_hour) >= CURDATE()')->fetchAll();
     }
 }
