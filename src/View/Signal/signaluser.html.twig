@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<form action="/" method="POST">
+    <div id="form">
+        <h3>
+            Signaler le profil utilisateur
+        </h3>
+        <input type="hidden" value="" name="signaled_user_id">
+        <input type="hidden" value="" name="user_id">
+        <input type="hidden" value="" name="user_login">
+        <input type="hidden" value="" name="alert_date">
+        <label for="alert">Motif du signalement</label>
+        <input type="text" id="alert" name="alert_message" required><br>
+        <div class="button">
+            <input type="submit" value="Valider">
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
