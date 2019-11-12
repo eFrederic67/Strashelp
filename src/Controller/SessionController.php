@@ -17,8 +17,9 @@ class SessionController extends AbstractController
             $resultats = $loginManager->login($_POST);
             if (($resultats)) {
                 $_SESSION['Auth'] = array(
-                  'login' => $_POST['login'],
-                  'pass' => sha1($_POST['password']),
+                    'login' => $_POST['login'],
+                    'pass' => sha1($_POST['password']),
+                    'firstname' => $resultats[0]['firstname'],
                 );
 
                 header("location:/");
@@ -47,22 +48,32 @@ class SessionController extends AbstractController
             return $this->twig->render('Session/signup.html.twig', [
                 'display1' => 'block',
                 'display2' => 'none',
+                'avatar' => "/assets/images/profil.png",
             ]);
         } else {
             // si le post est rempli parce que c'est un retour de formulaire
             // on teste les erreurs
             $signUpManager = new SessionManager();
             $errors = $signUpManager->testErrorInForm($_POST);
+            $_POST['avatar'] = "/assets/images/profil.png";
+            if ($_FILES['fichier']['name'] !== '') {
+                $addressAvatar = $signUpManager->testImage();
+                $_POST['avatar'] = "/".$addressAvatar;
+            }
             if (count($errors) == 0) {
                 // s'il le teste d'erreur est ok
                 // lancer les procédures pour ajouter la personne dans la base de donnée
                 $_POST['birthday'] = $_POST['yearOfBirth']."-".$_POST['monthOfBirth']."-".$_POST['dayOfBirth'];
                 $_POST['admin']=0;
                 $_POST['password'] = sha1($_POST['password']);
-                    echo "<script>
-                    alert(\"Inscription prise en compte\");
-                    </script>";
+
+
                 if ($signUpManager->requete($_POST)) {
+                    $_SESSION['Auth'] = array(
+                        'login' => $_POST['login'],
+                        'pass' => $_POST['password'],
+                        'firstname' => $_POST['firstname'],
+                    );
                     header("Location:/Session/SignUpValidate");
                 }
             } else {
