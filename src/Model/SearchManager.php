@@ -3,8 +3,9 @@
 namespace App\Model;
 
 use App\Model\Interfaces\AddPostInterfaces;
+use App\Model\Interfaces\PostInterfaces;
 
-class SearchManager extends AbstractManager implements AddPostInterfaces
+class SearchManager extends AbstractManager implements AddPostInterfaces, PostInterfaces
 {
     const TABLE = 'post';
     const TUPLES = ['title', 'type', 'id_category', 'id_keyword','start_hour', 'end_hour', 'id_user',
@@ -59,9 +60,5 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetch();
-        /*$post = $this->pdo->prepare("SELECT title, id, text_annoucement FROM ".self::TABLE." WHERE id=:item");
-        $post->bindValue('id', $id, \PDO::PARAM_INT);
-        $post->execute();
-        return $post->fetch()*/;
     }
 }
