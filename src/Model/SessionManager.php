@@ -198,4 +198,12 @@ class SessionManager extends AbstractManager
         }
         return true;
     }
+
+    public function getLastUser():array
+    {
+        // prepared request
+        $statement = $this->pdo->query("SELECT * FROM ".self::TABLE." ORDER BY id DESC LIMIT 1");
+
+        return $statement->fetch();
+    }
 }

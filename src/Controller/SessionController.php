@@ -20,6 +20,7 @@ class SessionController extends AbstractController
                     'login' => $_POST['login'],
                     'pass' => sha1($_POST['password']),
                     'firstname' => $resultats[0]['firstname'],
+                    'id' => $resultats[0]['id'],
                 );
                 header("location:/");
             } else {
@@ -66,10 +67,12 @@ class SessionController extends AbstractController
 
 
                 if ($signUpManager->insertInDB($_POST)) {
+                    $lastUser = $signUpManager->getLastUser();
                     $_SESSION['Auth'] = array(
                         'login' => $_POST['login'],
                         'pass' => $_POST['password'],
                         'firstname' => $_POST['firstname'],
+                        'id' => $lastUser['id'],
                     );
                     $signUpManager->cleanPhotosTemp();
                     header("Location:/Session/SignUpValidate");
