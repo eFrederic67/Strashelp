@@ -17,7 +17,7 @@ class SearchManager extends AbstractManager implements AddPostInterfaces
 
     public function search()
     {
-        $select = $this->pdo->prepare("SELECT post.id, type, title, id_category, 
+        $select = $this->pdo->prepare("SELECT post.id, type, title, id_category,
         DATE_FORMAT(start_hour, '%a %c %b %H %i') 
         AS start_hour, DATE_FORMAT(end_hour, '%a %c %b %H %i') AS end_hour, user.login,
         DATE_FORMAT(date_publication, '%a %c %b  %H %i') AS date_publication,text_annoucement, nbmin, nbmax FROM ".

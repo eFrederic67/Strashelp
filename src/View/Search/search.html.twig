@@ -1,8 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <table id="myTable" class="display" style="width:100%; background: #7597ff">
+    <table id="myTable" class="display" style="width:100%; background: whitesmoke">
         <thead>
+        <tr>
+            <td colspan="4">
+                <a href="/Search/addPost" class="btn btn-primary text-center offset-5">Créer une annonce</a>
+            </td>
+        </tr>
         <tr>
             <th>Titre</th>
             <th>Date de début</th>
@@ -12,11 +17,11 @@
         </thead>
         <tbody style="background: #7597ff">
         {% for searchid in search %}
-            <tr style="background: #7597ff">
-                <td  style="background: #7597ff"><a href=""> {{ searchid.title }}</a></td>
-                <td style="background: #7597ff">{{ searchid.start_hour }}</td>
-                <td style="background: #7597ff">{{ searchid.text_annoucement }}</td>
-                <td style="background: #7597ff"><a href="">{{ searchid.id_user }}</a></td>
+            <tr class="table-primary">
+                <td style="background: whitesmoke"><a href="" class="badge badge-warning"> {{ searchid.title }}</a></td>
+                <td style="background: whitesmoke">{{ searchid.start_hour }}</td>
+                <td style="background: whitesmoke">{{ searchid.text_annoucement }}</td>
+                <td style="background: whitesmoke"><a href="/profile/profile/{{ searchid.id }}" class="badge badge-warning">{{ searchid.login }}</a></td>
             </tr>
         {% endfor %}
         </tbody>
