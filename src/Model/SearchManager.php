@@ -8,8 +8,8 @@ use App\Model\Interfaces\PostInterfaces;
 class SearchManager extends AbstractManager implements AddPostInterfaces, PostInterfaces
 {
     const TABLE = 'post';
-    const TUPLES = ['title', 'type', 'id_category', 'id_keyword','start_hour', 'end_hour', 'id_user',
-        'date_publication', 'text_annoucement', 'nbmin', 'nbmax'];
+    const TUPLES = ['title', 'type', 'id_category', 'id_keyword','start_hour', 'end_hour',
+        'date_publication', 'text_annoucement'];
 
     public function __construct()
     {
@@ -49,6 +49,13 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         }
             $statement->execute();
             var_dump($statement);
+    }
+
+    public function displayCategory()
+    {
+        $statements = $this->pdo->prepare("SELECT category.name AS cname FROM category");
+        $statements->execute();
+        return $statements->fetchAll();
     }
 
     public function post(int $id)

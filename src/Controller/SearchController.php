@@ -25,11 +25,19 @@ class SearchController extends AbstractController
             $bazar = $itemManager->addPost($_POST);
             return $this->twig->render(
                 'Search/add.html.twig',
-                ['bazar'=> $bazar]
+                [
+                    'bazar'=> $bazar
+                ]
             );
         } else {
+            var_dump($_POST);
+            $categoryManager = new SearchManager();
+            $category = $categoryManager->displayCategory();
             return $this->twig->render(
-                'Search/add.html.twig'
+                'Search/add.html.twig',
+                [
+                   'cname' => $category
+                ]
             );
         }
     }
