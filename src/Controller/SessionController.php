@@ -21,13 +21,10 @@ class SessionController extends AbstractController
                     'pass' => sha1($_POST['password']),
                     'firstname' => $resultats[0]['firstname'],
                 );
-
                 header("location:/");
             } else {
                 $message = "les identifiants ne sont pas reconnus";
             }
-        } else {
-            $resultats = $loginManager->login('');
         }
 
         return $this->twig->render('Session/login.html.twig', ['message' => $message]);
@@ -74,6 +71,7 @@ class SessionController extends AbstractController
                         'pass' => $_POST['password'],
                         'firstname' => $_POST['firstname'],
                     );
+                    $signUpManager->cleanPhotosTemp();
                     header("Location:/Session/SignUpValidate");
                 }
             } else {

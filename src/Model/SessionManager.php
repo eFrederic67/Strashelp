@@ -174,4 +174,29 @@ class SessionManager extends AbstractManager
             }
         }
     }
+
+    public function cleanPhotosTemp():bool
+    {
+        // Scan de toutes les photos dans le dossier avatars
+        $dir    = 'assets/images/avatars/';
+        $files = scandir($dir);
+        // requete de tous les noms d'avatars dans la base
+        $requeteClean = "SELECT avatar FROM ".self::TABLE;
+        $liste = $this->pdo->query($requeteClean)->fetchall();
+
+        $tableauAvatar = [];
+        foreach ($liste as $avatar) {
+            array_push($tableauAvatar, $avatar['avatar']);
+        }
+        $j = count($files);
+        for ($i = 0; $i < $j; $i++) {
+            if (!in_array($files[$i], $tableauAvatar)) {
+                if ($files[$i] == "." || $files[$i] == "..") {
+                } else {
+                    unlink($dir.$files[$i]);
+                }
+            }
+        }
+        return true;
+    }
 }
