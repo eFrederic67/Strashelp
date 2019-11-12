@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <table id="myTable" class="display" style="width:100%">
+    <table id="myTable" class="display" style="width:100%; background: #7597ff">
         <thead>
         <tr>
             <th>Titre</th>
@@ -10,13 +10,13 @@
             <th>Annonceur</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="background: #7597ff">
         {% for searchid in search %}
-            <tr>
-                <td><a href=""> {{ searchid.title }}</a></td>
-                <td>{{ searchid.start_hour }}</td>
-                <td>{{ searchid.text_annoucement }}</td>
-                <td><a href="">{{ searchid.id_user }}</a></td>
+            <tr style="background: #7597ff">
+                <td  style="background: #7597ff"><a href=""> {{ searchid.title }}</a></td>
+                <td style="background: #7597ff">{{ searchid.start_hour }}</td>
+                <td style="background: #7597ff">{{ searchid.text_annoucement }}</td>
+                <td style="background: #7597ff"><a href="">{{ searchid.id_user }}</a></td>
             </tr>
         {% endfor %}
         </tbody>
