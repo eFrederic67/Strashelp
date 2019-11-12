@@ -78,7 +78,7 @@ class SessionManager extends AbstractManager
         return $errors;
     }
 
-    public function requete($post)
+    public function insertInDB($post)
     {
         //donc là, il faut préparer une requête pour insérer les champs dans la base de données
 
@@ -111,9 +111,8 @@ class SessionManager extends AbstractManager
         foreach ($champsAInserer as $value) {
             $insertion->bindValue($value, $post[$value], \PDO::PARAM_STR);
         }
-        // ajouter un test pour être sûr que ça s'est bien passé et un return
-        $insertion->execute();
-        return true;
+        // un test pour être sûr que ça s'est bien passé et un return
+        return ($insertion->execute()) ? true : false;
     }
 
     public function testDoublon($field, $valeur)
@@ -173,5 +172,38 @@ class SessionManager extends AbstractManager
                 return $uploadFile;
             }
         }
+    }
+
+    public function cleanPhotosTemp():bool
+    {
+        // Scan de toutes les photos dans le dossier avatars
+        $dir    = 'assets/images/avatars/';
+        $files = scandir($dir);
+        // requete de tous les noms d'avatars dans la base
+        $requeteClean = "SELECT avatar FROM ".self::TABLE;
+        $liste = $this->pdo->query($requeteClean)->fetchall();
+
+        $tableauAvatar = [];
+        foreach ($liste as $avatar) {
+            array_push($tableauAvatar, $avatar['avatar']);
+        }
+        $nombreDeFichiers = count($files);
+        for ($i = 0; $i < $nombreDeFichiers; $i++) {
+            if (!in_array($files[$i], $tableauAvatar)) {
+                if ($files[$i] == "." || $files[$i] == "..") {
+                } else {
+                    unlink($dir.$files[$i]);
+                }
+            }
+        }
+        return true;
+    }
+
+    public function getLastUser():array
+    {
+        // prepared request
+        $statement = $this->pdo->query("SELECT * FROM ".self::TABLE." ORDER BY id DESC LIMIT 1");
+
+        return $statement->fetch();
     }
 }
