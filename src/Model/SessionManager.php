@@ -78,7 +78,7 @@ class SessionManager extends AbstractManager
         return $errors;
     }
 
-    public function requete($post)
+    public function insertInDB($post)
     {
         //donc là, il faut préparer une requête pour insérer les champs dans la base de données
 
@@ -188,8 +188,8 @@ class SessionManager extends AbstractManager
         foreach ($liste as $avatar) {
             array_push($tableauAvatar, $avatar['avatar']);
         }
-        $j = count($files);
-        for ($i = 0; $i < $j; $i++) {
+        $nombreDeFichiers = count($files);
+        for ($i = 0; $i < $nombreDeFichiers; $i++) {
             if (!in_array($files[$i], $tableauAvatar)) {
                 if ($files[$i] == "." || $files[$i] == "..") {
                 } else {

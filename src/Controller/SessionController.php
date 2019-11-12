@@ -65,7 +65,7 @@ class SessionController extends AbstractController
                 $_POST['password'] = sha1($_POST['password']);
 
 
-                if ($signUpManager->requete($_POST)) {
+                if ($signUpManager->insertInDB($_POST)) {
                     $_SESSION['Auth'] = array(
                         'login' => $_POST['login'],
                         'pass' => $_POST['password'],
