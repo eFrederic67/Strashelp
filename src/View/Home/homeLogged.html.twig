@@ -7,8 +7,107 @@
 {% block content %}
     <h1 class="col-4">Bienvenue {{ firstname }}</h1>
     <h1 class="col-4">Vos Rendez-vous</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Type</td>
+            <td>date</td>
+            <td>heure début</td>
+            <td>heure heure fin</td>
+            <td>titre</td>
+            <td>combien de personnes ont répondu</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rdv in rendezVous  %}
+            <tr>
+                <td>
+                    {% if rdv.type == 0 %}
+                        Offre
+                    {% else %}
+                        Demande
+                    {% endif %}
+                </td>
+                <td>{{ rdv.start_hour|date("d/m/Y") }}</td>
+                <td>{{ rdv.start_hour|date('H:i:s') }}</td>
+                <td>{{ rdv.end_hour|date('H:i:s') }}</td>
+                <td>{{ rdv.title }}</td>
+                <td>{{ rdv.reponse }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <h1 class="col-4">Ils ont besoin de vous</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Qui</td>
+            <td>Catégorie</td>
+            <td>Quel jour</td>
+            <td>À quelle heure</td>
+            <td>Jusqu'à</td>
+            <td>Titre</td>
+            <td>Combien de personnes</td>
+            <td>Réponses</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for need in ilsOntBesoin  %}
+            <tr>
+                <td>{{ need.user }}</td>
+                <td>{{ need.category }}</td>
+                <td>{{ need.start_hour|date("d/m/Y") }}</td>
+                <td>{{ need.start_hour|date('H:i:s') }}</td>
+                <td>{{ need.end_hour|date('H:i:s') }}</td>
+                <td>{{ need.title }}</td>
+                <td>{{ need.nbmin }} - {{ need.nbmax }}</td>
+                <td>{% if need.reponses == 0 %}
+                        0 / {{ need.nbmax }}
+                    {% else %}
+                        {{ need.reponse }} / {{ need.nbmax }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <h1 class="col-4">Dernières Annonces</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Type</td>
+            <td>Qui</td>
+            <td>Catégorie</td>
+            <td>Quel jour</td>
+            <td>À quelle heure</td>
+            <td>Jusqu'à</td>
+            <td>Titre</td>
+            <td>Combien de personnes</td>
+            <td>Nb de réponses</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dernieresAnnonce in dernieresAnnonces  %}
+            <tr>
+                <td>
+                    {% if dernieresAnnonce.type == 0 %}
+                        Offre
+                    {% else %}
+                        Demande
+                    {% endif %}
+                </td>
+                <td>{{ dernieresAnnonce.user }}</td>
+                <td>{{ dernieresAnnonce.category }}</td>
+                <td>{{ dernieresAnnonce.start_hour|date("d/m/Y") }}</td>
+                <td>{{ dernieresAnnonce.start_hour|date('H:i:s') }}</td>
+                <td>{{ dernieresAnnonce.end_hour|date('H:i:s') }}</td>
+                <td>{{ dernieresAnnonce.title }}</td>
+                <td>{{ dernieresAnnonce.nbmin }} - {{ dernieresAnnonce.nbmax }}</td>
+                <td>{{ dernieresAnnonce.reponse }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <h1 class="col-4">Top Actus</h1>
     <h1 class="col-4">Top Helpers</h1>
     <h2>Catégorie 1</h2>
