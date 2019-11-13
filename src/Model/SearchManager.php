@@ -8,7 +8,7 @@ use App\Model\Interfaces\PostInterfaces;
 class SearchManager extends AbstractManager implements AddPostInterfaces, PostInterfaces
 {
     const TABLE = 'post';
-    const TUPLES = ['title', 'type', 'id_category', 'id_keyword','start_hour', 'end_hour',
+    const TUPLES = ['title', 'type', 'id_category' ,'start_hour', 'end_hour',
         'date_publication', 'text_annoucement'];
 
     public function __construct()
@@ -28,27 +28,18 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
 
     public function addPost(array $item)
     {
-        /*
-         Fonction qui permet d'ajouter une annonce qui prends une constante des champs de la table post
-         et ceux grace a un foreach !
-         */
-        $error = 0;
-        $placeholder = "";
-        foreach (self::TUPLES as $value) {
-            if (empty($item[$value])) {
-                $error++;
-            }
-            $placeholder.=":".$value.", ";
-        }
-            $placeholder = substr($placeholder, 0, strlen($placeholder)-2);
-            $bidule = implode(',', self::TUPLES);
-            $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE."(".$bidule.")
-                VALUES ($placeholder)");
-        foreach (self::TUPLES as $value) {
-            $statement->bindValue($value, $item[$value], \PDO::PARAM_STR);
-        }
-            $statement->execute();
-            var_dump($statement);
+        $item['id_user'] = $_SESSION['id'];
+        $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE."(title, type, id_category, start_hour, 
+        end_hour, date_publication, text_annoucement) VALUES (:title, :type, :id_category, :start_hour, :end_hour, 
+        :date_publication, :text_annoucement)");
+        $statement->bindValue('title', $item['title'], \PDO::PARAM_STR);
+        $statement->bindValue('type', $item['type'], \PDO::PARAM_INT);
+        $statement->bindValue('id_category', $item['id_category'], \PDO::PARAM_STR);
+        $statement->bindValue('start_hour', $item['start_hour'], \PDO::PARAM_STR);
+        $statement->bindValue('end_hour', $item['end_hour'], \PDO::PARAM_STR);
+        $statement->bindValue('date_publication', $item['date_publication'], \PDO::PARAM_STR);
+        $statement->bindValue('text_annoucement', $item['text_annoucement'], \PDO::PARAM_STR);
+        return ($statement->execute()? true:false);
     }
 
     public function displayCategory()
