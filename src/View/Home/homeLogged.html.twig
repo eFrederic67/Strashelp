@@ -32,7 +32,7 @@
                 <td>{{ rdv.start_hour|date('H:i:s') }}</td>
                 <td>{{ rdv.end_hour|date('H:i:s') }}</td>
                 <td>{{ rdv.title }}</td>
-                <td>{{ rdv.title }}</td>
+                <td>{{ rdv.reponse }}</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -48,6 +48,7 @@
             <td>Jusqu'à</td>
             <td>Titre</td>
             <td>Combien de personnes</td>
+            <td>Réponses</td>
         </tr>
         </thead>
         <tbody>
@@ -60,6 +61,12 @@
                 <td>{{ need.end_hour|date('H:i:s') }}</td>
                 <td>{{ need.title }}</td>
                 <td>{{ need.nbmin }} - {{ need.nbmax }}</td>
+                <td>{% if need.reponses == 0 %}
+                        0 / {{ need.nbmax }}
+                    {% else %}
+                        {{ need.reponse }} / {{ need.nbmax }}
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -76,6 +83,7 @@
             <td>Jusqu'à</td>
             <td>Titre</td>
             <td>Combien de personnes</td>
+            <td>Nb de réponses</td>
         </tr>
         </thead>
         <tbody>
@@ -95,6 +103,7 @@
                 <td>{{ dernieresAnnonce.end_hour|date('H:i:s') }}</td>
                 <td>{{ dernieresAnnonce.title }}</td>
                 <td>{{ dernieresAnnonce.nbmin }} - {{ dernieresAnnonce.nbmax }}</td>
+                <td>{{ dernieresAnnonce.reponse }}</td>
             </tr>
         {% endfor %}
         </tbody>

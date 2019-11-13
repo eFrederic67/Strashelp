@@ -19,8 +19,10 @@ class HomeManager extends AbstractManager
 
     public function selectBySection($table, $id)
     {
-        return $this->pdo->query('SELECT * FROM ' . $table . ' 
+        $tableau = $this->pdo->query('SELECT * FROM ' . $table . ' 
          WHERE id_user ='.$id.' AND DATE(start_hour) >= CURDATE()')->fetchAll();
+        $tableau = $this->howManyAnswers($tableau);
+        return $tableau;
     }
 
     public function peopleInNeed($table, $id)
@@ -39,23 +41,34 @@ class HomeManager extends AbstractManager
         JOIN user on user.id = id_user 
         WHERE id_user <> '.$id.' AND id_category in ('. $cat .') AND DATE(start_hour) >= CURDATE()';
 
-        return $this->pdo->query($sql)->fetchAll();
+        $tableau = $this->pdo->query($sql)->fetchAll();
+        $tableau = $this->howManyAnswers($tableau);
+
+        return $tableau;
     }
 
-    public function lastPosts()
+    public function lastPosts($id)
     {
-        $sql = "SELECT post.id, post.type, post.id_category, start_hour, end_hour, post.title, nbmin, nbmax, user.login as user, category.name as category FROM post 
+        $sql = "SELECT post.id, post.type, post.id_category, start_hour, end_hour, post.title, nbmin, nbmax,
+                user.login as user, category.name as category FROM post 
                 JOIN user ON user.id = id_user 
-                JOIN category ON category.id = post.id_category 
+                JOIN category ON category.id = post.id_category
+                WHERE id_user <>".$id." 
                 ORDER  BY post.id DESC LIMIT 5";
 
-        return $this->pdo->query($sql)->fetchAll();
+        $tableau = $this->pdo->query($sql)->fetchAll();
+        $tableau = $this->howManyAnswers($tableau);
+
+        return $tableau;
     }
 
-    public function howManyAnswers()
+    public function howManyAnswers($tableau)
     {
-        $sql = "SELECT * FROM user";
-        return $this->pdo->query($sql)->fetchAll();
+        foreach ($tableau as $key => $value) {
+            $sql = "SELECT count(*) FROM response WHERE id_post =".$value['id'];
+            $pouet = $this->pdo->query($sql)->fetch();
+            $tableau[$key]['reponse'] = $pouet['count(*)'];
+        }
+        return $tableau;
     }
-
 }
