@@ -30,14 +30,13 @@ class HomeController extends AbstractController
             $homeManager = new HomeManager();
             $myAppointments = $homeManager->selectBySection('post', $_SESSION['Auth']['id']);
             $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
+            $lastPost = $homeManager->lastPosts($_SESSION['Auth']['id']);
 
-//            var_dump($peopleInNeed);
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
                     'rendezVous' => $myAppointments,
                     'ilsOntBesoin' => $peopleInNeed,
-
-
+                    'dernieresAnnonces' => $lastPost,
                 ]);
         } else {
             return $this->twig->render('Home/index.html.twig');
