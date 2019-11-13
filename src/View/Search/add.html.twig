@@ -24,7 +24,7 @@
                                 <label for="id_category">Type d'annonce</label>
                                 <select name="id_category" class="custom-select" id="id_category">
                                     {% for cnameid in cname %}
-                                        <option value="{{ cnameid.id }}">{{ cnameid.cname }}</option>
+                                        <option value="{{ cnameid.id }}">{{ cnameid.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>

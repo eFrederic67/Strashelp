@@ -20,17 +20,9 @@ class SearchController extends AbstractController
 
     public function addPost()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $itemManager = new SearchManager();
-            $bazar = $itemManager->addPost($_POST);
-            return $this->twig->render(
-                'Search/add.html.twig',
-                [
-                    'bazar'=> $bazar
-                ]
-            );
+        if (!empty($_POST)) {
+            echo "Error";
         } else {
-            var_dump($_POST);
             $categoryManager = new SearchManager();
             $category = $categoryManager->displayCategory();
             return $this->twig->render(

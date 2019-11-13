@@ -20,7 +20,7 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
     {
         $select = $this->pdo->prepare("SELECT post.id, type, title, id_category, user.login,
         DATE_FORMAT(start_hour, '%d/%m/%Y') AS start_day, DATE_FORMAT(start_hour, '%Hh%i') AS start_hour,
-        DATE_FORMAT(end_hour, '%Hh%i') AS end_hour, text_annoucement, nbmin, nbmax FROM ". self::TABLE."
+        DATE_FORMAT(end_hour, '%Hh%i') AS end_hour, text_annoucement, nbmin, nbmax, user.id FROM ". self::TABLE."
         JOIN user ON user.id = post.id_user ");
         $select->execute();
         return $select->fetchAll();
@@ -53,7 +53,7 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
 
     public function displayCategory()
     {
-        $statements = $this->pdo->prepare("SELECT category.name AS cname FROM category");
+        $statements = $this->pdo->prepare("SELECT * FROM category");
         $statements->execute();
         return $statements->fetchAll();
     }
