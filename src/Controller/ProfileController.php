@@ -96,12 +96,27 @@ class ProfileController extends AbstractController
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 
-    public function myprofile()
+    public function myprofile():string
     {
         $profileManager = new profileManager();
         $session = $profileManager->session();
-
-        return $this->twig->render('Profile/myprofile.html.twig', ['session' => $session]);
+        $skills = [];
+        $myprofile = [];
+        foreach ($session as $myprofile) {
+            if ($myprofile['admin'] == 0) {
+                $myprofile['membre'] = "Membre de l'association";
+            } else {
+                $myprofile['membre'] = "Administrateur";
+            }
+            if ($myprofile['éducation'] == 1) {
+                $skills[] = 'éducation';
+            } if ($myprofile['cuisine'] == 1) {
+                $skills[] = 'cuisine';
+            } if ($myprofile['bricolage'] == 1) {
+                $skills[] = 'bricolage';
+            }
+        }
+        return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile, 'skills' => $skills]);
     }
 
     public function edit(): string

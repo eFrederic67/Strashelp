@@ -63,28 +63,39 @@ class ProfileManager extends AbstractManager
 
     public function update(array $myprofile):bool
     {
+        if (strpos($_SESSION['Auth']['login'], '@')) {
+            $test = 'email';
+        } else {
+            $test ='login';
+        }
+
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table 
-        SET `avatar`=:avatar, `email` = :email, `login`=:login, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
-        `phone`=:phone, `description`=:description WHERE password=:pass");
+        SET `email` = :email, `login`=:login, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
+        `phone`=:phone, `description`=:description WHERE password=:pass AND $test=:login");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
-        $statement->bindValue('avatar', $myprofile['avatar'], \PDO::PARAM_STR);
         $statement->bindValue('email', $myprofile['email'], \PDO::PARAM_STR);
         $statement->bindValue('login', $myprofile['login'], \PDO::PARAM_STR);
         $statement->bindValue('adresse_1', $myprofile['adresse_1'], \PDO::PARAM_STR);
         $statement->bindValue('adresse_2', $myprofile['adresse_2'], \PDO::PARAM_STR);
         $statement->bindValue('phone', $myprofile['phone'], \PDO::PARAM_STR);
         $statement->bindValue('description', $myprofile['description'], \PDO::PARAM_STR);
-
-
+        $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
 
         return $statement->execute() ;
     }
 
     public function session()
     {
-        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE `password`=:pass");
-        $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
+        if (strpos($_SESSION['Auth']['login'], '@')) {
+            $test = 'email';
+        } else {
+            $test ='login';
+        }
+
+        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE `password`=:pass AND $test=:login");
+        $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
+        $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll();
     }
