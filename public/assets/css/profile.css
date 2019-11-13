@@ -23,6 +23,7 @@
 
 
 
+
 body{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
@@ -103,6 +104,9 @@ body{
     color: #818182;
     font-weight: 600;
     margin-top: 10%;
+}
+.profile-work .Skill{
+    font-size: 1em;
 }
 .profile-work a{
     text-decoration: none;
