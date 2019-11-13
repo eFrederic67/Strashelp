@@ -93,7 +93,7 @@ class ProfileManager extends AbstractManager
             $test ='login';
         }
 
-        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE `password`=:pass AND $test=:login");
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE `password`=:pass AND $test=:login");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
         $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
         $statement->execute();
@@ -116,5 +116,13 @@ class ProfileManager extends AbstractManager
             $skills[] = 'Bricolage';
         }
         return $skills;
+    }
+
+    public function annonces(array $profil)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM `post` WHERE id_user=:id");
+        $statement->bindValue('id', $profil['id'], \PDO::PARAM_STR);
+        $statement->execute();
+        return $statement->fetch();
     }
 }

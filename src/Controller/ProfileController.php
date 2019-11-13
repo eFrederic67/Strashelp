@@ -94,7 +94,11 @@ class ProfileController extends AbstractController
         $profileManager = new profileManager();
         $profile = $profileManager->selectOneById($id);
         $skills = $profileManager->skill($profile);
-        return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile, 'skills' => $skills]);
+        $annonces = $profileManager->annonces($profile);
+        return $this->twig->render(
+            'Profile/profile.html.twig',
+            ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces]
+        );
     }
 
     public function myprofile():string
@@ -102,7 +106,12 @@ class ProfileController extends AbstractController
         $profileManager = new profileManager();
         $myprofile = $profileManager->session();
         $skills = $profileManager->skill($myprofile);
-        return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile, 'skills' => $skills]);
+        $annonces = $profileManager->annonces($myprofile);
+
+        return $this->twig->render(
+            'Profile/myprofile.html.twig',
+            ['myprofile' => $myprofile, 'skills' => $skills, 'annonces' => $annonces]
+        );
     }
 
     public function edit(): string
