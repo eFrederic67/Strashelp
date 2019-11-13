@@ -29,10 +29,13 @@ class HomeController extends AbstractController
         if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SESSION['Auth']['pass'])) {
             $homeManager = new HomeManager();
             $myAppointments = $homeManager->selectBySection('post', $_SESSION['Auth']['id']);
+            $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
 
+//            var_dump($peopleInNeed);
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
                     'rendezVous' => $myAppointments,
+                    'ilsOntBesoin' => $peopleInNeed,
 
 
                 ]);

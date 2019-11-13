@@ -39,6 +39,32 @@
         </tbody>
     </table>
     <h1 class="col-4">Ils ont besoin de vous</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Qui</td>
+            <td>Catégorie</td>
+            <td>Quel jour</td>
+            <td>À quelle heure</td>
+            <td>Jusqu'à</td>
+            <td>Titre</td>
+            <td>Combien de personnes</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for need in ilsOntBesoin  %}
+            <tr>
+                <td>{{ need.user }}</td>
+                <td>{{ need.category }}</td>
+                <td>{{ need.start_hour|date("d/m/Y") }}</td>
+                <td>{{ need.start_hour|date('H:i:s') }}</td>
+                <td>{{ need.end_hour|date('H:i:s') }}</td>
+                <td>{{ need.title }}</td>
+                <td>{{ need.nbmin }} - {{ need.nbmax }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <h1 class="col-4">Dernières Annonces</h1>
     <h1 class="col-4">Top Actus</h1>
     <h1 class="col-4">Top Helpers</h1>
