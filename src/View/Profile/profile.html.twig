@@ -1,31 +1,96 @@
 {% extends 'layout.html.twig' %}
-
+{% block stylesheet %}
+    {% include 'Profile/style.html.twig' %}
+{% endblock %}
 {% block content %}
     <div>
-        <div>
-            <h2>Profil de {{ profile.nickname }}</h2>
-            <img src="{{ profile.avatar }}" alt="avatar">
-            <div>
-                <p>{{ profile.firstname }} {{ profile.lastname }}</p>
-                <p>{{ profile.birthday }}</p>
-                <p>{{ profile.city }}</p>
-            </div>
-            <div>
-                <p>{{ profile.adresse_1 }}</p>
-                <p>{{ profile.adresse_2 }}</p>
-            </div>
-            <div>
-                <p>{{ profile.phone }}</p>
-                <p>{{ profile.email }}</p>
-            </div>
-        </div>
-        <div>
-            <p>{{ profile.description }}</p>
-        </div>
-        <div>
-            <a href="/Signal/signaluser/2">Signaler</a>
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="{{ profile.avatar }}" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                            <h5>
+                                Profil de {{ profile.firstname }}
+                            </h5>
+                            <h6>
+                                {{ profile.membre }}
+                            </h6>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#annonces" role="tab" aria-controls="annonces" aria-selected="false">Ces annonces</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/signal/signaluser/{{ profile.id }}" class="profile-edit-btn">Signaler le profil</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p class="Skill">Compétences</p>
+                            <p>{{ skills.0 }}</p>
+                            <p>{{ skills.1 }}</p>
+                            <p>{{ skills.2 }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Pseudo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ profile.login }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Nom</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ profile.firstname }} {{ profile.lastname }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ profile.email }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Présentation</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ profile.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="annonces" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="col-md-6">
+                                    <p>{{ annonces.title }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
 
 {% endblock %}

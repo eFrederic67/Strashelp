@@ -93,10 +93,36 @@ class ProfileManager extends AbstractManager
             $test ='login';
         }
 
-        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE `password`=:pass AND $test=:login");
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE `password`=:pass AND $test=:login");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
         $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetch();
+    }
+
+    public function skill(array $profile)
+    {
+        $skills = [];
+        if ($profile['admin'] == 0) {
+            $profile['membre'] = "Membre de l'association";
+        } else {
+            $profile['membre'] = "Administrateur";
+        }
+        if ($profile['éducation'] == 1) {
+            $skills[] = 'Éducation';
+        } if ($profile['cuisine'] == 1) {
+            $skills[] = 'Cuisine';
+        } if ($profile['bricolage'] == 1) {
+            $skills[] = 'Bricolage';
+        }
+        return $skills;
+    }
+
+    public function annonces(array $profil)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM `post` WHERE id_user=:id");
+        $statement->bindValue('id', $profil['id'], \PDO::PARAM_STR);
+        $statement->execute();
+        return $statement->fetch();
     }
 }

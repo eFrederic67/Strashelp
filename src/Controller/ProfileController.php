@@ -93,30 +93,25 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $profile = $profileManager->selectOneById($id);
-        return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
+        $skills = $profileManager->skill($profile);
+        $annonces = $profileManager->annonces($profile);
+        return $this->twig->render(
+            'Profile/profile.html.twig',
+            ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces]
+        );
     }
 
     public function myprofile():string
     {
         $profileManager = new profileManager();
-        $session = $profileManager->session();
-        $skills = [];
-        $myprofile = [];
-        foreach ($session as $myprofile) {
-            if ($myprofile['admin'] == 0) {
-                $myprofile['membre'] = "Membre de l'association";
-            } else {
-                $myprofile['membre'] = "Administrateur";
-            }
-            if ($myprofile['éducation'] == 1) {
-                $skills[] = 'éducation';
-            } if ($myprofile['cuisine'] == 1) {
-                $skills[] = 'cuisine';
-            } if ($myprofile['bricolage'] == 1) {
-                $skills[] = 'bricolage';
-            }
-        }
-        return $this->twig->render('Profile/myprofile.html.twig', ['myprofile' => $myprofile, 'skills' => $skills]);
+        $myprofile = $profileManager->session();
+        $skills = $profileManager->skill($myprofile);
+        $annonces = $profileManager->annonces($myprofile);
+
+        return $this->twig->render(
+            'Profile/myprofile.html.twig',
+            ['myprofile' => $myprofile, 'skills' => $skills, 'annonces' => $annonces]
+        );
     }
 
     public function edit(): string
