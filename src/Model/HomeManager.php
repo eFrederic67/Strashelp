@@ -44,16 +44,6 @@ class HomeManager extends AbstractManager
 
     public function lastPosts()
     {
-        /*
-            <td>Type</td>
-            <td>Qui</td>
-            <td>Catégorie</td>
-            <td>Quel jour</td>
-            <td>À quelle heure</td>
-            <td>Jusqu'à</td>
-            <td>Titre</td>
-            <td>Combien de personnes</td>
-*/
         $sql = "SELECT post.id, post.type, post.id_category, start_hour, end_hour, post.title, nbmin, nbmax, user.login as user, category.name as category FROM post 
                 JOIN user ON user.id = id_user 
                 JOIN category ON category.id = post.id_category 
@@ -61,4 +51,11 @@ class HomeManager extends AbstractManager
 
         return $this->pdo->query($sql)->fetchAll();
     }
+
+    public function howManyAnswers()
+    {
+        $sql = "SELECT * FROM user";
+        return $this->pdo->query($sql)->fetchAll();
+    }
+
 }
