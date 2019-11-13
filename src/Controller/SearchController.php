@@ -20,16 +20,43 @@ class SearchController extends AbstractController
 
     public function addPost()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $itemManager = new SearchManager();
-            $bazar = $itemManager->addPost($_POST);
-            return $this->twig->render(
-                'Search/add.html.twig',
-                ['bazar'=> $bazar]
-            );
+        $categoryManager = new SearchManager();
+        $category = $categoryManager->displayCategory();
+        if (!empty($_POST)) {
+            $errors = [];
+            if ($_POST['title'] != htmlspecialchars($_POST['title'])) {
+                $errors['title'] = 'Caractères spéciaux interdit !';
+            }
+            foreach ($category as $key => $value) {
+                $category[$key] = $value['id'];
+            }
+            if (!in_array($_POST['id_category'], $category)) {
+                $errors['id_category'] = 'Catégorie inexistante';
+            }
+
+            if (empty($_POST['text_annoucement'])) {
+                $errors['text_annoucement'] = 'Merci de remplir ce champs';
+            }
+            var_dump($errors);
+            if (count($errors) > 0) {
+                return $this->twig->render(
+                    'Search/add.html.twig',
+                    [
+                        'errors' => $errors,
+                        'post' => $_POST,
+                        'cname' => $categoryManager->displayCategory()
+                    ]
+                );
+            } else {
+                $categoryManager->addPost($_POST);
+                header('Location: Search/post');
+            }
         } else {
             return $this->twig->render(
-                'Search/add.html.twig'
+                'Search/add.html.twig',
+                [
+                   'cname' => $category
+                ]
             );
         }
     }
