@@ -26,7 +26,7 @@ class SignalpostManager extends AbstractManager
             try {
                 $signalingUserId = $_SESSION['id'];
                 $signalingUserLogin = $_SESSION['login'];
-                $alertMessage = trim($_POST['alert_message']);
+                $alertMessage = $_POST['alert_message'];
                 $alertDate = date("d/m/o H:i:s");
                 $query = "INSERT INTO $this->table
                    VALUES (NULL, :user_id, :user_login, :post_id, :alert_message, :alert_date)";
