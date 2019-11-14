@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\ProfileManager;
+use App\Model\SearchManager;
 
 /**
  * Class profileController
@@ -93,11 +94,13 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $profile = $profileManager->selectOneById($id);
+        $searchManager = new SearchManager();
+        $search = $searchManager->search();
         $skills = $profileManager->skill($profile);
         $annonces = $profileManager->annonces($profile);
         return $this->twig->render(
             'Profile/profile.html.twig',
-            ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces]
+            ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces, 'search' => $search]
         );
     }
 
@@ -105,12 +108,14 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $myprofile = $profileManager->session();
+        $searchManager = new SearchManager();
+        $search = $searchManager->search();
         $skills = $profileManager->skill($myprofile);
         $annonces = $profileManager->annonces($myprofile);
 
         return $this->twig->render(
             'Profile/myprofile.html.twig',
-            ['myprofile' => $myprofile, 'skills' => $skills, 'annonces' => $annonces]
+            ['myprofile' => $myprofile, 'skills' => $skills, 'annonces' => $annonces, 'search' => $search]
         );
     }
 
