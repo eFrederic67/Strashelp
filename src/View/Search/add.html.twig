@@ -1,30 +1,39 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <section class="td-form">
-        <div class="row td-form-wrapper">
-            <div class="col td-glass" style="background-color: grey;">
-                <form class="td-form-wrapper" style="background-color: #4d5c8b;" method="post">
-                    <h1 class="text-center">Créer une annonce</h1>
-                    <div class="form-group">
-                        <div class="col-md-12"><label for="name">Titre de l'annonce*</label>
-                            <div class="d-flex"><input class="form-control d-flex" type="text" autocomplete="off" required="" value="{{ post.title }}" placeholder="Nom de l'annonce" name="title"></div>
+        <div class="card col-12 col-md-6 offset-md-3 mt-4">
+                <h1 class="card-header info-color white-text text-center py-4">Créer une annonce</h1>
+            <div class="card-body px-lg-5 pt-0">
+                <form class="md-form" method="post">
+                    <div>
+                        <div class="mt-2">
+                            <label for="name">Titre de l'annonce*</label>
+                            <div>
+                                <input class="form-control" type="text" autocomplete="off" required="" value="{{ post.title }}" placeholder="Nom de l'annonce" name="title">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <div>
-                                <fieldset></fieldset>
+
+                    <div>
+                        <div>
+                            <div class="mt-2">
                                 <fieldset>
-                                    <legend>Quel type d'annonce souhaitez vous postez</legend>
-                                    <div class="custom-control custom-radio custom-control-inline"><input type="radio" id="customRadioInline1" class="custom-control-input" name="type" value="0" checked=""><label class="custom-control-label col-3 my-2" for="customRadioInline1">Offre</label></div>
-                                    <div class="custom-control custom-radio custom-control-inline"><input type="radio" id="customRadioInline2" class="custom-control-input" name="type" value="1"><label class="custom-control-label col-3 my-2" for="customRadioInline2">Demande</label></div>
+                                    <legend>Quel type d'annonce souhaitez vous poster</legend>
+                                    <div class="form-check mb-4">
+                                        <input type="radio" id="customRadio1" class="form-check-input" name="type" value="0" checked="">
+                                        <label class="form-check-label" for="customRadio1">Offre</label>
+                                    </div>
+                                    <div class="form-check mb-4">
+                                        <input type="radio" id="customRadio2" class="form-check-input" name="type" value="1">
+                                        <label class="form-check-label" for="customRadio2">Demande</label>
+                                    </div>
                                 </fieldset>
-                            <div class="form-group col-md-6">
-                                <label for="id_category">Type d'annonce</label>
-                                <select name="id_category" class="custom-select" id="id_category">
+
+                            <div class="mt-2">
+                                <label>Type d'annonce</label>
+                                <select name="id_category" class="custom-select mdb-select" id="id_category">
                                     {% for cnameid in cname %}
-                                        <option value="{{ cnameid.id }}">{{ cnameid.name }}</option>
+                                        <option value="{{ cnameid.id }}">{{ cnameid.name | capitalize}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -32,107 +41,42 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-12"><label for="Date">Date</label>
-                            <div class="d-flex td-input-container"><input class="form-control" type="date" autocomplete="off" name="date_publication" value="{{ post.date_publication }}"></div>
+                    <div class="mt-2">
+                        <div>
+                            <label for="Date">Date</label>
+                            <div>
+                                <input class="form-control datepicker" type="date" autocomplete="off" name="date_publication" value="{{ post.date_publication }}">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="d-lg-flex flex-wrap align-items-lg-center col-md-12"><label class="col-2">Horaire de début</label>
-                            <div class="d-flex td-input-container"><input class="form-control" type="time" autocomplete="off" name="start_hour" required value="{{ post.start_hour }}"></div>
+                    <div class="mt-2 row justify-content-around">
+                        <div  class="md-form">
+                            <label>Horaire de début</label>
+                            <div>
+                                <input class="form-control datepicker text-center" type="time" autocomplete="off" name="start_hour" required value="{{ post.start_hour }}">
+                            </div>
+                        </div>
+                        <div class="md-form">
+                            <label>Horaire de fin</label>
+                            <div>
+                                <input class="form-control datepicker text-center" type="time" autocomplete="off" name="end_hour" required value="{{ post.end_hour }}">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="d-lg-flex flex-wrap align-items-lg-center col-md-12"><label class="col-2">Horaire de fin</label>
-                            <div class="d-flex td-input-container"><input class="form-control" type="time" autocomplete="off" name="end_hour" required value="{{ post.end_hour }}"></div>
+                    <div class="mt-2">
+                        <div>
+                            <label for="text_annoucement">Descriptif de votre annonce *</label>
+                            <div>
+                                <i class="icon ion-android-create align-self-center"></i>
+                                <textarea id="editor" name="text_annoucement">{{ post.text_annoucement }}</textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-12"><label for="text_annoucement">Descriptif de votre annonce *</label>
-                            <div class="d-flex td-input-container"><i class="icon ion-android-create align-self-center"></i><textarea class="form-control" id="editor" name="text_annoucement" rows="6" cols="50">{{ post.text_annoucement }}</textarea></div>
+                        <div>
+                            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Ajouter votre annonce</button>
                         </div>
-                    </div>
-                    <div>
-                        &nbsp;<br/>
-                        &nbsp;<br/>
-                        &nbsp;<br/>
-                        &nbsp;<br/>
-                        &nbsp;<br/>
-                    <div class="form-group">
-                        <div class="col-md-12"><button class="btn btn-dark float-right" type="submit">Ajouter votre annonce</button></div>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
-    </section>
-
-
-{#
-    <!-- Extended default form grid -->
-    <form class="my-5 offset-4 col-3" method="post" style="background: lightskyblue; opacity: 65%">
-        <!-- Grid row -->
-        <div class="form-row">
-            <!-- Default input -->
-            <div class=" form-group col-md-6">
-                <label for="inputEmail4">Titre</label>
-                <input type="text" class="form-control" name="title" id="inputEmail4" placeholder="Titre">
-            </div>
-            <!-- Default input -->
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Type d'annonce</label>
-                <input type="text" class="form-control" name="type" id="inputPassword4" placeholder="Type">
-            </div>
-        </div>
-        <!-- Grid row -->
-
-        <!-- Default input -->
-        <div class="form-group">
-            <label for="inputAddress">Message</label>
-            <textarea type="text" class="form-control" id="editor" name="text_annoucement" placeholder="Your Annonce"></textarea>
-        </div>
-        <!-- Default input -->
-        <div class="form-group">
-            <label for="inputAddress2">Keyword</label>
-            <input type="text" class="form-control" name="id_keyword" id="inputAddress2" placeholder="Mots Clés">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">id_Categorie</label>
-            <input type="text" class="form-control" name="id_category" id="inputAddress2" placeholder="ID de la categorie">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Date de la publication</label>
-            <input type="date" class="form-control" name="date_publication" placeholder="0000-00-00">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">id_user</label>
-            <input type="text" class="form-control" name="id_user" id="inputAddress2" placeholder="id de l'user">
-        </div>
-        <!-- Grid row -->
-        <div class="form-row">
-            <!-- Default input -->
-            <div class="form-group col-md-6">
-                <label for="inputCity">Horaire de début</label>
-                <input type="time" name="start_hour" class="form-control" id="inputCity" placeholder="0000-00-00">
-            </div>
-            <!-- Default input -->
-            <div class="form-group col-md-6">
-                <label for="inputZip">Horaire de fin</label>
-                <input type="time" name="end_hour" class="form-control" id="inputZip" placeholder="0000-00-00">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputZip">Nombre Minimum</label>
-                <input type="text" name="nbmin" class="form-control" id="inputZip" placeholder="Minimal Personne">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputZip">Nombre Maximum</label>
-                <input type="text" name="nbmax" class="form-control" id="inputZip" placeholder="Maximum Personne">
-            </div>
-        </div>
-        <!-- Grid row -->
-        <button type="submit" class="btn btn-primary btn-md col-6 offset-3">Envoyer</button>
-    </form>
-#}
-    <!-- Extended default form grid -->
 {% endblock %}
 {% block javascript %}
 <script>
