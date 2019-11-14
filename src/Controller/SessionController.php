@@ -13,7 +13,7 @@ class SessionController extends AbstractController
         $message = '';
         $loginManager = new SessionManager();
 
-        if(isset($_SESSION['Auth'])) {
+        if (isset($_SESSION['Auth'])) {
             header('location:/home/index');
         } else {
             if (!empty($_POST)) {
