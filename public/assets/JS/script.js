@@ -68,7 +68,6 @@ function countId(id) {
             counter+=1;
         }
     });
-    alert(counter);
 }
 
 
