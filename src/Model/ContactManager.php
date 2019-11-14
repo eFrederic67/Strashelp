@@ -17,16 +17,14 @@ class ContactManager extends AbstractManager
     {
         if (isset($_POST['Envoyer'])) {
             try {
-                $userLogin = $_SESSION['login'];
                 $theme = $_POST['theme'];
                 $message = $_POST['message'];
                 $messageDate = date("d/m/o H:i:s");
                 $query = "INSERT INTO $this->table
-                   VALUES (NULL, :user_id, :user_login, :theme, :message, :message_date)";
+                   VALUES (NULL, :user_id, :theme, :message, :message_date)";
                 $statement = $this->pdo->prepare($query);
 
                 $statement->bindValue(':user_id', $id, PDO::PARAM_INT);
-                $statement->bindValue(':user_login', $userLogin, PDO::PARAM_STR);
                 $statement->bindValue(':theme', $theme, PDO::PARAM_STR);
                 $statement->bindValue(':message', $message, PDO::PARAM_STR);
                 $statement->bindValue(':message_date', $messageDate, PDO::PARAM_STR);
