@@ -28,11 +28,12 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
 
     public function addPost(array $item)
     {
-        $item['id_user'] = $_SESSION['id'];
-        $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE."(title, type, id_category, start_hour, 
-        end_hour, date_publication, text_annoucement) VALUES (:title, :type, :id_category, :start_hour, :end_hour, 
-        :date_publication, :text_annoucement)");
+        $item['id_user'] = $_SESSION['Auth']['id'];
+        $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE."(id_user, title, type, id_category, start_hour, 
+        end_hour, date_publication, text_annoucement) VALUES 
+        (:id_user, :title, :type, :id_category,:start_hour, :end_hour, :date_publication, :text_annoucement)");
         $statement->bindValue('title', $item['title'], \PDO::PARAM_STR);
+        $statement->bindValue('id_user', $item['id_user'], \PDO::PARAM_INT);
         $statement->bindValue('type', $item['type'], \PDO::PARAM_INT);
         $statement->bindValue('id_category', $item['id_category'], \PDO::PARAM_STR);
         $statement->bindValue('start_hour', $item['start_hour'], \PDO::PARAM_STR);
@@ -57,6 +58,12 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         JOIN user ON user.id = post.id_user WHERE post.id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+        return $statement->fetch();
+    }
+
+    public function getLastEntry()
+    {
+        $statement = $this->pdo->query("SELECT * FROM ".self::TABLE." ORDER BY id DESC LIMIT 1");
         return $statement->fetch();
     }
 }
