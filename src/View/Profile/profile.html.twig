@@ -22,7 +22,7 @@
                             </h6>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#annonces" role="tab" aria-controls="annonces" aria-selected="false">Ces annonces</a>
@@ -82,9 +82,29 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="annonces" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="col-md-6">
-                                    <p>{{ annonces.title }}</p>
-                                </div>
+                                <table id="myTable" class="display" style="width:100%; background: whitesmoke">
+                                    <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Date</th>
+                                        <th>Heure de début</th>
+                                        <th>Heure de fin</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style="background: #7597ff">
+
+                                    {% for searchid in search %}
+                                        {% if  profile.id == searchid.id %}
+                                            <tr class="table-primary">
+                                                <td style="background: whitesmoke"><a href="/Search/Posts/{{ searchid.post_id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
+                                                <td style="background: whitesmoke">{{ searchid.start_day }}</td>
+                                                <td style="background: whitesmoke">{{ searchid.start_hour }}</td>
+                                                <td style="background: whitesmoke">{{ searchid.end_hour }}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -93,4 +113,11 @@
         </div>
     </div>
 
+{% endblock %}
+{% block javascript %}
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
 {% endblock %}
