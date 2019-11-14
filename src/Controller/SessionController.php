@@ -13,29 +13,33 @@ class SessionController extends AbstractController
         $message = '';
         $loginManager = new SessionManager();
 
-        if (!empty($_POST)) {
-            $resultats = $loginManager->login($_POST);
-            if (($resultats)) {
-                $_SESSION['Auth'] = array(
-                    'login' => $_POST['login'],
-                    'pass' => sha1($_POST['password']),
-                    'firstname' => $resultats[0]['firstname'],
-                    'id' => $resultats[0]['id'],
-                );
-                header("location:/");
-            } else {
-                $message = "les identifiants ne sont pas reconnus";
+        if (isset($_SESSION['Auth'])) {
+            header('location:/home/index');
+        } else {
+            if (!empty($_POST)) {
+                $resultats = $loginManager->login($_POST);
+                if (($resultats)) {
+                    $_SESSION['Auth'] = array(
+                        'login' => $_POST['login'],
+                        'pass' => sha1($_POST['password']),
+                        'firstname' => $resultats[0]['firstname'],
+                        'id' => $resultats[0]['id'],
+                    );
+                    header("location:/home/index");
+                } else {
+                    $message = "les identifiants ne sont pas reconnus";
+                }
             }
-        }
 
-        return $this->twig->render('Session/login.html.twig', ['message' => $message]);
+            return $this->twig->render('Session/login.html.twig', ['message' => $message]);
+        }
     }
 
     public function logout()
     {
         $loginManager = new SessionManager();
         if ($loginManager->logout()) {
-            header("location:/");
+            header("location: /");
         }
     }
 

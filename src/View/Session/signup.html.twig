@@ -1,14 +1,8 @@
-{% extends 'layout.html.twig' %}
-
-{% block title %}
-Inscription
-{% endblock %}
-
-{% block content %}
-<script>
-
-</script>
-    <div class="signup" id="signup" style="display: block;">
+{% extends 'layoutUnlogged.html.twig' %}
+        {% block title %}
+            Bienvenue sur Stras'Help
+        {% endblock %}
+        {% block content %}
         <h1 class="h3 text-center mt-2">Formulaire d'inscription</h1>
         <form class="Session_form text-center border border-light p-4 col-4 offset-4" target="" method="POST" enctype="multipart/form-data">
                 <div>
@@ -154,5 +148,4 @@ Inscription
 
         </form>
     </div>
-
 {% endblock %}
