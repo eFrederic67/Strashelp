@@ -5,7 +5,7 @@
                 <h1 class="card-header info-color white-text text-center py-4">Créer une annonce</h1>
             <div class="card-body px-lg-5 pt-0">
 
-                <form class="md-form" style="color: #757575;" method="post">
+                <div class="md-form" style="color: #757575;" method="post">
                     <div>
                         <div class="mt-2">
                             <label for="name">Titre de l'annonce*</label>
@@ -50,22 +50,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-2 row justify-content-around">
                         <div  class="md-form">
                             <label>Horaire de début</label>
                             <div>
-                                <input class="form-control datepicker" type="time" autocomplete="off" name="start_hour" required value="{{ post.start_hour }}">
+                                <input class="form-control datepicker text-center" type="time" autocomplete="off" name="start_hour" required value="{{ post.start_hour }}">
+                            </div>
+                        </div>
+                        <div class="md-form">
+                            <label>Horaire de fin</label>
+                            <div>
+                                <input class="form-control datepicker text-center" type="time" autocomplete="off" name="end_hour" required value="{{ post.end_hour }}">
                             </div>
                         </div>
                     </div>
                     <div class="mt-2">
-                        <div class="md-form">
-                            <label>Horaire de fin</label>
-                            <div>
-                                <input class="form-control datepicker" type="time" autocomplete="off" name="end_hour" required value="{{ post.end_hour }}">
-                            </div>
-                        </div>
-                    </div class="mt-2">
                         <div>
                             <label for="text_annoucement">Descriptif de votre annonce *</label>
                             <div>
@@ -73,6 +72,7 @@
                                 <textarea id="editor" name="text_annoucement">{{ post.text_annoucement }}</textarea>
                             </div>
                         </div>
+                    </div>
                         <div>
                             <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Ajouter votre annonce</button>
                         </div>
