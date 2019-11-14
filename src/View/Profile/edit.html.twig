@@ -7,8 +7,6 @@
 {% block content %}
     <h1 class="h1_center">Modifie ton profil</h1>
 
-    {% for session in session %}
-
         <form method="post" class="edit_profil">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -45,9 +43,6 @@
             <button type="submit" class="btn btn-primary btn-md edit_submit">Modifier</button>
             <a class="btn btn-primary btn-md edit_submit" href="/profile/myprofile">Back</a>
         </form>
-
-    {% endfor %}
-
 
 {% endblock %}
 

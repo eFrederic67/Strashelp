@@ -134,7 +134,6 @@ class ProfileController extends AbstractController
             $myprofile['phone'] = $_POST['phone'];
             $myprofile['description'] = $_POST['description'];
 
-
             $profileManager->update($myprofile);
             header('Location:/profile/myprofile');
         }
