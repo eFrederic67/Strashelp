@@ -1,4 +1,11 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layoutUnlogged.html.twig' %}
+
+{% block menu %}
+    <div class="row headerMenuUnlogger">
+        <div class="item home text-white"><a href="/Session/login"><i class="fas fa-sign-in-alt"></i><span>Se connecter</span></a></div>
+        <div class="item home text-white"><a href="/Session/signup"><i class="fas fa-user-plus"></i><span>S'incrire</span></a></div>
+    </div>
+{% endblock %}
 
 {% block title %}
 Recouvrement de mot de passe
