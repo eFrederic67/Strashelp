@@ -38,4 +38,12 @@ class SignalController extends AbstractController
 
         return $this->twig->render('Signal/signalpost.html.twig', ['post' => $post]);
     }
+
+    public function selectPostTitleById(int $id)
+    {
+        $selecttitleManager = new SignalpostManager();
+        $postTitle = $selecttitleManager->selectPostTitleById($id);
+
+        return $this->twig->render('Signal/signalpost.html.twig', ['post_title' => $postTitle]);
+    }
 }

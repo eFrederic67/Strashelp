@@ -24,6 +24,7 @@ class SignalpostManager extends AbstractManager
     {
         if (isset($_POST['Envoyer'])) {
             try {
+                $postTitle =
                 $signalingUserId = $_SESSION['id'];
                 $signalingUserLogin = $_SESSION['login'];
                 $alertMessage = $_POST['alert_message'];
@@ -32,6 +33,7 @@ class SignalpostManager extends AbstractManager
                    VALUES (NULL, :user_id, :user_login, :post_id, :alert_message, :alert_date)";
                 $statement = $this->pdo->prepare($query);
 
+                $statement->bindValue(':post_title', $postTitle, PDO::PARAM_STR);
                 $statement->bindValue(':user_id', $signalingUserId, PDO::PARAM_STR);
                 $statement->bindValue(':user_login', $signalingUserLogin, PDO::PARAM_STR);
                 $statement->bindValue(':post_id', $id, PDO::PARAM_STR);
@@ -46,5 +48,17 @@ class SignalpostManager extends AbstractManager
                 echo('Erreur : '.$e->getMessage());
             }
         }
+    }
+
+    public function selectPostTitleById(int $id)
+    {
+        $query = "SELECT title FROM post WHERE id=:id";
+        $statement = $this->pdo->prepare($query);
+
+        $statement->bindValue('post_title', $id, \PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetch();
     }
 }
