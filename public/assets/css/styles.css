@@ -12,12 +12,41 @@ body {
 .background {
   background: #7597ff;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 90px;
+}
+
+.headerFlex {
+  display: flex !important;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
 }
 
 .titreUnloggedContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerMenuUnlogger{
+  color: white;
+  margin: 0;
+  text-decoration: none;
+  padding: 0;
+  align-items: center;
+}
+
+.headerMenuUnlogger a{
+  color: white;
+  text-decoration: none;
+}
+
+.headerMenuUnlogger a:hover{
+  color: white;
+  text-decoration: underline;
 }
 
 h1 a {
@@ -26,7 +55,7 @@ h1 a {
 }
 h1 a:hover {
   color: white;
-  text-decoration: underline;
+  text-decoration: none;
 }
 .font-icon-example {
   max-width: 750px;

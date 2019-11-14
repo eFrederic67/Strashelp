@@ -26,8 +26,11 @@
 
 <body>
 <div class="background">
-    <div class="col-10 offset-1 titreUnloggedContainer">
-        <h1 class="h1 text-white"><a href="/home/index">Stras'Help</a></h1>
+    <div class="font-icon-example justify-content-center headerFlex">
+        <div class="titreUnloggedContainer">
+            <h1 class="h1 text-white"><a href="/home/index">Stras'Help</a></h1>
+            {% block menu %}{% endblock %}
+        </div>
     </div>
 </div>
 

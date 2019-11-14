@@ -2,6 +2,13 @@
 {% block title %}Bienvenue sur Stras'Help
 {% endblock %}
 
+{% block menu %}
+    <div class="row headerMenuUnlogger">
+        <div class="item home text-white"><a href="/Session/login"><i class="fas fa-sign-in-alt"></i><span>Se connecter</span></a></div>
+        <div class="item home text-white"><a href="/Session/signup"><i class="fas fa-user-plus"></i><span>S'incrire</span></a></div>
+    </div>
+{% endblock %}
+
 {% block content %}
                 <a class="btn btn-info btn-block col-4 offset-4 mt-4" href="/Session/login">Se connecter</a><br/>
                 <a class="btn btn-info btn-block col-4 offset-4" href="/Session/signup">M'inscrire</a>
