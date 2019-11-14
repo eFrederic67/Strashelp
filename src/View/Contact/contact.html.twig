@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<form action="/" method="POST">
+    <div id="form">
+        <h3>
+            Demande d'aide
+        </h3>
+        <input type="hidden" value="{{ user.id }}" name="user_id">
+        <input type="hidden" value="{{ user.message_date }}" name="message_date">
+        <label for="themeList">Thème de votre question</label>
+        <SELECT id="themeList" name="theme" size="1" required>
+            <OPTION value="">--Choisir dans la liste--
+            <OPTION value="Site">Utilisation du site
+            <OPTION value="Compte">Gestion de mon compte
+            <OPTION value="Helpeurs">Communauté des helpeurs
+            <OPTION value="Autres">AUTRES
+        </SELECT>
+        <label for="message">Votre message</label>
+        <input type="text" id="message" value="{{ user.message }}" name="message" required><br>
+        <div class="button">
+            <input type="submit" value="Envoyer">
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
