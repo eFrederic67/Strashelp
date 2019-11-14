@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/styles_form.css">
+    <link rel="stylesheet" href="assets/css/TD-BS4-Simple-Contact-Form-1.css">
+    <link rel="stylesheet" href="assets/css/TD-BS4-Simple-Contact-Form.css">
+    <link rel="stylesheet" href="/assets/css/Footer-Dark.css">
+    <link rel="stylesheet" href="/assets/css/styles_footer.css">
+
+    <link rel="icon" href="/assets/images/favicon.png">
+</head>
+
+<body>
+<div class="background">
+    {# TODO : Remplacer le texte par une image #}
+    <h1 class="h1 text-center text-white offset-4"><a href="/home/index">Stras'Help</a></h1>
+</div>
+
+{% block content %}{% endblock %}
+
+
+{% include '/HeaderFooter/footer.html.twig' %}
+​</body>
+</html>
+
+
