@@ -21,8 +21,8 @@ class SearchController extends AbstractController
     public function addPost()
     {
         $categoryManager = new SearchManager();
-        $category = $categoryManager->displayCategory();
         if (!empty($_POST)) {
+            $category = $categoryManager->displayCategory();
             $errors = [];
             if ($_POST['title'] != htmlspecialchars($_POST['title'])) {
                 $errors['title'] = 'Caractères spéciaux interdit !';
@@ -37,7 +37,6 @@ class SearchController extends AbstractController
             if (empty($_POST['text_annoucement'])) {
                 $errors['text_annoucement'] = 'Merci de remplir ce champs';
             }
-            var_dump($errors);
             if (count($errors) > 0) {
                 return $this->twig->render(
                     'Search/add.html.twig',
@@ -49,9 +48,11 @@ class SearchController extends AbstractController
                 );
             } else {
                 $categoryManager->addPost($_POST);
-                header('Location: Search/post');
+                $getEntry = $categoryManager->getLastEntry();
+                header('Location: /Search/posts/'. $getEntry['id']);
             }
         } else {
+            $category = $categoryManager->displayCategory();
             return $this->twig->render(
                 'Search/add.html.twig',
                 [
