@@ -22,7 +22,7 @@ class SessionController extends AbstractController
                     'firstname' => $resultats[0]['firstname'],
                     'id' => $resultats[0]['id'],
                 );
-                header("location:/");
+                header("location:/home/index");
             } else {
                 $message = "les identifiants ne sont pas reconnus";
             }
@@ -35,7 +35,7 @@ class SessionController extends AbstractController
     {
         $loginManager = new SessionManager();
         if ($loginManager->logout()) {
-            header("location:/");
+            header("location: /");
         }
     }
 
