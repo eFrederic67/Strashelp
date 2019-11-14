@@ -19,7 +19,7 @@
         <tbody style="background: #7597ff">
         {% for searchid in search %}
             <tr class="table-primary">
-                <td style="background: whitesmoke"><a href="/Search/Posts/{{ searchid.id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
+                <td style="background: whitesmoke"><a href="/Search/Posts/{{ searchid.post_id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
                 <td style="background: whitesmoke">{{ searchid.start_day }}</td>
                 <td style="background: whitesmoke">{{ searchid.start_hour }}</td>
                 <td style="background: whitesmoke">{{ searchid.end_hour }}</td>
