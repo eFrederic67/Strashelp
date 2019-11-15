@@ -1,4 +1,3 @@
-
 function verifDate(yd,md,bd) {
     let today = new Date();
     let yt = today.getFullYear();
