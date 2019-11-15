@@ -19,7 +19,8 @@ class HomeManager extends AbstractManager
 
     public function selectBySection($table, $id)
     {
-        $tableau = $this->pdo->query('SELECT *, category.name as cat FROM ' . $table . ' JOIN category ON category.id = id_category
+        $tableau = $this->pdo->query('SELECT *, category.name as cat FROM '.$table.'
+         JOIN category ON category.id = id_category
          WHERE id_user ='.$id.' AND DATE(start_hour) >= CURDATE()')->fetchAll();
         $tableau = $this->howManyAnswers($tableau);
         return $tableau;
