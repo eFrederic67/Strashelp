@@ -92,7 +92,7 @@ class SessionController extends AbstractController
                         'firstname' => $_POST['firstname'],
                         'id' => $lastUser['id'],
                     );
-                    //$signUpManager->cleanPhotosTemp();
+                    $signUpManager->cleanPhotosTemp();
                     $idUser = $signUpManager->getLastUser();
                     header("Location:/Profile/profile/".$idUser['id']);
                 }

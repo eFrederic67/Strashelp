@@ -110,7 +110,6 @@ class SessionManager extends AbstractManager
         }
         // un test pour être sûr que ça s'est bien passé et un return
         return ($insertion->execute()) ? true : false;
-        var_dump($insertion);
     }
 
     public function testDoublon($field, $valeur)
@@ -176,21 +175,29 @@ class SessionManager extends AbstractManager
     {
         // Scan de toutes les photos dans le dossier avatars
         $dir    = 'assets/images/avatars/';
-        $files = scandir($dir);
+        $existingFiles = scandir($dir);
         // requete de tous les noms d'avatars dans la base
         $requeteClean = "SELECT avatar FROM ".self::TABLE;
         $liste = $this->pdo->query($requeteClean)->fetchall();
+
+        $existingFiles2=[];
+        $pouet = count($existingFiles);
+        for ($i = 0; $i < $pouet; $i++) {
+            $existingFiles2[$i] = $dir.$existingFiles[$i];
+            $existingFiles[$i] = "/".$dir.$existingFiles[$i];
+        }
 
         $tableauAvatar = [];
         foreach ($liste as $avatar) {
             array_push($tableauAvatar, $avatar['avatar']);
         }
-        $nombreDeFichiers = count($files);
+
+        $nombreDeFichiers = count($existingFiles);
         for ($i = 0; $i < $nombreDeFichiers; $i++) {
-            if (!in_array($files[$i], $tableauAvatar)) {
-                if ($files[$i] == "." || $files[$i] == "..") {
+            if (!in_array($existingFiles[$i], $tableauAvatar)) {
+                if ($existingFiles2[$i] == $dir."." || $existingFiles2[$i] == $dir."..") {
                 } else {
-                    unlink($dir.$files[$i]);
+                    unlink($existingFiles2[$i]);
                 }
             }
         }
