@@ -25,9 +25,7 @@ class SearchuserController extends AbstractController
     {
         $itemManager = new SearchuserManager();
         $item = $itemManager->post($id);
-        return $this->twig->render(
-            'Search/post.html.twig',
-            ['item' => $item]
-        );
+
+        return $this->twig->render('Search/user.html.twig', ['item' => $item]);
     }
 }
