@@ -126,7 +126,6 @@ class ProfileController extends AbstractController
         $session = $profileManager->session();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $myprofile['avatar'] = $_POST['avatar'];
             $myprofile['email'] = $_POST['email'];
             $myprofile['login'] = $_POST['login'];
             $myprofile['adresse_1'] = $_POST['adresse_1'];
