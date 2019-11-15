@@ -104,9 +104,9 @@ class ProfileManager extends AbstractManager
     {
         $skills = [];
         if ($profile['admin'] == 0) {
-            $profile['membre'] = "Membre de l'association";
+            $skills['membre'] = "Membre de l'association";
         } else {
-            $profile['membre'] = "Administrateur";
+            $skills['membre'] = "Administrateur";
         }
         if ($profile['éducation'] == 1) {
             $skills[] = 'Éducation';
