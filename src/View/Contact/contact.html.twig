@@ -7,15 +7,22 @@
         <h3>
             Demande d'aide
         </h3>
+        <div class="hint">
+            Avant d'envoyer un message, n'hésitez pas à consulter les réponses aux <a href="?page=">questions les plus fréquentes</a>.
+        </div>
+        <div class="hint">
+            Pour vos demandes concernant l'adhésion à l'association, merci d'écrire à <a href="mailto:adhesion@strashelp.org">cette adresse</a>.<br>
+            Pour les questions d'ordre plus général, ou un contact professionnel, merci d'écrire à <a href="mailto:info@strashelp.org">cette adresse</a>.
+        </div>
         <input type="hidden" value="{{ user.id }}" name="user_id">
         <input type="hidden" value="{{ user.message_date }}" name="message_date">
         <label for="themeList">Thème de votre question</label>
         <SELECT id="themeList" name="theme" size="1" required>
             <OPTION value="">--Choisir dans la liste--
             <OPTION value="Site">Utilisation du site
-            <OPTION value="Compte">Gestion de mon compte
-            <OPTION value="Helpeurs">Communauté des helpeurs
-            <OPTION value="Autres">AUTRES
+            <OPTION value="Account">Gestion de mon compte
+            <OPTION value="Helpers">Communauté des helpeurs
+            <OPTION value="Other">AUTRES
         </SELECT>
         <label for="message">Votre message</label>
         <input type="text" id="message" value="{{ user.message }}" name="message" required><br>
