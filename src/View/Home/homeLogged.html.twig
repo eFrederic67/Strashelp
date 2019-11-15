@@ -5,17 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="col-4">Bienvenue {{ firstname }}</h1>
-    <h1 class="col-4">Vos Rendez-vous</h1>
-    <table border="1">
-        <thead>
+    <h1 class=" text-center">Bienvenue {{ firstname }}</h1>
+    <h2 class="col-4">Vos Rendez-vous</h2>
+    <table class="col-4 table table-striped">
+        <thead class="thead-dark">
         <tr>
             <td>Type</td>
-            <td>date</td>
-            <td>heure début</td>
-            <td>heure heure fin</td>
-            <td>titre</td>
-            <td>combien de personnes ont répondu</td>
+            <td>Catégorie</td>
+            <td>Date</td>
+            <td>Heure début</td>
+            <td>Heure heure fin</td>
+            <td>Titre</td>
+            <td>Combien de personnes ont répondu</td>
         </tr>
         </thead>
         <tbody>
@@ -28,18 +29,19 @@
                         Demande
                     {% endif %}
                 </td>
+                <td>{{ rdv.cat | capitalize }}</td>
                 <td>{{ rdv.start_hour|date("d/m/Y") }}</td>
-                <td>{{ rdv.start_hour|date('H:i:s') }}</td>
-                <td>{{ rdv.end_hour|date('H:i:s') }}</td>
+                <td>{{ rdv.start_hour|date('H:i') }}</td>
+                <td>{{ rdv.end_hour|date('H:i') }}</td>
                 <td>{{ rdv.title }}</td>
                 <td>{{ rdv.reponse }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <h1 class="col-4">Ils ont besoin de vous</h1>
+    <h2 class="col-4">Ils ont besoin de vous</h2>
     <table border="1">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <td>Qui</td>
             <td>Catégorie</td>
@@ -71,9 +73,9 @@
         {% endfor %}
         </tbody>
     </table>
-    <h1 class="col-4">Dernières Annonces</h1>
+    <h2 class="col-4"><a href="/Search/search">Dernières Annonces</a></h2>
     <table border="1">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <td>Type</td>
             <td>Qui</td>
@@ -108,10 +110,10 @@
         {% endfor %}
         </tbody>
     </table>
-    <h1 class="col-4">Top Actus</h1>
-    <h1 class="col-4">Top Helpers</h1>
-    <h2>Catégorie 1</h2>
-    <h2>Catégorie 2</h2>
-    <h2>Catégorie 3</h2>
+    <h2 class="col-4">Top Actus</h2>
+    <h2 class="col-4">Top Helpers</h2>
+    <h3>Bricolage</h3>
+    <h3>Cuisine</h3>
+    <h3>Éducation</h3>
 
 {% endblock %}

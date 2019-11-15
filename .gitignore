@@ -8,3 +8,5 @@ src/View/.DS_Store
 src/.DS_Store
 .DS_Store
 .gitignore
+strashelp.sql
+header_backup.html.twig
