@@ -60,7 +60,9 @@ class SessionController extends AbstractController
             // on teste les erreurs
             $signUpManager = new SessionManager();
             $errors = $signUpManager->testErrorInForm($_POST);
-            $_POST['avatar'] = "/assets/images/profil.png";
+            if (!isset($_POST['avatar'])) {
+                $_POST['avatar'] = "/assets/images/profil.png";
+            }
             if ($_POST['bricolage']== 'on') {
                 $_POST['bricolage']= 1;
             }
@@ -90,9 +92,9 @@ class SessionController extends AbstractController
                         'firstname' => $_POST['firstname'],
                         'id' => $lastUser['id'],
                     );
-                    $signUpManager->cleanPhotosTemp();
-                    $id_user = $signUpManager->getLastUser();
-                    header("Location:/Profile/profile/".$id_user['id']);
+                    //$signUpManager->cleanPhotosTemp();
+                    $idUser = $signUpManager->getLastUser();
+                    header("Location:/Profile/profile/".$idUser['id']);
                 }
             } else {
                 // s'il y a des erreurs on reloade la page

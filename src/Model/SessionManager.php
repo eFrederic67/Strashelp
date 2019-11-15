@@ -162,7 +162,7 @@ class SessionManager extends AbstractManager
             $uploadDir = 'assets/images/avatars/';
             // on génère un nom de fichier à partir du nom de fichier sur le poste du client
             // (mais vous pouvez générer ce nom autrement si vous le souhaitez)
-            $uploadFile = $uploadDir . $filename;//basename($_FILES['fichier']['name'][$i]);
+            $uploadFile = $uploadDir . $filename;
 
             // on déplace le fichier temporaire vers le nouvel emplacement sur le serveur.
             // Ca y est, le fichier est uploadé
