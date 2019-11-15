@@ -45,9 +45,12 @@ class SessionController extends AbstractController
 
     public function signup()
     {
+        $signUpManager = new SessionManager();
+        $category = $signUpManager->displayCategory();
         if (empty($_POST)) {
             // si le post est vide parce que c'est le 1er loading de la page
             return $this->twig->render('Session/signup.html.twig', [
+                'category' => $category,
                 'display1' => 'block',
                 'display2' => 'none',
                 'avatar' => "/assets/images/profil.png",
@@ -58,6 +61,15 @@ class SessionController extends AbstractController
             $signUpManager = new SessionManager();
             $errors = $signUpManager->testErrorInForm($_POST);
             $_POST['avatar'] = "/assets/images/profil.png";
+            if ($_POST['bricolage']== 'on') {
+                $_POST['bricolage']= 1;
+            }
+            if ($_POST['cuisine']== 'on') {
+                $_POST['cuisine']= 1;
+            }
+            if ($_POST['éducation']== 'on') {
+                $_POST['éducation']= 1;
+            }
             if ($_FILES['fichier']['name'] !== '') {
                 $addressAvatar = $signUpManager->testImage();
                 $_POST['avatar'] = "/".$addressAvatar;
@@ -79,14 +91,14 @@ class SessionController extends AbstractController
                         'id' => $lastUser['id'],
                     );
                     $signUpManager->cleanPhotosTemp();
-                    header("Location:/Session/SignUpValidate");
+                    $id_user = $signUpManager->getLastUser();
+                    header("Location:/Profile/profile/".$id_user['id']);
                 }
             } else {
-                $signUpManager = new SessionManager();
-                $category = $signUpManager->displayCategory();
                 // s'il y a des erreurs on reloade la page
                 // en remettant les informations et envoyant les messages d'erreurs
                 return $this->twig->render('Session/signup.html.twig', [
+                    'category' => $category,
                     'errors' => $errors,
                     'login' => $_POST['login'],
                     'email' => $_POST['email'],

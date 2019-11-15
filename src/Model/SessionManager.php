@@ -82,6 +82,7 @@ class SessionManager extends AbstractManager
     {
         //donc là, il faut préparer une requête pour insérer les champs dans la base de données
         // On récupère les champs de la table self::TABLE
+        $post['zipcode'] = (int)$post['zipcode'];
         $query = 'DESCRIBE '.self::TABLE;
         $statement = $this->pdo->prepare($query);
         $statement->execute();
@@ -97,8 +98,8 @@ class SessionManager extends AbstractManager
         $requete .= ") VALUES (";
         foreach ($champsAInserer as $value) {
             if (null !== ($post[$value])) {
-                $requete .= "':".$value."', ";
-//                $requete .= ":".$value.", ";
+                $requete .= "'".$post[$value]."', ";
+//                $requete .= "':".$value."', ";
             }
         }
         $requete = substr($requete, 0, strlen($requete)-2);
@@ -109,6 +110,7 @@ class SessionManager extends AbstractManager
         }
         // un test pour être sûr que ça s'est bien passé et un return
         return ($insertion->execute()) ? true : false;
+        var_dump($insertion);
     }
 
     public function testDoublon($field, $valeur)

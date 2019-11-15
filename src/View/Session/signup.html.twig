@@ -135,22 +135,12 @@
                         <fieldset>
                             <div class="mt-4">Vos Compétences</div>
                             <div class="row justify-content-around ">
-                        <div>
-                            {% if bricolage == '0'  %}
-                                <input type="checkbox" id="bricolage" name="bricolage">
-                            {%  else  %}
-                                <input type="checkbox" id="bricolage" name="bricolage" checked>
-                            {%  endif  %}
-                            <label for="bricolage">Bricolage</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="cuisine" name="cuisine" {% if cuisine != '0' %}checked{%  endif %}>
-                            <label for="cuisine" >Cuisine</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="éducation" name="éducation" {% if éducation != '0' %}checked{%  endif %}>
-                            <label for="éducation">Éducation</label>
-                        </div>
+                        {% for cat in category %}
+                            <div>
+                                <input type="checkbox" id="{{ cat.name }}" name="{{ cat.name }}" {% if _context[cat.name] != '0' and _context[cat.name] != '' %}checked{%  endif %}>
+                                <label for="{{ cat.name }}">{{ cat.name | capitalize}}</label>
+                            </div>
+                        {% endfor %}
                             </div>
                         <div class="mt-2">
                             <label for="description">Description</label>
