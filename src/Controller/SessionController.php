@@ -82,6 +82,8 @@ class SessionController extends AbstractController
                     header("Location:/Session/SignUpValidate");
                 }
             } else {
+                $signUpManager = new SessionManager();
+                $category = $signUpManager->displayCategory();
                 // s'il y a des erreurs on reloade la page
                 // en remettant les informations et envoyant les messages d'erreurs
                 return $this->twig->render('Session/signup.html.twig', [
@@ -103,9 +105,13 @@ class SessionController extends AbstractController
                     'monthOfBirth' => $_POST['monthOfBirth'],
                     'yearOfBirth' => $_POST['yearOfBirth'],
                     'avatar' => $_POST['avatar'],
-                    'despription' => $_POST['description'],
+                    'description' => $_POST['description'],
+                    'bricolage' => $_POST['bricolage'],
+                    'cuisine' => $_POST['cuisine'],
+                    'éducation' => $_POST['éducation'],
                     'display1' => 'none',
                     'display2' => 'block',
+
                 ]);
             }
         }

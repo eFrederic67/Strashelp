@@ -81,28 +81,24 @@ class SessionManager extends AbstractManager
     public function insertInDB($post)
     {
         //donc là, il faut préparer une requête pour insérer les champs dans la base de données
-
         // On récupère les champs de la table self::TABLE
         $query = 'DESCRIBE '.self::TABLE;
         $statement = $this->pdo->prepare($query);
         $statement->execute();
         $champs = $statement->fetchAll();
-
         $champsAInserer=[];
         $requete ="INSERT INTO ".self::TABLE."(";
-
         $lenTemp = count($champs);
         for ($i = 1; $i<$lenTemp; $i++) {
             array_push($champsAInserer, $champs[$i]['Field']);
             $requete .= $champs[$i]['Field'].", ";
         }
-
         $requete = substr($requete, 0, strlen($requete)-2);
         $requete .= ") VALUES (";
-
         foreach ($champsAInserer as $value) {
             if (null !== ($post[$value])) {
-                $requete .= ":".$value.", ";
+                $requete .= "':".$value."', ";
+//                $requete .= ":".$value.", ";
             }
         }
         $requete = substr($requete, 0, strlen($requete)-2);

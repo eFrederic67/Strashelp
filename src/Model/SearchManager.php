@@ -43,13 +43,6 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         return ($statement->execute()? true:false);
     }
 
-    public function displayCategory()
-    {
-        $statements = $this->pdo->prepare("SELECT * FROM category");
-        $statements->execute();
-        return $statements->fetchAll();
-    }
-
     public function post(int $id)
     {
         $statement = $this->pdo->prepare("SELECT post.id, type, title, category.name AS catname, user.login,
