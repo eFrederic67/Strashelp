@@ -12,16 +12,27 @@
             </h4>
             <h5 class="card-title">Le {{ item.start_day }} de {{ item.start_hour }} à {{ item.end_hour }}</h5>
             </div>
-            <div class="font-icon-example offset-3 col">
-                <div class="item"><a href="/signal/signalpost/{{ item.id }}"><i class="fas fa-exclamation text-danger"></i><span>Signaler l'annonce</span></a></div>
+            <div class="font-icon-example offset-3">
+                <div class="item">
+                    <a href="/signal/signalpost/{{ item.id }}">
+                        <i class="fas fa-exclamation text-danger"></i><span>Signaler l'annonce</span></a>
+                </div>
             </div>
         </div>
         <div class="card-body">
             <p class="card-text text-justify">{{ item.text_annoucement | raw }}</p>
-            <a href="#!" class="btn btn-dark">Intéressé</a>
         </div>
         <div class="card-footer text-muted">
-            Type d'annonce : {{ item.catname }}
+            <a href="#!" class="btn btn-dark">Intéressé</a>
+            <br/>
+            Type d'annonce : {{ item.catname | capitalize}}
+            <br/>
+            Nombres de personnes demandés
+            {% if item.nbmin == item.nbmax %}
+                Max <strong>{{ item.nbmax }}</strong>
+            {% else %}
+                Min <strong>{{ item.nbmin }}</strong> | Max <strong>{{ item.nbmax }}</strong>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
