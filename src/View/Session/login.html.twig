@@ -4,7 +4,7 @@
 Connexion
 {% endblock %}
 {% block menu %}
-    <div class="row headerMenuUnlogger">
+    <div class="row headerMenuUnlogger unlogged">
         <div class="item home text-white"><a href="/Session/signup"><i class="fas fa-user-plus"></i><span>S'incrire</span></a></div>
     </div>
 {% endblock %}
@@ -12,19 +12,19 @@ Connexion
 {% block content %}
 
     <form class="Session_form text-center border border-light p-5"  target="" method="POST">
-        <p class="h4 col-4 offset-4">Connexion</p>
+        <p class="h4 text-center">Connexion</p>
         {% if message != "" %}
             <h5 class="text-danger">{{ message }}</h5>
         {% endif %}
         <div>
             <label  for="nom">Login ou adresse e-mail :</label><br/>
-            <input  class="form-control col-4 offset-4" type="text"  id="login"  name="login" required /> 
+            <input  class="form-control col-md-4 offset-2 col-8 offset-md-4" type="text"  id="login"  name="login" required />
         </div>
         <div>
             <label  for="password">Mot de passe :</label><br/>
-            <input   class="form-control col-4 offset-4" type="password"  id="password"  name="password" required /> 
+            <input   class="form-control col-md-4 offset-2 col-8 offset-md-4" type="password"  id="password"  name="password" required />
         </div>
-        <div class="text-center col-4 offset-4">
+        <div class="text-center col-md-4 offset-2 col-8 offset-md-4">
             <p>
                 <a href="/Session/Recovery">J'ai oublié mon mot de passe</a>
             </p>

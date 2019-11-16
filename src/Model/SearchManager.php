@@ -30,8 +30,9 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
     {
         $item['id_user'] = $_SESSION['Auth']['id'];
         $statement = $this->pdo->prepare("INSERT INTO ".self::TABLE."(id_user, title, type, id_category, start_hour, 
-        end_hour, date_publication, text_annoucement) VALUES 
-        (:id_user, :title, :type, :id_category,:start_hour, :end_hour, :date_publication, :text_annoucement)");
+        end_hour, date_publication, text_annoucement, nbmin, nbmax) VALUES 
+        (:id_user, :title, :type, :id_category,:start_hour, :end_hour, :date_publication, :text_annoucement, :nbmin,
+         :nbmax)");
         $statement->bindValue('title', $item['title'], \PDO::PARAM_STR);
         $statement->bindValue('id_user', $item['id_user'], \PDO::PARAM_INT);
         $statement->bindValue('type', $item['type'], \PDO::PARAM_INT);
@@ -40,6 +41,8 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         $statement->bindValue('end_hour', $item['end_hour'], \PDO::PARAM_STR);
         $statement->bindValue('date_publication', $item['date_publication'], \PDO::PARAM_STR);
         $statement->bindValue('text_annoucement', $item['text_annoucement'], \PDO::PARAM_STR);
+        $statement->bindValue('nbmin', $item['nbmin'], \PDO::PARAM_INT);
+        $statement->bindValue('nbmax', $item['nbmax'], \PDO::PARAM_INT);
         return ($statement->execute()? true:false);
     }
 
