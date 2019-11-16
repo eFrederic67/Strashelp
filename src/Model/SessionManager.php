@@ -81,28 +81,25 @@ class SessionManager extends AbstractManager
     public function insertInDB($post)
     {
         //donc là, il faut préparer une requête pour insérer les champs dans la base de données
-
         // On récupère les champs de la table self::TABLE
+        $post['zipcode'] = (int)$post['zipcode'];
         $query = 'DESCRIBE '.self::TABLE;
         $statement = $this->pdo->prepare($query);
         $statement->execute();
         $champs = $statement->fetchAll();
-
         $champsAInserer=[];
         $requete ="INSERT INTO ".self::TABLE."(";
-
         $lenTemp = count($champs);
         for ($i = 1; $i<$lenTemp; $i++) {
             array_push($champsAInserer, $champs[$i]['Field']);
             $requete .= $champs[$i]['Field'].", ";
         }
-
         $requete = substr($requete, 0, strlen($requete)-2);
         $requete .= ") VALUES (";
-
         foreach ($champsAInserer as $value) {
             if (null !== ($post[$value])) {
-                $requete .= ":".$value.", ";
+                $requete .= "'".$post[$value]."', ";
+//                $requete .= "':".$value."', ";
             }
         }
         $requete = substr($requete, 0, strlen($requete)-2);
@@ -164,7 +161,7 @@ class SessionManager extends AbstractManager
             $uploadDir = 'assets/images/avatars/';
             // on génère un nom de fichier à partir du nom de fichier sur le poste du client
             // (mais vous pouvez générer ce nom autrement si vous le souhaitez)
-            $uploadFile = $uploadDir . $filename;//basename($_FILES['fichier']['name'][$i]);
+            $uploadFile = $uploadDir . $filename;
 
             // on déplace le fichier temporaire vers le nouvel emplacement sur le serveur.
             // Ca y est, le fichier est uploadé
@@ -178,21 +175,29 @@ class SessionManager extends AbstractManager
     {
         // Scan de toutes les photos dans le dossier avatars
         $dir    = 'assets/images/avatars/';
-        $files = scandir($dir);
+        $existingFiles = scandir($dir);
         // requete de tous les noms d'avatars dans la base
         $requeteClean = "SELECT avatar FROM ".self::TABLE;
         $liste = $this->pdo->query($requeteClean)->fetchall();
+
+        $existingFiles2=[];
+        $pouet = count($existingFiles);
+        for ($i = 0; $i < $pouet; $i++) {
+            $existingFiles2[$i] = $dir.$existingFiles[$i];
+            $existingFiles[$i] = "/".$dir.$existingFiles[$i];
+        }
 
         $tableauAvatar = [];
         foreach ($liste as $avatar) {
             array_push($tableauAvatar, $avatar['avatar']);
         }
-        $nombreDeFichiers = count($files);
+
+        $nombreDeFichiers = count($existingFiles);
         for ($i = 0; $i < $nombreDeFichiers; $i++) {
-            if (!in_array($files[$i], $tableauAvatar)) {
-                if ($files[$i] == "." || $files[$i] == "..") {
+            if (!in_array($existingFiles[$i], $tableauAvatar)) {
+                if ($existingFiles2[$i] == $dir."." || $existingFiles2[$i] == $dir."..") {
                 } else {
-                    unlink($dir.$files[$i]);
+                    unlink($existingFiles2[$i]);
                 }
             }
         }

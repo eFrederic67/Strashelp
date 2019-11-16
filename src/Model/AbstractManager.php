@@ -67,4 +67,11 @@ abstract class AbstractManager
 
         return $statement->fetch();
     }
+
+    public function displayCategory()
+    {
+        $statements = $this->pdo->prepare("SELECT * FROM category");
+        $statements->execute();
+        return $statements->fetchAll();
+    }
 }
