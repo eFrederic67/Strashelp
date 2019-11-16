@@ -5,6 +5,11 @@ html {
 body {
   height: 100%;
 }
+
+nav ul {
+  padding: 0 0 10px 0;
+  margin: 0;
+}
 #myTable{
   z-index: 1;
 }
@@ -13,6 +18,10 @@ body {
   background: #138496;
   display: flex;
   justify-content: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 2000;
 }
 
 .headerFlex {
@@ -59,7 +68,7 @@ h1 a:hover {
 }
 .font-icon-example {
   max-width: 750px;
-  height: 100px;
+  height: 70px;
   display: table;
   z-index: 2;
 }
@@ -256,4 +265,52 @@ footer ul .social {
   }
 }
 
+@media (max-width: 767px) {
+
+  .background {
+    width: 100% !important;
+    height: 70px;
+    position: fixed;
+    top:calc(100% - 70px);
+    background: #138496;
+    justify-content: center;
+
+    z-index: 2000;
+  }
+
+  nav {
+    width: 100% !important;
+    display: flex;
+  }
+  nav ul {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 0;
+  }
+
+  .font-icon-example .item i {
+    font-size: 150% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .font-icon-example .item span {
+    display: none !important;
+    font-size: 50% !important;
+  }
+  .font-icon-example .item {
+    display: block;
+    text-align: center;
+    width: 70px;
+    vertical-align: middle;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .font-icon-example .item:hover {
+    transform: translateY(0) !important ;
+  }
+}
 
