@@ -63,6 +63,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mt-2 row justify-content-around">
+                        <div class="md-form">
+                            <label>Nombre de personne minimum</label>
+                            <input class="form-control text-center" type="number" pattern="[0-9]" name="nbmin" value="{{ post.nbmin }}" placeholder="Facultatif">
+                        </div>
+                        <div class="md-form">
+                            <label>Nombre de personne maximum</label>
+                            <input class="form-control text-center" type="number" pattern="[0-9]" name="nbmax"  required value="{{ post.nbmax }}">
+                        </div>
+                    </div>
                     <div class="mt-2">
                         <div>
                             <label for="text_annoucement">Descriptif de votre annonce *</label>
