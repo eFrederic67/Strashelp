@@ -16,7 +16,7 @@ class SessionManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function login($post)
+    public function getLogin($post)
     {
         $login="";
         $password="";
@@ -32,7 +32,7 @@ class SessionManager extends AbstractManager
                     $test ='login';
                 }
 
-                $sql = "SELECT id,firstname FROM ".$this->table ." WHERE ".trim($test)."='"
+                $sql = "SELECT id,firstname,admin FROM ".$this->table ." WHERE ".trim($test)."='"
                     .$login."' AND password='".$pass."'";
                 return $this->pdo->query($sql)->fetchAll();
             }

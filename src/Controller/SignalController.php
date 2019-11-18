@@ -27,7 +27,9 @@ class SignalController extends AbstractController
     {
         $signaluserManager = new SignaluserManager();
         $user = $signaluserManager->signalUserById($id);
-        return $this->twig->render('Signal/signaluser.html.twig', ['user' => $user]);
+        return $this->twig->render('Signal/signaluser.html.twig', [
+            'user' => $user,
+            ]);
     }
 
     public function signalPost(int $id)
@@ -35,13 +37,17 @@ class SignalController extends AbstractController
         $signalpostManager = new SignalpostManager();
         $post = $signalpostManager->signalPostById($id);
 
-        return $this->twig->render('Signal/signalpost.html.twig', ['post' => $post]);
+        return $this->twig->render('Signal/signalpost.html.twig', [
+            'post' => $post,
+        ]);
     }
 
     public function selectPostTitleById(int $id)
     {
         $selecttitleManager = new SignalpostManager();
         $postTitle = $selecttitleManager->selectPostTitleById($id);
-        return $this->twig->render('Signal/signalpost.html.twig', ['post_title' => $postTitle]);
+        return $this->twig->render('Signal/signalpost.html.twig', [
+            'post_title' => $postTitle,
+        ]);
     }
 }

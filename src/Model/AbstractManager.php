@@ -74,4 +74,11 @@ abstract class AbstractManager
         $statements->execute();
         return $statements->fetchAll();
     }
+
+    public function isAdmin()
+    {
+        $statements = $this->pdo->prepare("SELECT admin FROM user WHERE id=".$_SESSION['Auth']['id']);
+        $statements->execute();
+        return $statements->fetch();
+    }
 }
