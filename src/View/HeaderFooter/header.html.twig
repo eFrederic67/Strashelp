@@ -1,7 +1,8 @@
 <div class="background">
-    <div class="font-icon-example justify-content-around">
-        <div class="item home text-white"><a href="/Home/index"><i class="fas fa-home text-white"></i><span>HOME</span></a></div>
-        <div class="item profile dropdown  text-white">
+    <nav>
+    <ul class="font-icon-example justify-content-around">
+        <li class="item home text-white"><a href="/Home/index"><i class="fas fa-home text-white"></i><span>HOME</span></a></li>
+        <li class="item profile dropdown text-white">
             <a href="#" data-toggle="dropdown" aria-haspopup="true" id="iconMenu"><i class="fas fa-user-alt nav-item dropdown account text-white" aria-expanded="true" title="Mon compte"></i>
                 <span>MON COMPTE</span>
                 <div class="dropdown-menu account" aria-labelledby="dropdownAccount" id="menuCompte">
@@ -12,11 +13,15 @@
                     <a class="dropdown-item" href="/Session/logout">Déconnexion</a>
                 </div>
             </a>
-        </div>
-        <div class="item statistics text-white"><a href="#"><i class="far fa-calendar text-white"></i><span>CALENDRIER</span></a></div>
-        <div class="item search text-white"><a href="/Search/addPost"><i class="fas fa-people-carry text-white"></i><span>LES ANNONCES</span></a></div>
-        <div class="item search text-white"><a href="/Search/search"><i class="fas fa-search text-white"></i><span>RECHERCHE</span></a></div>
-        <div class="item logout text-white"><a href="/Session/logout"><i class="fas fa-sign-out-alt text-white"></i><span>DÉCONNEXION</span></a></div>
+        </li>
+        <li class="item statistics text-white"><a href="#"><i class="far fa-calendar text-white"></i><span>CALENDRIER</span></a></li>
+        <li class="item search text-white"><a href="/Search/addPost"><i class="fas fa-pencil-square text-white"></i><span>NOUVEAU</span></a></li>
+        <li class="item search text-white"><a href="/Search/search"><i class="fas fa-search text-white"></i><span>RECHERCHE</span></a></li>
+        {% if session['Auth'].admin == 1 %}
+        <li class="item search  text-warning"><a href="/Admin/Admin"><i class="fas fa-user-shield"></i><span>ADMIN</span></a></li>
+        {% endif %}
+        <li class="item logout text-white"><a href="/Session/logout"><i class="fas fa-sign-out-alt text-white"></i><span>DÉCONNEXION</span></a></li>
 
-    </div>
+    </ul>
+    </nav>
 </div>

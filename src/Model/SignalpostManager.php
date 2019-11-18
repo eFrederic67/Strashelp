@@ -23,8 +23,8 @@ class SignalpostManager extends AbstractManager
     public function signalPostById(int $id)
     {
         if (!empty($_POST)) {
-                $signalingUserId = $_SESSION['id'];
-                $signalingUserLogin = $_SESSION['login'];
+                $signalingUserId = $_SESSION['Auth']['id'];
+                $signalingUserLogin = $_SESSION['Auth']['login'];
                 $alertMessage = $_POST['alert_message'];
                 $query = "INSERT INTO $this->table
                    VALUES (NULL, :user_id, :user_login, :post_id, :alert_message, CURRENT_DATE(), NULL)";
@@ -38,7 +38,7 @@ class SignalpostManager extends AbstractManager
 
                 $statement->execute();
 
-                header("Location: /Search/post" . $id);
+                header("Location: /Search/posts/" . $id);
         }
     }
 

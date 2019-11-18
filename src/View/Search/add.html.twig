@@ -1,14 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-        <div class="card col-12 col-md-6 offset-md-3 mt-4">
+        <div class="card col-12 col-md-6 offset-md-3 my-4">
                 <h1 class="card-header info-color white-text text-center py-4">Créer une annonce</h1>
             <div class="card-body px-lg-5 pt-0">
                 <form class="md-form" method="post">
                     <div>
                         <div class="mt-2">
                             <label for="name">Titre de l'annonce*</label>
-                            <div>
                                 <input class="form-control" type="text" autocomplete="off" required="" value="{{ post.title }}" placeholder="Nom de l'annonce" name="title">
                             </div>
                         </div>
@@ -86,6 +85,7 @@
                             <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Ajouter votre annonce</button>
                         </div>
             </form>
+            </div>
         </div>
 {% endblock %}
 {% block javascript %}

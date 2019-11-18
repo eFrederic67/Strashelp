@@ -17,13 +17,14 @@ class SessionController extends AbstractController
             header('location:/home/index');
         } else {
             if (!empty($_POST)) {
-                $resultats = $loginManager->login($_POST);
+                $resultats = $loginManager->getLogin($_POST);
                 if (($resultats)) {
                     $_SESSION['Auth'] = array(
                         'login' => $_POST['login'],
                         'pass' => sha1($_POST['password']),
                         'firstname' => $resultats[0]['firstname'],
                         'id' => $resultats[0]['id'],
+                        'admin' => $resultats[0]['admin'],
                     );
                     header("location:/home/index");
                 } else {
@@ -91,6 +92,7 @@ class SessionController extends AbstractController
                         'pass' => $_POST['password'],
                         'firstname' => $_POST['firstname'],
                         'id' => $lastUser['id'],
+                        'admin' => 1,
                     );
                     $signUpManager->cleanPhotosTemp();
                     $idUser = $signUpManager->getLastUser();
