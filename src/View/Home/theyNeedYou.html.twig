@@ -1,0 +1,20 @@
+{% extends 'layoutUnlogged.html.twig' %}
+{% block title %}Bienvenue sur Stras'Help
+{% endblock %}
+
+{% block menu %}
+    <div class="row headerMenuUnlogger unlogged">
+        <div class="item home text-white unlogged"><a href="/Session/login"><i class="fas fa-sign-in-alt"></i><span>Se connecter</span></a></div>
+        <div class="item home text-white unlogged"><a href="/Session/signup"><i class="fas fa-user-plus"></i><span>S'incrire</span></a></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+                <p class="col-4 text-justify">Stras'Help est une association <u>exclusivement Strasbourgeoise</u>
+                qui permet de mettre en relation des personnes pour l'échange de services <u>non-marchands.</u></p>
+                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Education.jpg">
+                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Education2.png">
+                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Education3.jpg">
+                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Cuisine.jpg">
+                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Bricolage.jpg">
+{% endblock %}
