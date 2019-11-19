@@ -37,6 +37,13 @@ class SearchController extends AbstractController
             if (empty($_POST['text_annoucement'])) {
                 $errors['text_annoucement'] = 'Merci de remplir ce champs';
             }
+            if (!is_numeric($_POST['nbmin'])) {
+                $errors['nbmin'] = 1;
+            }
+
+            if (!is_numeric($_POST['nbmax'])) {
+                $errors['nbmax'] = 1;
+            }
             if (count($errors) > 0) {
                 return $this->twig->render(
                     'Search/add.html.twig',
@@ -66,9 +73,6 @@ class SearchController extends AbstractController
     {
         $itemManager = new SearchManager();
         $item = $itemManager->post($id);
-        return $this->twig->render(
-            'Search/post.html.twig',
-            ['item' => $item]
-        );
+        return $this->twig->render('Search/post.html.twig', ['item' => $item,]);
     }
 }

@@ -9,6 +9,8 @@
 
 namespace App\Model;
 
+use App\Model\SessionManager;
+
 /**
  *
  */
@@ -27,23 +29,6 @@ class ProfileManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-
-    /**
-     * @param array $profile
-     * @return int
-     */
-    public function insert(array $profile): int
-    {
-        // prepared request
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (`title`) VALUES (:title)");
-        $statement->bindValue('title', $profile['title'], \PDO::PARAM_STR);
-
-        if ($statement->execute()) {
-            return (int)$this->pdo->lastInsertId();
-        }
-    }
-
-
     /**
      * @param int $id
      */
@@ -57,11 +42,11 @@ class ProfileManager extends AbstractManager
 
 
     /**
-     * @param array $myprofile
+     * @param array $post
      * @return bool
      */
 
-    public function update(array $myprofile):bool
+    public function update(array $post):bool
     {
         if (strpos($_SESSION['Auth']['login'], '@')) {
             $test = 'email';
@@ -71,15 +56,15 @@ class ProfileManager extends AbstractManager
 
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table 
-        SET `email` = :email, `login`=:login, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
+        SET `email` = :email, `login`=:pseudo, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
         `phone`=:phone, `description`=:description WHERE password=:pass AND $test=:login");
-        $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_INT);
-        $statement->bindValue('email', $myprofile['email'], \PDO::PARAM_STR);
-        $statement->bindValue('login', $myprofile['login'], \PDO::PARAM_STR);
-        $statement->bindValue('adresse_1', $myprofile['adresse_1'], \PDO::PARAM_STR);
-        $statement->bindValue('adresse_2', $myprofile['adresse_2'], \PDO::PARAM_STR);
-        $statement->bindValue('phone', $myprofile['phone'], \PDO::PARAM_STR);
-        $statement->bindValue('description', $myprofile['description'], \PDO::PARAM_STR);
+        $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
+        $statement->bindValue('email', $post['email'], \PDO::PARAM_STR);
+        $statement->bindValue('pseudo', $post['login'], \PDO::PARAM_STR);
+        $statement->bindValue('adresse_1', $post['adresse_1'], \PDO::PARAM_STR);
+        $statement->bindValue('adresse_2', $post['adresse_2'], \PDO::PARAM_STR);
+        $statement->bindValue('phone', $post['phone'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $post['description'], \PDO::PARAM_STR);
         $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
 
         return $statement->execute() ;
@@ -124,5 +109,31 @@ class ProfileManager extends AbstractManager
         $statement->bindValue('id', $profil['id'], \PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetch();
+    }
+
+
+    public function testErrorInForm(array $post, array $session)
+    {
+        $errors = array();
+        $sessionManager = new SessionManager();
+        if ($post['login'] != $session['login']) {
+            if ($sessionManager->testDoublon('login', $post['login'])) {
+                $errors['login'] = "Le login que vous avez choisi est déjà utilisé";
+            }
+        }
+        if ($post['email'] != $session['email']) {
+            if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+                if ($sessionManager->testDoublon('email', $post['email'])) {
+                    $errors['email'] = "Cette adresse mail est est déjà utilisée";
+                }
+            } else {
+                $errors['email'] = $post['email'] . " n'est pas une adresse valide !";
+            }
+
+            if ($post['emailConf'] != $post['email']) {
+                $errors['email'] = "les deux adresses mails entrées sont différentes";
+            }
+        }
+        return $errors;
     }
 }

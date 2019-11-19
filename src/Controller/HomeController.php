@@ -45,6 +45,6 @@ class HomeController extends AbstractController
 
     public function faq()
     {
-            return $this->twig->render('Home/faq.html.twig');
+        return $this->twig->render('Home/faq.html.twig');
     }
 }

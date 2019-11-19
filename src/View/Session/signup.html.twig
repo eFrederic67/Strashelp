@@ -4,7 +4,7 @@
         {% endblock %}
 
 {% block menu %}
-    <div class="row headerMenuUnlogger">
+    <div class="row headerMenuUnlogger unlogged">
         <div class="item home text-white"><a href="/Session/login"><i class="fas fa-sign-in-alt"></i><span>Se connecter</span></a></div>
     </div>
 {% endblock %}
@@ -44,9 +44,9 @@
                                 <img class="image" src="{{ avatar }}" alt="image de profil par défaut" id="profilPicHover"/>
                                 <div class="fas fa-camera-retro text"></div>
                                 <div class="text2">Changer de photo</div>
-                                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                                <input type="hidden" name="MAX_FILE_SIZE" value="0" />
                                 <input type="hidden" name="bricolage" value="0" />
-                                <input type="hidden" name="cuisine" value="1" />
+                                <input type="hidden" name="cuisine" value="0" />
                                 <input type="hidden" name="éducation" value="0" />
 
                             </div>
@@ -132,14 +132,21 @@
                             <label for="phone">Téléphone <i>(fixe ou portable)</i></label><br/>
                             <input class="form-control text-center" type="text" id="phone" name="phone" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}[ \.\-\/]?[0-9]{2}" minlength="10" maxlength="10" placeholder="0612345678" value="{{ phone }}"  required>
                         </div>
-
-                        <div class="mt-4">
-                            {% if errors.dateOfBirth != "" %}
-                                <h5 class="h6 text-danger">{{ errors.dateOfBirth }}</h5>
-                            {% endif %}
+                        <fieldset>
+                            <div class="mt-4">Vos Compétences</div>
+                            <div class="row justify-content-around ">
+                        {% for cat in category %}
+                            <div>
+                                <input type="checkbox" id="{{ cat.name }}" name="{{ cat.name }}" {% if _context[cat.name] != '0' and _context[cat.name] != '' %}checked{%  endif %}>
+                                <label for="{{ cat.name }}">{{ cat.name | capitalize}}</label>
+                            </div>
+                        {% endfor %}
+                            </div>
+                        <div class="mt-2">
                             <label for="description">Description</label>
                             <textarea class="form-control" name="description" id="description" rows="5" placeholder="Parlez de vous...">{{ description }}</textarea>
                         </div>
+                        </fieldset>
                     </fieldset>
                     <div  class="button my-2">
                         <button class="btn btn-info btn-block mb-2" type="submit">Envoyer</button>

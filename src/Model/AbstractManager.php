@@ -67,4 +67,18 @@ abstract class AbstractManager
 
         return $statement->fetch();
     }
+
+    public function displayCategory()
+    {
+        $statements = $this->pdo->prepare("SELECT * FROM category");
+        $statements->execute();
+        return $statements->fetchAll();
+    }
+
+    public function isAdmin()
+    {
+        $statements = $this->pdo->prepare("SELECT admin FROM user WHERE id=".$_SESSION['Auth']['id']);
+        $statements->execute();
+        return $statements->fetch();
+    }
 }

@@ -17,13 +17,14 @@ class SessionController extends AbstractController
             header('location:/home/index');
         } else {
             if (!empty($_POST)) {
-                $resultats = $loginManager->login($_POST);
+                $resultats = $loginManager->getLogin($_POST);
                 if (($resultats)) {
                     $_SESSION['Auth'] = array(
                         'login' => $_POST['login'],
                         'pass' => sha1($_POST['password']),
                         'firstname' => $resultats[0]['firstname'],
                         'id' => $resultats[0]['id'],
+                        'admin' => $resultats[0]['admin'],
                     );
                     header("location:/home/index");
                 } else {
@@ -45,9 +46,12 @@ class SessionController extends AbstractController
 
     public function signup()
     {
+        $signUpManager = new SessionManager();
+        $category = $signUpManager->displayCategory();
         if (empty($_POST)) {
             // si le post est vide parce que c'est le 1er loading de la page
             return $this->twig->render('Session/signup.html.twig', [
+                'category' => $category,
                 'display1' => 'block',
                 'display2' => 'none',
                 'avatar' => "/assets/images/profil.png",
@@ -57,7 +61,18 @@ class SessionController extends AbstractController
             // on teste les erreurs
             $signUpManager = new SessionManager();
             $errors = $signUpManager->testErrorInForm($_POST);
-            $_POST['avatar'] = "/assets/images/profil.png";
+            if (!isset($_POST['avatar'])) {
+                $_POST['avatar'] = "/assets/images/profil.png";
+            }
+            if ($_POST['bricolage']== 'on') {
+                $_POST['bricolage']= 1;
+            }
+            if ($_POST['cuisine']== 'on') {
+                $_POST['cuisine']= 1;
+            }
+            if ($_POST['éducation']== 'on') {
+                $_POST['éducation']= 1;
+            }
             if ($_FILES['fichier']['name'] !== '') {
                 $addressAvatar = $signUpManager->testImage();
                 $_POST['avatar'] = "/".$addressAvatar;
@@ -77,14 +92,17 @@ class SessionController extends AbstractController
                         'pass' => $_POST['password'],
                         'firstname' => $_POST['firstname'],
                         'id' => $lastUser['id'],
+                        'admin' => 1,
                     );
                     $signUpManager->cleanPhotosTemp();
-                    header("Location:/Session/SignUpValidate");
+                    $idUser = $signUpManager->getLastUser();
+                    header("Location:/Profile/profile/".$idUser['id']);
                 }
             } else {
                 // s'il y a des erreurs on reloade la page
                 // en remettant les informations et envoyant les messages d'erreurs
                 return $this->twig->render('Session/signup.html.twig', [
+                    'category' => $category,
                     'errors' => $errors,
                     'login' => $_POST['login'],
                     'email' => $_POST['email'],
@@ -103,9 +121,13 @@ class SessionController extends AbstractController
                     'monthOfBirth' => $_POST['monthOfBirth'],
                     'yearOfBirth' => $_POST['yearOfBirth'],
                     'avatar' => $_POST['avatar'],
-                    'despription' => $_POST['description'],
+                    'description' => $_POST['description'],
+                    'bricolage' => $_POST['bricolage'],
+                    'cuisine' => $_POST['cuisine'],
+                    'éducation' => $_POST['éducation'],
                     'display1' => 'none',
                     'display2' => 'block',
+
                 ]);
             }
         }
