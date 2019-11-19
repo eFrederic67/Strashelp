@@ -1,20 +1,43 @@
-{% extends 'layoutUnlogged.html.twig' %}
-{% block title %}Bienvenue sur Stras'Help
-{% endblock %}
+{% extends 'layout.html.twig' %}
 
-{% block menu %}
-    <div class="row headerMenuUnlogger unlogged">
-        <div class="item home text-white unlogged"><a href="/Session/login"><i class="fas fa-sign-in-alt"></i><span>Se connecter</span></a></div>
-        <div class="item home text-white unlogged"><a href="/Session/signup"><i class="fas fa-user-plus"></i><span>S'incrire</span></a></div>
-    </div>
+{% block title %}
+    Bienvenue sur Stras'Help
 {% endblock %}
 
 {% block content %}
-                <p class="col-4 text-justify">Stras'Help est une association <u>exclusivement Strasbourgeoise</u>
-                qui permet de mettre en relation des personnes pour l'échange de services <u>non-marchands.</u></p>
-                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Education.jpg">
-                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Education2.png">
-                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Education3.jpg">
-                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Cuisine.jpg">
-                <img class="img-fluid" src="/assets/images/UnloggedHomepage_Bricolage.jpg">
+    <h2 class="col-4">Ils ont besoin de vous</h2>
+    <table class="col-4 table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <td>Qui</td>
+            <td>Catégorie</td>
+            <td>Quel jour</td>
+            <td>À quelle heure</td>
+            <td>Jusqu'à</td>
+            <td>Titre</td>
+            <td>Combien de personnes</td>
+            <td>Réponses</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for need in ilsOntBesoin  %}
+            <tr>
+                <td>{{ need.user }}</td>
+                <td>{{ need.category }}</td>
+                <td>{{ need.start_hour|date("d/m/Y") }}</td>
+                <td>{{ need.start_hour|date('H:i:s') }}</td>
+                <td>{{ need.end_hour|date('H:i:s') }}</td>
+                <td>{{ need.title }}</td>
+                <td>{{ need.nbmin }} - {{ need.nbmax }}</td>
+                <td>{% if need.reponses == 0 %}
+                        0 / {{ need.nbmax }}
+                    {% else %}
+                        {{ need.reponse }} / {{ need.nbmax }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
