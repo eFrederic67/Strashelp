@@ -31,13 +31,14 @@ class HomeController extends AbstractController
             $myAppointments = $homeManager->selectBySection('post', $_SESSION['Auth']['id']);
             $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
             $lastPost = $homeManager->lastPosts($_SESSION['Auth']['id']);
-
+            $alignement = (count($peopleInNeed)>    3) ? "justify-content-start" : "justify-content-around";
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
                     'rendezVous' => $myAppointments,
                     'ilsOntBesoin' => $peopleInNeed,
                     'dernieresAnnonces' => $lastPost,
-                ]);
+                    'alignement' => $alignement,
+            ]);
         } else {
             return $this->twig->render('Home/index.html.twig');
         }
