@@ -9,6 +9,8 @@
 
 namespace App\Model;
 
+use App\Model\SessionManager;
+
 /**
  *
  */
@@ -124,5 +126,31 @@ class ProfileManager extends AbstractManager
         $statement->bindValue('id', $profil['id'], \PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetch();
+    }
+
+
+    public function testErrorInForm(array $post, array $session)
+    {
+        $errors = array();
+        $sessionManager = new SessionManager();
+        if ($post['login'] != $session['login']) {
+            if ($sessionManager->testDoublon('login', $post['login'])) {
+                $errors['login'] = "Le login que vous avez choisi est déjà utilisé";
+            }
+        }
+        if ($post['email'] != $session['email']) {
+            if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+                if ($sessionManager->testDoublon('email', $post['email'])) {
+                    $errors['email'] = "Cette adresse mail est est déjà utilisée";
+                }
+            } else {
+                $errors['email'] = $post['email'] . " n'est pas une adresse valide !";
+            }
+
+            if ($post['emailConf'] != $post['email']) {
+                $errors['email'] = "les deux adresses mails entrées sont différentes";
+            }
+        }
+        return $errors;
     }
 }

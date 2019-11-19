@@ -8,26 +8,67 @@
     <h1 class="h1_center">Modifie ton profil</h1>
 
         <form method="post" class="edit_profil">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" name="email" class="form-control" id="inputEmail" value="{{ session.email }}">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="pseudo">Pseudo</label>
-                    <input type="text" class="form-control" name="login" id="pseudo" value="{{ session.login }}">
-                </div>
-            </div>
-            <!-- Grid row -->
+            <hr/>
+            <div class="profilPic avatar_size">
+                <div class="overlay-image" onclick="document.getElementById('avatar').click()">
+                    <a href="" ><img class="image" src="{{ session.avatar }}" alt="image de profil par défaut" id="profilPic" /></a>
+                    <div class="hover">
+                        <img class="image" src="{{ session.avatar }}" alt="image de profil par défaut" id="profilPicHover"/>
+                        <div class="fas fa-camera-retro text"></div>
+                        <div class="text2">Changer de photo</div>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="0" />
+                        <input type="hidden" name="bricolage" value="0" />
+                        <input type="hidden" name="cuisine" value="0" />
+                        <input type="hidden" name="éducation" value="0" />
 
-            <div class="form-group">
-                <label for="adresse1">Addresse</label>
-                <input type="text" class="form-control" id="adresse1" name="adresse_1" value="{{ session.adresse_1 }}">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="adresse2">Adresse complément <i>(optionnel)</i></label>
-                <input type="text" class="form-control" id="adresse2" name="adresse_2" value="{{ session.adresse_2 }}">
+            <div style="display: none">
+                <input type="file" name="fichier" id="avatar" onchange="readURL(this);"/>
             </div>
+            <hr/>
+            <div class="form-group input_center">
+                <div class="col-md-6">
+                    {% if errors.login != "" %}
+                        <h5 class="h6 text-danger">{{ errors.login }}</h5>
+                    {% endif %}
+                    <label for="login">Nouveau login</label><br/>
+                    <input class="form-control" type="text" id="login"  name="login" value="{{ session.login }}" required>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                {% if errors.email != "" %}
+                    <h5 class="h6 text-danger">{{ errors.email }}</h5>
+                {% endif %}
+                <label for="email">Votre e-mail</label><br/>
+                <input class="form-control" type="email" id="inputEmail" name="email" value="{{ session.email }}" required>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="emailConf">Confirmez votre e-mail</label><br/>
+                <input class="form-control" type="email" id="inputEmailConf"  name="emailConf" value="{{ session.email }}" required>
+            </div>
+            <hr>
+            <div class="form-group input_center">
+                <div class="col-md-6">
+                    <label for="password">Saississez votre nouveau mot de passe<br/><i style="font-size: 0.8em">(8 caractères minimum dont 1 majuscule et 1 chiffre)</i></label><br/>
+                    <input class="form-control" type="password" id="password"  name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="nouveau mot de passe">
+                    <input class="form-control mt-2" type="password" id="passwordConf"  name="passwordConf" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirmez votre mot de passe">
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 form-group">
+                {% if errors.adresse_1 != "" %}
+                    <h5 class="h6 text-danger">{{ errors.adresse_1 }}</h5>
+                {% endif %}
+                <label for="adresse_1">Adresse</label><br/>
+                <input class="form-control" type="text" id="adresse_1" name="adresse_1" value="{{ session.adresse_1 }}" required  />
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="adresse_2">Adresse complément <i>(optionnel)</i></label><br/>
+                <input class="form-control" type="text" id="adresse_2" name="adresse_2" value="{{ session.adresse_2 }}"/>
+            </div>
+            <hr>
             <!-- Grid row -->
             <div class="form-group input_center">
                 <div class="form-group col-md-6">
@@ -41,7 +82,7 @@
             </div>
             <!-- Grid row -->
             <button type="submit" class="btn btn-primary btn-md edit_submit">Modifier</button>
-            <a class="btn btn-primary btn-md edit_submit" href="/profile/myprofile">Back</a>
+            <a class="btn btn-primary btn-md edit_submit" href="/profile/myprofile">Retour</a>
         </form>
 {% endblock %}
 
