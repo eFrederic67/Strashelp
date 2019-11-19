@@ -47,4 +47,13 @@ class HomeController extends AbstractController
     {
         return $this->twig->render('Home/faq.html.twig');
     }
+
+    public function theyNeedYou()
+    {
+        $homeManager = new HomeManager();
+        $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
+        return $this->twig->render('Home/theyNeedYou.html.twig', [
+            'ilsOntBesoin' => $peopleInNeed,
+            ]);
+    }
 }
