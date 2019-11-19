@@ -6,26 +6,18 @@ use App\Model\SearchuserManager;
 
 class SearchuserController extends AbstractController
 {
-    // TODO utiliser les examples ci-dessous
-
-    public function search()
+    public function search($id)
     {
-        $searchuserManager = new SearchuserManager();
-        $search = $searchuserManager->search();
+        $searchManager = new SearchuserManager();
+        $search = $searchManager->search($id);
 
-        return $this->twig->render(
-            'Search/user.html.twig',
-            [
-                'search'=> $search
-            ]
-        );
+        return $this->twig->render('Searchuser/user.html.twig', ['search'=> $search]);
     }
 
-    public function users(int $id):string
+    public function users()
     {
-        $itemManager = new SearchuserManager();
-        $item = $itemManager->post($id);
-
-        return $this->twig->render('Search/user.html.twig', ['item' => $item]);
+        $userManager = new SearchuserManager();
+        $user = $userManager->displayUsers();
+        return $this->twig->render('Searchuser/user.html.twig', ['users' => $user]);
     }
 }
