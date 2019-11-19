@@ -7,8 +7,8 @@
                 <span>MON COMPTE</span>
                 <div class="dropdown-menu account" aria-labelledby="dropdownAccount" id="menuCompte">
                     <a class="dropdown-item" href="/profile/myprofile">Mon profil</a>
-                    <a class="dropdown-item" href="?page=">Messagerie</a>
                     <a class="dropdown-item" href="?page=">Rendez-vous</a>
+                    <a class="dropdown-item" href="/Home/theyNeedYou">Ils ont besoin...</a>
                     <a class="dropdown-item" href="?page=">Préférences</a>
                     <a class="dropdown-item" href="/Session/logout">Déconnexion</a>
                 </div>
@@ -18,7 +18,7 @@
         <li class="item search text-white"><a href="/Search/addPost"><i class="fas fa-pencil-square text-white"></i><span>NOUVEAU</span></a></li>
         <li class="item search text-white"><a href="/Search/search"><i class="fas fa-search text-white"></i><span>RECHERCHE</span></a></li>
         {% if session['Auth'].admin == 1 %}
-        <li class="item search  text-warning"><a href="/Admin/Admin"><i class="fas fa-user-shield"></i><span>ADMIN</span></a></li>
+        <li class="item search  text-warning"><a href="/Admin/index"><i class="fas fa-user-shield"></i><span>ADMIN</span></a></li>
         {% endif %}
         <li class="item logout text-white"><a href="/Session/logout"><i class="fas fa-sign-out-alt text-white"></i><span>DÉCONNEXION</span></a></li>
 

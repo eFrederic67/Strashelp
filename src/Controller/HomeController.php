@@ -52,8 +52,10 @@ class HomeController extends AbstractController
     {
         $homeManager = new HomeManager();
         $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
+        $alignement = (count($peopleInNeed)>    3) ? "justify-content-start" : "justify-content-around";
         return $this->twig->render('Home/theyNeedYou.html.twig', [
             'ilsOntBesoin' => $peopleInNeed,
+            'alignement' => $alignement,
             ]);
     }
 }

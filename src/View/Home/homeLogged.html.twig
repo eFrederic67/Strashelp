@@ -39,40 +39,35 @@
         {% endfor %}
         </tbody>
     </table>
-    <h2 class="col-4"><a href="/home/theyNeedYou">Ils ont besoin de vous</a></h2>
-    <table class="col-4 table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <td>Qui</td>
-            <td>Catégorie</td>
-            <td>Quel jour</td>
-            <td>À quelle heure</td>
-            <td>Jusqu'à</td>
-            <td>Titre</td>
-            <td>Combien de personnes</td>
-            <td>Réponses</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for need in ilsOntBesoin  %}
-            <tr>
-                <td>{{ need.user }}</td>
-                <td>{{ need.category }}</td>
-                <td>{{ need.start_hour|date("d/m/Y") }}</td>
-                <td>{{ need.start_hour|date('H:i:s') }}</td>
-                <td>{{ need.end_hour|date('H:i:s') }}</td>
-                <td>{{ need.title }}</td>
-                <td>{{ need.nbmin }} - {{ need.nbmax }}</td>
-                <td>{% if need.reponses == 0 %}
-                        0 / {{ need.nbmax }}
-                    {% else %}
-                        {{ need.reponse }} / {{ need.nbmax }}
-                    {% endif %}
-                </td>
-            </tr>
+    <h2 class="col-12 text-center my-4"><a href="/home/theyNeedYou">Ils ont besoin de vous</a></h2>
+
+    <div class="container row justify-content-around col-12 text-white m-0">
+    {% for need in ilsOntBesoin  %}
+    {% if need.category == 'bricolage' %}
+    <div class="card col-12 col-md-3 bricolage my-1" id="/Search/posts/{{ need.id_post }}">
+    {% elseif need.category == 'cuisine' %}
+    <div class="card col-12 col-md-3 cuisine my-1" id="/Search/posts/{{ need.id_post }}">
+    {% else %}
+    <div class="card col-12 col-md-3 education my-1" id="/Search/posts/{{ need.id_post }}">
+    {% endif %}
+            <div class="card-body">
+                <div class="row align-items-baseline justify-left">
+                    <h1>{{ need.start_hour|date("d/m") }}<h6>/{{ need.start_hour|date("Y") }}</h6></h1>
+                </div>
+                <span>{{ need.start_hour|date("H:i") }} ~ {{ need.end_hour|date("H:i") }}<br/>
+            <span>{{ need.user }}<br/>
+            Catégorie<br/>
+            réponses/nbax</span>
+
+            </div>
+        </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
+    <div class="container">
+        &nbsp;
+    </div>
+
+
     <h2 class="col-4"><a href="/Search/search">Dernières Annonces</a></h2>
     <table class="col-4 table table-striped">
         <thead class="thead-dark">
@@ -115,5 +110,4 @@
     <h3>Bricolage</h3>
     <h3>Cuisine</h3>
     <h3>Éducation</h3>
-
 {% endblock %}
