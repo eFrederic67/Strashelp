@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\ProfileManager;
 use App\Model\SearchManager;
+use App\Model\SessionManager;
 
 /**
  * Class profileController
@@ -54,29 +55,6 @@ class ProfileController extends AbstractController
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 
-    /**
-     * Display profile creation page
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function add()
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $profileManager = new profileManager();
-            $profile = [
-                'title' => $_POST['title'],
-            ];
-            $id = $profileManager->insert($profile);
-            header('Location:/profile/show/' . $id);
-        }
-
-        return $this->twig->render('profile/add.html.twig');
-    }
-
 
     /**
      * Handle profile deletion
@@ -115,27 +93,51 @@ class ProfileController extends AbstractController
 
         return $this->twig->render(
             'Profile/myprofile.html.twig',
-            ['myprofile' => $myprofile, 'skills' => $skills, 'annonces' => $annonces, 'search' => $search]
+            [
+                'myprofile' => $myprofile,
+                'skills' => $skills,
+                'annonces' => $annonces,
+                'search' => $search
+            ]
         );
     }
 
-    public function edit(): string
+    public function edit()
     {
         $profileManager = new profileManager();
-        $myprofile = $profileManager->selectAll();
         $session = $profileManager->session();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $myprofile['email'] = $_POST['email'];
-            $myprofile['login'] = $_POST['login'];
-            $myprofile['adresse_1'] = $_POST['adresse_1'];
-            $myprofile['adresse_2'] = $_POST['adresse_2'];
-            $myprofile['phone'] = $_POST['phone'];
-            $myprofile['description'] = $_POST['description'];
+            $signUpManager = new SessionManager();
+            $errors = $profileManager->testErrorInForm($_POST, $session);
+            if (isset($_FILES['fichier']['name']) && $_FILES['fichier']['name'] != $session['avatar']) {
+                $addressAvatar = $signUpManager->testImage();
+                $_POST['avatar'] = "/".$addressAvatar;
+            }
 
-            $profileManager->update($myprofile);
-            header('Location:/profile/myprofile');
+            if (count($errors) == 0) {
+                if (isset($_POST['password'])) {
+                    $_POST['password'] = sha1($_POST['password']);
+                }
+                if ($profileManager->update($_POST)) {
+                    $_SESSION['Auth']['login'] = $_POST['login'];
+                    header("Location:/Profile/myprofile");
+                }
+            } else {
+                return $this->twig->render(
+                    'Profile/edit.html.twig',
+                    [
+                        'session' => $session,
+                        'errors' => $errors,
+                    ]
+                );
+            }
+        } else {
+            return $this->twig->render(
+                'Profile/edit.html.twig',
+                [
+                    'session' => $session,
+                ]
+            );
         }
-        return $this->twig->render('Profile/edit.html.twig', ['session' => $session]);
     }
 }

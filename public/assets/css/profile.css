@@ -22,6 +22,12 @@
 }
 
 
+.image{
+    width: auto;
+    height: 250px;
+}
+
+
 
 
 body{
@@ -38,8 +44,8 @@ body{
     text-align: center;
 }
 .profile-img img{
-    width: 50%;
-    height: 100%;
+    width: auto;
+    height: 250px;
 }
 .profile-img .file {
     position: relative;
