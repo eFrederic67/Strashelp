@@ -40,6 +40,7 @@ class HomeController extends AbstractController
                     'ilsOntBesoin' => $peopleInNeed,
                     'dernieresAnnonces' => $lastPost,
                     'alignement' => $alignement,
+                    'alignementLast' => $alignementLast,
             ]);
         } else {
             return $this->twig->render('Home/index.html.twig');

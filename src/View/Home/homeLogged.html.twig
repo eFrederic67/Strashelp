@@ -62,6 +62,7 @@
 
                     <div class="text-right">
                         <h4>{{ need.start_hour|date("H:i") }} ~ {{ need.end_hour|date("H:i") }}<br/></h4>
+                        <span>{{ need.title }}<br/>
                         <span>{{ need.user }}<br/>
                         {{need.reponse}}/{{need.nbmax}} personnes</span>
                     </div>
@@ -74,16 +75,16 @@
         <div class="container row {{alignementLast}} col-12 text-white m-0">
         {% for lastPost in dernieresAnnonces  %}
             {% if lastPost.category == 'bricolage' %}
-            <div class="card col-12 col-md-6 my-1 bricolage border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id_post }}')">
+            <div class="card col-12 col-md-6 my-1 bricolage border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id }}')">
             {% elseif lastPost.category == 'cuisine' %}
-            <div class="card col-12 col-md-6 my-1 cuisine border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id_post }}')">
+            <div class="card col-12 col-md-6 my-1 cuisine border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id }}')">
             {% else %}
-            <div class="card col-12 col-md-6 my-1 education border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id_post }}')">
+            <div class="card col-12 col-md-6 my-1 education border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id }}')">
             {% endif %}
                 <div class="card-body">
                     <div class="column justify-left">
                         <div>
-                            {% if dernieresAnnonce.type == 0 %}
+                            {% if lastPost.type == 0 %}
                                 <h3><i class="text-info">Offre</i></h3>
                             {% else %}
                                 <h3><i class="text-warning">Demande</i></h3>
@@ -108,9 +109,9 @@
         {% endfor %}
         </div>
 
-        <h2 class="col-4">Top Actus</h2>
-    <h2 class="col-4">Top Helpers</h2>
-    <h3>Bricolage</h3>
-    <h3>Cuisine</h3>
-    <h3>Éducation</h3>
+        <h2 class="col-12 text-center my-4">Top Actus</h2>
+    <h2 class="col-12 text-center my-4">Top Helpers</h2>
+    <h3 class="col-12 col-md-4 text-center my-4">Bricolage</h3>
+    <h3 class="col-12 col-md-4 text-center my-4">Cuisine</h3>
+    <h3 class="col-12 col-md-4 text-center my-4">Éducation</h3>
 {% endblock %}
