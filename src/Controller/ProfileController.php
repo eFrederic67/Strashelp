@@ -55,29 +55,6 @@ class ProfileController extends AbstractController
         return $this->twig->render('Profile/profile.html.twig', ['profile' => $profile]);
     }
 
-    /**
-     * Display profile creation page
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function add()
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $profileManager = new profileManager();
-            $profile = [
-                'title' => $_POST['title'],
-            ];
-            $id = $profileManager->insert($profile);
-            header('Location:/profile/show/' . $id);
-        }
-
-        return $this->twig->render('profile/add.html.twig');
-    }
-
 
     /**
      * Handle profile deletion
@@ -111,7 +88,6 @@ class ProfileController extends AbstractController
         $myprofile = $profileManager->session();
         $searchManager = new SearchManager();
         $search = $searchManager->search();
-
         $skills = $profileManager->skill($myprofile);
         $annonces = $profileManager->annonces($myprofile);
 
@@ -130,7 +106,6 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $session = $profileManager->session();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $signUpManager = new SessionManager();
             $errors = $profileManager->testErrorInForm($_POST, $session);
@@ -140,7 +115,11 @@ class ProfileController extends AbstractController
             }
 
             if (count($errors) == 0) {
+                if (isset($_POST['password'])) {
+                    $_POST['password'] = sha1($_POST['password']);
+                }
                 if ($profileManager->update($_POST)) {
+                    $_SESSION['Auth']['login'] = $_POST['login'];
                     header("Location:/Profile/myprofile");
                 }
             } else {
