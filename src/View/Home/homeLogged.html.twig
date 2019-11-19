@@ -70,44 +70,45 @@
             {% endfor %}
         </div>
 
-    <h2 class="col-12 text-center my-4"><a href="/Search/search">Dernières Annonces</a></h2>
-    <table class="col-4 table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <td>Type</td>
-            <td>Qui</td>
-            <td>Catégorie</td>
-            <td>Quel jour</td>
-            <td>À quelle heure</td>
-            <td>Jusqu'à</td>
-            <td>Titre</td>
-            <td>Combien de personnes</td>
-            <td>Nb de réponses</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for dernieresAnnonce in dernieresAnnonces  %}
-            <tr>
-                <td>
-                    {% if dernieresAnnonce.type == 0 %}
-                        Offre
-                    {% else %}
-                        Demande
-                    {% endif %}
-                </td>
-                <td>{{ dernieresAnnonce.user }}</td>
-                <td>{{ dernieresAnnonce.category }}</td>
-                <td>{{ dernieresAnnonce.start_hour|date("d/m/Y") }}</td>
-                <td>{{ dernieresAnnonce.start_hour|date('H:i:s') }}</td>
-                <td>{{ dernieresAnnonce.end_hour|date('H:i:s') }}</td>
-                <td>{{ dernieresAnnonce.title }}</td>
-                <td>{{ dernieresAnnonce.nbmin }} - {{ dernieresAnnonce.nbmax }}</td>
-                <td>{{ dernieresAnnonce.reponse }}</td>
-            </tr>
+        <h2 class="col-12 text-center my-4"><a href="/search/search">Nouvelles annonces</a></h2>
+        <div class="container row {{alignementLast}} col-12 text-white m-0">
+        {% for lastPost in dernieresAnnonces  %}
+            {% if lastPost.category == 'bricolage' %}
+            <div class="card col-12 col-md-6 my-1 bricolage border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id_post }}')">
+            {% elseif lastPost.category == 'cuisine' %}
+            <div class="card col-12 col-md-6 my-1 cuisine border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id_post }}')">
+            {% else %}
+            <div class="card col-12 col-md-6 my-1 education border-white" onclick="window.location.replace('/Search/posts/{{ lastPost.id_post }}')">
+            {% endif %}
+                <div class="card-body">
+                    <div class="column justify-left">
+                        <div>
+                            {% if dernieresAnnonce.type == 0 %}
+                                <h3><i class="text-info">Offre</i></h3>
+                            {% else %}
+                                <h3><i class="text-warning">Demande</i></h3>
+                            {% endif %}
+                        </div>
+                        <div class="align-items-baseline">
+                            <h1>{{lastPost.title}}</h1>
+                        </div>
+                            <div>
+                                <i>{{lastPost.category | capitalize}}</i>
+                            </div>
+                    </div>
+
+                    <div class="text-right">
+                        <h1>{{ lastPost.start_hour|date("d/m") }}</h1><h6>{{ lastPost.start_hour|date("Y") }}</h6>
+                        <h4>{{ lastPost.start_hour|date("H:i") }} ~ {{ lastPost.end_hour|date("H:i") }}<br/></h4>
+                        <span>{{ lastPost.user }}<br/>
+                        {{lastPost.reponse}}/{{lastPost.nbmax}} personnes</span>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-    <h2 class="col-4">Top Actus</h2>
+        </div>
+
+        <h2 class="col-4">Top Actus</h2>
     <h2 class="col-4">Top Helpers</h2>
     <h3>Bricolage</h3>
     <h3>Cuisine</h3>

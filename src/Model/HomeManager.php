@@ -55,7 +55,7 @@ class HomeManager extends AbstractManager
                 JOIN user ON user.id = id_user 
                 JOIN category ON category.id = post.id_category
                 WHERE id_user <>".$id." 
-                ORDER  BY post.id DESC LIMIT 5";
+                ORDER  BY post.id DESC LIMIT 8";
 
         $tableau = $this->pdo->query($sql)->fetchAll();
         $tableau = $this->howManyAnswers($tableau);
