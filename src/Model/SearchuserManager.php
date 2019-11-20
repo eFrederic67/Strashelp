@@ -21,9 +21,7 @@ class SearchuserManager extends AbstractManager
         $select = $this->pdo->prepare("SELECT id, lastname, firstname, login, admin, avatar, 
         description, bricolage, cuisine, éducation AS education FROM ".self::TABLE."WHERE id=:id");
         $select->bindValue('id', $id, \PDO::PARAM_INT);
-
         $select->execute();
-
         return $select->fetchAll();
     }
 
