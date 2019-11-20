@@ -8,6 +8,7 @@
     <h1 class="text-center">Bienvenue {{ firstname }}</h1>
 
     <h2 class="col-12 text-center my-4">Vos Rendez-vous</h2>
+    {% if rendezVous|length > 0 %}
     <table class="col-4 table table-striped">
         <thead class="thead-dark">
         <tr>
@@ -40,6 +41,9 @@
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <p class="text-center">Vous n'avez aucun rendez-vous prévu.</p>
+    {% endif %}
 {% if ilsOntBesoin|length > 0 %}
     <h2 class="col-12 text-center my-4"><a href="/home/theyNeedYou">Ils ont besoin de vous</a></h2>
 <div class="container row {{alignement}} col-12 text-white m-0">
