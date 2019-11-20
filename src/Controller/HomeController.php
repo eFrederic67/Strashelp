@@ -30,14 +30,18 @@ class HomeController extends AbstractController
             $homeManager = new HomeManager();
             $myAppointments = $homeManager->selectBySection('post', $_SESSION['Auth']['id']);
             $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
+            $alignement = (count($peopleInNeed)>    3) ? "justify-content-start" : "justify-content-around";
             $lastPost = $homeManager->lastPosts($_SESSION['Auth']['id']);
+            $alignementLast = (count($lastPost)>    2) ? "justify-content-start" : "justify-content-around";
 
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
                     'rendezVous' => $myAppointments,
                     'ilsOntBesoin' => $peopleInNeed,
                     'dernieresAnnonces' => $lastPost,
-                ]);
+                    'alignement' => $alignement,
+                    'alignementLast' => $alignementLast,
+            ]);
         } else {
             return $this->twig->render('Home/index.html.twig');
         }
@@ -46,5 +50,16 @@ class HomeController extends AbstractController
     public function faq()
     {
         return $this->twig->render('Home/faq.html.twig');
+    }
+
+    public function theyNeedYou()
+    {
+        $homeManager = new HomeManager();
+        $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
+        $alignement = (count($peopleInNeed)>    3) ? "justify-content-start" : "justify-content-around";
+        return $this->twig->render('Home/theyNeedYou.html.twig', [
+            'ilsOntBesoin' => $peopleInNeed,
+            'alignement' => $alignement,
+            ]);
     }
 }

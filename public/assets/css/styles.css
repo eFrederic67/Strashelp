@@ -262,7 +262,35 @@ footer ul .social {
 }
 
 .covered {
-  height: 1px;
+  display: none;
+  height: 40px;
+}
+
+.bricolage {
+  cursor:pointer;
+  background-image: linear-gradient(
+          rgba(0, 0, 0, 0.4),
+          rgba(0, 0, 0, 0.6)
+  ),url("../images/bricolage.jpg");
+  background-size: cover;
+}
+
+.cuisine {
+  cursor:pointer;
+  background-image: linear-gradient(
+          rgba(0, 0, 0, 0.4),
+          rgba(0, 0, 0, 0.6)
+  ),url("../images/cuisine.jpg");
+  background-size: cover;
+}
+
+.education {
+  cursor:pointer;
+  background-image: linear-gradient(
+          rgba(0, 0, 0, 0.4),
+          rgba(0, 0, 0, 0.6)
+  ),url("../images/education.jpg");
+  background-size: cover;
 }
 
 @media (min-width: 768px) {
@@ -321,7 +349,12 @@ footer ul .social {
   .font-icon-example .item:hover {
     transform: translateY(0) !important ;
   }
+  .covered {
+    display: block;
+  }
 }
+
+
 
 @media (max-width: 400px) {
   h1 {

@@ -36,7 +36,7 @@ class HomeManager extends AbstractManager
         $cat = array_diff($cat, [0]);
         $cat = implode(",", $cat);
 
-        $sql = 'SELECT post.id, post.type as type, post.title as title, category.name as category, 
+        $sql = 'SELECT post.id as id_post, post.type as type, post.title as title, category.name as category, 
         start_hour, end_hour, user.login as user, nbmin, nbmax, category.id FROM ' . $table . '
         JOIN category ON id_category = category.id
         JOIN user on user.id = id_user 
@@ -55,7 +55,7 @@ class HomeManager extends AbstractManager
                 JOIN user ON user.id = id_user 
                 JOIN category ON category.id = post.id_category
                 WHERE id_user <>".$id." 
-                ORDER  BY post.id DESC LIMIT 5";
+                ORDER  BY post.id DESC LIMIT 8";
 
         $tableau = $this->pdo->query($sql)->fetchAll();
         $tableau = $this->howManyAnswers($tableau);
