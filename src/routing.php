@@ -12,8 +12,8 @@
 $routeParts = explode('/', ltrim($_SERVER['REQUEST_URI'], '/') ?: HOME_PAGE);
 if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SESSION['Auth']['pass'])) {
     // Si l'utilisateur est loggué
-        $controller = 'App\Controller\\' . ucfirst($routeParts[0] ?? '') . 'Controller';
-        $method = $routeParts[1] ?? '';
+    $controller = 'App\Controller\\' . ucfirst($routeParts[0] ?? '') . 'Controller';
+    $method = $routeParts[1] ?? '';
 } else {
     switch ($routeParts[0]) {
         case "home":
@@ -31,18 +31,20 @@ if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SES
     }
 }
 
-        $vars = array_slice($routeParts, 2);
+$vars = array_slice($routeParts, 2);
 
 
 if (class_exists($controller) && method_exists(new $controller(), $method)) {
-        echo call_user_func_array([new $controller(), $method], $vars);
+    echo call_user_func_array([new $controller(), $method], $vars);
 } else {
     header("HTTP/1.0 404 Not Found");
     echo '<html>
     <body>
         <div style="text-align:center;">
-            <h1>404 - Page not found</h1>
-            <img src="/assets/images/404.gif">
+            <h1>Stras\'help</h1>
+            <h1>404 - Page non trouvée</h1>
+            <img src="/assets/images/404.gif" style="width:350px;margin: auto"></p><p>&nbsp;</p> 
+            <a href="/Home/index" style="margin:100px 0 0 0 ;">Retour à l\'accueil</a>
         </div>
     </body>
 </html>';
