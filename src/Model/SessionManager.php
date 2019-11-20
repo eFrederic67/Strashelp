@@ -52,7 +52,9 @@ class SessionManager extends AbstractManager
         if ($this->testDoublon('login', $post['login'])) {
             $errors['login'] = "Le login que vous avez choisi est déjà utilisé";
         }
-
+        if ($post['passwordConf'] != $post['password']) {
+            $errors['password'] = "Les mots de passes entrés ne sont pas identiques";
+        }
         if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
             if ($this->testDoublon('email', $post['email'])) {
                 $errors['email'] = "Cette adresse mail est est déjà utilisée";
