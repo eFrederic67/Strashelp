@@ -117,5 +117,4 @@ class SearchController extends AbstractController
 
         header('Location: /search/search');
     }
-
 }
