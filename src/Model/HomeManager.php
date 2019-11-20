@@ -74,4 +74,11 @@ class HomeManager extends AbstractManager
         }
         return $tableau;
     }
+
+    public function lastArticle()
+    {
+        $sql = "SELECT * FROM article ORDER BY date_publication DESC LIMIT 4";
+        $pouet = $this->pdo->query($sql)->fetchall();
+        return $pouet;
+    }
 }
