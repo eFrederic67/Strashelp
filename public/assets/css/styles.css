@@ -306,6 +306,96 @@ footer h4{
   background-size: cover;
 }
 
+@media (min-width: 992px) {
+  .font-icon-example .item {
+    display: table-cell;
+    padding-bottom: 0;
+  }
+  .font-icon-example {
+  }
+  footer h4{
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 768px) {
+  li {
+    font-size: 12px;
+  }
+  .font-icon-example .item {
+    display: table-cell;
+    padding-bottom: 0;
+  }
+  .font-icon-example {
+  }
+  footer h4{
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  li {
+    font-size: 11px;
+  }
+
+  .background {
+    width: 100% !important;
+    height: 70px;
+    position: fixed;
+    top:calc(100% - 70px);
+    background: #138496;
+    justify-content: center;
+
+    z-index: 2000;
+  }
+
+  nav {
+    width: 100% !important;
+    display: flex;
+  }
+  nav ul {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 0;
+  }
+
+  .font-icon-example .item i {
+    font-size: 150% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .font-icon-example .item span {
+    display: none !important;
+    font-size: 50% !important;
+  }
+  .font-icon-example .item {
+    display: block;
+    text-align: center;
+    width: 70px;
+    vertical-align: middle;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .font-icon-example .item:hover {
+    transform: translateY(0) !important ;
+  }
+  .covered {
+    display: block;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 766px) {
+  li {
+    font-size: 11px;
+  }
+}
+
+
+
 @media (max-width: 400px) {
   h1 {
     font-size: 1.5em !important;
@@ -348,93 +438,5 @@ footer h4{
 
   footer h4{
     font-size: 24px;
-  }
-
-  @media (min-width: 401px) and (max-width: 766px) {
-    li {
-      font-size: 11px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    li {
-      font-size: 11px;
-    }
-
-    .background {
-      width: 100% !important;
-      height: 70px;
-      position: fixed;
-      top:calc(100% - 70px);
-      background: #138496;
-      justify-content: center;
-
-      z-index: 2000;
-    }
-
-    nav {
-      width: 100% !important;
-      display: flex;
-    }
-    nav ul {
-      width: 100% !important;
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: nowrap;
-      align-items: center;
-      margin: 0;
-    }
-
-    .font-icon-example .item i {
-      font-size: 150% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    .font-icon-example .item span {
-      display: none !important;
-      font-size: 50% !important;
-    }
-    .font-icon-example .item {
-      display: block;
-      text-align: center;
-      width: 70px;
-      vertical-align: middle;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    .font-icon-example .item:hover {
-      transform: translateY(0) !important ;
-    }
-    .covered {
-      display: block;
-    }
-  }
-
-  @media (min-width: 768px) {
-    li {
-      font-size: 12px;
-    }
-    .font-icon-example .item {
-      display: table-cell;
-      padding-bottom: 0;
-    }
-    .font-icon-example {
-    }
-    footer h4{
-      font-size: 22px;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .font-icon-example .item {
-      display: table-cell;
-      padding-bottom: 0;
-    }
-    .font-icon-example {
-    }
-    footer h4{
-      font-size: 26px;
-    }
   }
 }
