@@ -41,8 +41,10 @@ if (class_exists($controller) && method_exists(new $controller(), $method)) {
     echo '<html>
     <body>
         <div style="text-align:center;">
-            <h1>404 - Page not found</h1>
-            <img src="/assets/images/404.gif">
+            <h1>Stras\'help</h1>
+            <h1>404 - Page non trouvée</h1>
+            <img src="/assets/images/404.gif" style="width:350px;margin: auto"></p><p>&nbsp;</p> 
+            <a href="/Home/index" style="margin:100px 0 0 0 ;">Retour à l\'accueil</a>
         </div>
     </body>
 </html>';
