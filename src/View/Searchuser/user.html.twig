@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <table id="myTable" class="display" style="width:100%; background: whitesmoke">
+        <thead>
+        <tr>
+            <td colspan="8">
+                <a href="/Search/search" class="btn btn-primary text-center offset-5">Chercher une annonce</a>
+            </td>
+        </tr>
+        <tr>
+            <th>Avatar</th>
+            <th>Pseudo</th>
+            <th>Statut</th>
+            <th>Nom</th>
+            <th>Présentation</th>
+            <th>Compétence bricolage</th>
+            <th>Compétence cuisine</th>
+            <th>Compétence éducation</th>
+        </tr>
+        </thead>
+        <tbody style="background: #7597ff">
+        {% for user in users %}
+            <tr class="table-primary">
+                <td style="background: whitesmoke">
+                    <a href="/Profile/profile/{{ user.id }}" title="Profil de {{ user.login }}">
+                        <img src="{{ user.avatar }}" height=75px alt="avatar de {{ user.login }}"/>
+                    </a>
+                </td>
+                <td style="background: whitesmoke"><a href="/Profile/profile/{{ user.id }}" title="Profil de {{ user.login }}" class="badge badge-warning">{{ user.login }}</a></td>
+                <td style="background: whitesmoke">
+                    {% if user.admin is same as("1") %}
+                        Administrateur
+                    {% elseif user.admin is same as("0") %}
+                        Membre
+                    {% endif %}
+                </td>
+                <td style="background: whitesmoke">{{ user.firstname }} {{ user.lastname }}</td>
+                <td style="background: whitesmoke">{{ user.description }}</td>
+                <td style="background: whitesmoke">
+                    {% if user.bricolage is same as("1") %}
+                        oui
+                    {% elseif user.bricolage is same as("0") %}
+                        non
+                    {% endif %}
+                </td>
+                <td style="background: whitesmoke">
+                    {% if user.cuisine is same as("1") %}
+                        oui
+                    {% elseif user.cuisine is same as("0") %}
+                        non
+                    {% endif %}
+                </td>
+                <td style="background: whitesmoke">
+                    {% if user.education is same as("1") %}
+                        oui
+                    {% elseif user.education is same as("0") %}
+                        non
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+{% endblock %}

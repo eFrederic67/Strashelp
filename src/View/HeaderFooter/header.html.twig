@@ -1,7 +1,7 @@
 <div class="background">
     <nav>
     <ul class="font-icon-example justify-content-around">
-        <li class="item home text-white"><a href="/Home/index"><i class="fas fa-home text-white"></i><span>HOME</span></a></li>
+        <li class="item home text-white"><a href="/Home/index"><i class="fas fa-home text-white"></i><span>ACCUEIL</span></a></li>
         <li class="item profile dropdown text-white">
             <a href="#" data-toggle="dropdown" aria-haspopup="true" id="iconMenu"><i class="fas fa-user-alt nav-item dropdown account text-white" aria-expanded="true" title="Mon compte"></i>
                 <span>MON COMPTE</span>
@@ -9,7 +9,6 @@
                     <a class="dropdown-item" href="/profile/myprofile">Mon profil</a>
                     <a class="dropdown-item" href="?page=">Rendez-vous</a>
                     <a class="dropdown-item" href="/Home/theyNeedYou">Ils ont besoin...</a>
-                    <a class="dropdown-item" href="?page=">Préférences</a>
                     <a class="dropdown-item" href="/Session/logout">Déconnexion</a>
                 </div>
             </a>
@@ -18,8 +17,16 @@
         <li class="item search text-white"><a href="/Search/addPost"><i class="fas fa-pencil-square text-white"></i><span>NOUVEAU</span></a></li>
         <li class="item search text-white"><a href="/Search/search"><i class="fas fa-search text-white"></i><span>RECHERCHE</span></a></li>
         <li class="item search  text-white"><a href="/Blog/liste"><i class="fas fa-newspaper"></i><span>ARTICLES</span></a></li>
+        <li class="item search text-white"><a href="/Search/addPost"><i class="fas fa-pencil-square text-white"></i><span>POSTER</span></a></li>
+        <li class="item search text-white">
+            <a href="#" data-toggle="dropdown" aria-haspopup="true" id="iconMenu"><i class="fas fa-search nav-item dropdown account text-white" aria-expanded="true" title="Recherche"></i>
+                <span>RECHERCHE</span>
+                <div class="dropdown-menu account" aria-labelledby="dropdownAccount" id="menuCompte">
+                    <a class="dropdown-item" href="/Search/search">Rechercher une annonce</a>
+                    <a class="dropdown-item" href="/Searchuser/users">Rechercher un membre</a>
+                </div>
+            </a>
         <li class="item logout text-white"><a href="/Session/logout"><i class="fas fa-sign-out-alt text-white"></i><span>DÉCONNEXION</span></a></li>
-
     </ul>
     </nav>
 </div>

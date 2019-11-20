@@ -75,4 +75,46 @@ class SearchController extends AbstractController
         $item = $itemManager->post($id);
         return $this->twig->render('Search/post.html.twig', ['item' => $item,]);
     }
+
+    public function editPost(int $id): string
+    {
+        $editManager = new SearchManager();
+        $edit = $editManager->selectOneById($id);
+        $category = $editManager->displayCategory();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data =[];
+            foreach ($_POST as $key => $value) {
+                $data[$key] = trim($value);
+            }
+
+            $edit['title'] = $data['title'];
+            $edit['type'] = $data['type'];
+            $edit['id_category'] = $data['id_category'];
+            $edit['start_hour'] = $data['start_hour'];
+            $edit['end_hour'] = $data['end_hour'];
+            $edit['date_publication'] = $data['date_publication'];
+            $edit['text_annoucement'] = $data['text_annoucement'];
+            $edit['nbmin'] = $data['nbmin'];
+            $edit['nbmax'] = $data['nbmax'];
+
+            $editManager->modifPost($id);
+            header('Location: /search/posts/'.$id);
+        }
+
+        return $this->twig->render(
+            'Search/add.html.twig',
+            [
+                'post'=>$edit,
+                'cname'=>$category
+            ]
+        );
+    }
+
+    public function delPost(int $id)
+    {
+        $beastManager = new SearchManager();
+        $beastManager->deleteOnePost($id);
+
+        header('Location: /search/search');
+    }
 }
