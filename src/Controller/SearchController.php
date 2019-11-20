@@ -82,6 +82,7 @@ class SearchController extends AbstractController
         $edit = $editManager->selectOneById($id);
         $category = $editManager->displayCategory();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data =[];
             foreach ($_POST as $key => $value) {
                 $data[$key] = trim($value);
             }
