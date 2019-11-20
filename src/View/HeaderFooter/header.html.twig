@@ -17,9 +17,6 @@
         <li class="item statistics text-white"><a href="#"><i class="far fa-calendar text-white"></i><span>CALENDRIER</span></a></li>
         <li class="item search text-white"><a href="/Search/addPost"><i class="fas fa-pencil-square text-white"></i><span>NOUVEAU</span></a></li>
         <li class="item search text-white"><a href="/Search/search"><i class="fas fa-search text-white"></i><span>RECHERCHE</span></a></li>
-        {% if session['Auth'].admin == 1 %}
-        <li class="item search  text-warning"><a href="/Admin/index"><i class="fas fa-user-shield"></i><span>ADMIN</span></a></li>
-        {% endif %}
         <li class="item logout text-white"><a href="/Session/logout"><i class="fas fa-sign-out-alt text-white"></i><span>DÉCONNEXION</span></a></li>
 
     </ul>
