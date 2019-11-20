@@ -40,6 +40,7 @@
         {% endfor %}
         </tbody>
     </table>
+{% if ilsOntBesoin|length > 0 %}
     <h2 class="col-12 text-center my-4"><a href="/home/theyNeedYou">Ils ont besoin de vous</a></h2>
 <div class="container row {{alignement}} col-12 text-white m-0">
     {% for need in ilsOntBesoin  %}
@@ -70,7 +71,7 @@
             </div>
             {% endfor %}
         </div>
-
+{% endif %}
         <h2 class="col-12 text-center my-4"><a href="/search/search">Nouvelles annonces</a></h2>
         <div class="container row {{alignementLast}} col-12 text-white m-0">
         {% for lastPost in dernieresAnnonces  %}
