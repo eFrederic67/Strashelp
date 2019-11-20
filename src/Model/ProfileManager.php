@@ -46,18 +46,18 @@ class ProfileManager extends AbstractManager
      * @return bool
      */
 
-    public function update(array $post):bool
+    public function update(array $post, array $session):bool
     {
         if (strpos($_SESSION['Auth']['login'], '@')) {
             $test = 'email';
         } else {
             $test ='login';
         }
-
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table 
         SET `email` = :email, `login`=:pseudo, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
-        `phone`=:phone, `description`=:description WHERE password=:pass AND $test=:login");
+        `phone`=:phone, `description`=:description, `avatar`=:avatar, `password`=:password
+        WHERE password=:pass AND $test=:login");
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
         $statement->bindValue('email', $post['email'], \PDO::PARAM_STR);
         $statement->bindValue('pseudo', $post['login'], \PDO::PARAM_STR);
@@ -66,6 +66,17 @@ class ProfileManager extends AbstractManager
         $statement->bindValue('phone', $post['phone'], \PDO::PARAM_STR);
         $statement->bindValue('description', $post['description'], \PDO::PARAM_STR);
         $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
+
+        if (isset($post['password']) && $post['password'] != "") {
+            $statement->bindValue('password', $post['password'], \PDO::PARAM_STR);
+        } else {
+            $statement->bindValue('password', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
+        }
+        if (isset($post['avatar']) && $post['avatar'] != "") {
+            $statement->bindValue('avatar', $_POST['avatar'], \PDO::PARAM_STR);
+        } else {
+            $statement->bindValue('avatar', $session['avatar'], \PDO::PARAM_STR);
+        }
 
         return $statement->execute() ;
     }

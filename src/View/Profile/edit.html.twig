@@ -7,7 +7,7 @@
 {% block content %}
     <h1 class="h1_center">Modifie ton profil</h1>
 
-        <form method="post" class="edit_profil">
+        <form method="post" class="edit_profil" enctype="multipart/form-data">
             <hr/>
             <div class="profilPic avatar_size">
                 <div class="overlay-image" onclick="document.getElementById('avatar').click()">
@@ -17,10 +17,6 @@
                         <div class="fas fa-camera-retro text"></div>
                         <div class="text2">Changer de photo</div>
                         <input type="hidden" name="MAX_FILE_SIZE" value="0" />
-                        <input type="hidden" name="bricolage" value="0" />
-                        <input type="hidden" name="cuisine" value="0" />
-                        <input type="hidden" name="éducation" value="0" />
-
                     </div>
                 </div>
             </div>
@@ -33,7 +29,7 @@
                     {% if errors.login != "" %}
                         <h5 class="h6 text-danger">{{ errors.login }}</h5>
                     {% endif %}
-                    <label for="login">Nouveau login</label><br/>
+                    <label for="login">Pseudo</label><br/>
                     <input class="form-control" type="text" id="login"  name="login" value="{{ session.login }}" required>
                 </div>
             </div>
