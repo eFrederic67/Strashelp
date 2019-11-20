@@ -23,9 +23,6 @@
                     <a class="dropdown-item" href="/Searchuser/users">Rechercher un membre</a>
                 </div>
             </a>
-        {% if session['Auth'].admin == 1 %}
-        <li class="item search  text-warning"><a href="/Admin/index"><i class="fas fa-user-shield"></i><span>ADMIN</span></a></li>
-        {% endif %}
         <li class="item logout text-white"><a href="/Session/logout"><i class="fas fa-sign-out-alt text-white"></i><span>DÉCONNEXION</span></a></li>
     </ul>
     </nav>
