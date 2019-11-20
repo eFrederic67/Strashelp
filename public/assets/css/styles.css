@@ -165,7 +165,6 @@ h1 a:hover {
   opacity: 0;
   transition: .5s ease;
 }
-
 /* Apparition overlay sur passage souris */
 .overlay-image:hover .hover {
   opacity: 1;
@@ -235,30 +234,44 @@ footer a:visited {
 footer ul {
   list-style:none;
   margin-left:0;
-  padding-left:0;
+  padding-left:10px;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
   height: 100%;
 }
 
-footer ul .social {
-  align-content: space-around;
-}
-
 .details ul {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .networks ul {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  flex-basis: content;
+  align-items: center;
 }
 
-.social {
-  width: 52px;
-  height: auto;
+.footer {
+  justify-content: center;
+}
+
+.child {
+  justify-content: center;
+}
+
+.child ul,
+.child .details{
+  justify-content: center;
+  align-items: center;
+}
+
+footer h4{
+  font-size: 20px;
 }
 
 .covered {
@@ -293,16 +306,37 @@ footer ul .social {
   background-size: cover;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .font-icon-example .item {
     display: table-cell;
     padding-bottom: 0;
   }
   .font-icon-example {
   }
+  footer h4{
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 768px) {
+  li {
+    font-size: 12px;
+  }
+  .font-icon-example .item {
+    display: table-cell;
+    padding-bottom: 0;
+  }
+  .font-icon-example {
+  }
+  footer h4{
+    font-size: 22px;
+  }
 }
 
 @media (max-width: 767px) {
+  li {
+    font-size: 11px;
+  }
 
   .background {
     width: 100% !important;
@@ -354,6 +388,12 @@ footer ul .social {
   }
 }
 
+@media (min-width: 401px) and (max-width: 766px) {
+  li {
+    font-size: 11px;
+  }
+}
+
 
 
 @media (max-width: 400px) {
@@ -369,5 +409,34 @@ footer ul .social {
 
   .unlogged {
     transform: translateY(-10px);
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  .child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .child ul,
+  .child .details,
+  .details h4{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .details ul,
+  .networks ul{
+    align-items: center;
+  }
+
+  footer h4{
+    font-size: 24px;
   }
 }
