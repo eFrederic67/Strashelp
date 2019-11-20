@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Model\ProfileManager;
 use App\Model\SearchManager;
 use App\Model\SessionManager;
+use http\Header;
 
 /**
  * Class profileController
@@ -70,16 +71,20 @@ class ProfileController extends AbstractController
 
     public function profile(int $id)
     {
-        $profileManager = new profileManager();
-        $profile = $profileManager->selectOneById($id);
-        $searchManager = new SearchManager();
-        $search = $searchManager->search();
-        $skills = $profileManager->skill($profile);
-        $annonces = $profileManager->annonces($profile);
-        return $this->twig->render(
-            'Profile/profile.html.twig',
-            ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces, 'search' => $search]
-        );
+        if ($id == $_SESSION['Auth']['id']) {
+            header('Location:/profile/myprofile');
+        } else {
+            $profileManager = new profileManager();
+            $profile = $profileManager->selectOneById($id);
+            $searchManager = new SearchManager();
+            $search = $searchManager->search();
+            $skills = $profileManager->skill($profile);
+            $annonces = $profileManager->annonces($profile);
+            return $this->twig->render(
+                'Profile/profile.html.twig',
+                ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces, 'search' => $search]
+            );
+        }
     }
 
     public function myprofile():string
@@ -106,19 +111,24 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $session = $profileManager->session();
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $signUpManager = new SessionManager();
             $errors = $profileManager->testErrorInForm($_POST, $session);
-            if (isset($_FILES['fichier']['name']) && $_FILES['fichier']['name'] != $session['avatar']) {
+            if ($_FILES['fichier']['name'] !== '') {
                 $addressAvatar = $signUpManager->testImage();
                 $_POST['avatar'] = "/".$addressAvatar;
             }
 
             if (count($errors) == 0) {
-                if (isset($_POST['password'])) {
+                if (isset($_POST['password']) && $_POST['password'] != "") {
                     $_POST['password'] = sha1($_POST['password']);
                 }
-                if ($profileManager->update($_POST)) {
+                if ($profileManager->update($_POST, $session)) {
+                    if ($_POST['password'] != $_SESSION['Auth']['pass'] && $_POST['password'] != "") {
+                        $_SESSION['Auth']['pass'] = $_POST['password'];
+                    }
                     $_SESSION['Auth']['login'] = $_POST['login'];
                     header("Location:/Profile/myprofile");
                 }
