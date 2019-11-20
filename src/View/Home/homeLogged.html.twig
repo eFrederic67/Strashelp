@@ -114,10 +114,10 @@
         {% endfor %}
         </div>
 
-    <h2 class="col-12 text-center my-4">Actus</h2>
+                <h2 class="col-12 text-center my-4"><a href="/Blog/liste">Actus</a></h2>
     <div class="container row {{alignementBlog}} col-12 m-0">
             {% for article in derniersArticles %}
-                <div class="card col-12 col-sm-6 col-md-4 my-1 border-black" onclick="window.location.replace('/Blog/posts/{{ article.id }}')">
+                <div class="card col-12 col-sm-6 col-md-4 my-1 border-black" onclick="window.location.replace('/Blog/article/{{ article.id }}')">
                     <img src="{{ article.image}}" class="card-img-top">
                 <h3>{{ article.category }}</h3>
                 <div class="card-body">

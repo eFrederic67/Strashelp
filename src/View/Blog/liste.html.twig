@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Stras'Help – Les articles
+{% endblock %}
+
+{% block content %}
+<h2 class="col-12 text-center my-4"><a href="/Blog/liste">Actus</a></h2>
+    <div class="container row col-12 m-0">
+            {% for article in articles %}
+                <div class="card col-12 col-sm-6 col-md-4 my-1 border-black" onclick="window.location.replace('/Blog/article/{{ article.id }}')">
+                <img src="{{ article.image}}" class="card-img-top">
+                <h3>{{ article.category }}</h3>
+                    <div class="card-body">
+                        <div class="column justify-content-between">
+                            <div>
+                                <h1>{{article.title}}</h1><br/>
+                                <i>{{article.category | capitalize}}</i>
+                            </div>
+                            <div class="text-left">
+                                {{ article.date_publication|date("d/m") }}
+                            </div>
+                        </div>
+                        <div class="text-justify">
+                            <p>{{ article.bodytext | raw }}</p>
+                        </div>
+                    </div>
+                </div>
+     {% endfor %}
+        </div>
+    <div>&nbsp;</div>
+{% endblock %}

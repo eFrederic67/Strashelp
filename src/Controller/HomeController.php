@@ -71,8 +71,7 @@ class HomeController extends AbstractController
 
     private function trunc(array $tab)
     {
-        foreach ($tab as $key => $value)
-        {
+        foreach ($tab as $key => $value) {
             $tab[$key]['bodytext'] = substr($value['bodytext'], 0, 150)."… <i>(lire la suite)</i>";
         }
         return $tab;
