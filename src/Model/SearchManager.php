@@ -92,4 +92,3 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         $statement->execute(['id' => $id]);
     }
 }
-
