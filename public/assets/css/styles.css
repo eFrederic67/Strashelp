@@ -301,6 +301,12 @@ footer ul .social {
   background-size: cover;
   background-position: center;
 }
+.blogView {
+  background-size: cover;
+  background-position: center;
+  height: 350px;
+  width: 100%;
+}
 @media (min-width: 768px) {
   .font-icon-example .item {
     display: table-cell;
