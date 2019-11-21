@@ -88,7 +88,7 @@ class ProfileController extends AbstractController
             $skills = $profileManager->skill($profile);
             $annonces = $profileManager->annonces($profile);
 
-            if ($session['id'] === $friends['id_utilisateur']) {
+            if (!empty($friends)) {
                 $connaissance['fonction'] = 'supprimer';
                 $connaissance['name'] = 'Ne plus suivre';
                 $connaissance['class'] = 'fas';
