@@ -5,7 +5,11 @@
     <table id="myTable" class="display" style="width:100%; background: whitesmoke">
         <thead>
         <tr>
+            {% if session['Auth'].admin == 1 %}
+            <td colspan="9">
+                {% else %}
             <td colspan="8">
+                {% endif %}
                 <a href="/Search/search" class="btn btn-primary text-center offset-5">Chercher une annonce</a>
             </td>
         </tr>
@@ -18,47 +22,54 @@
             <th>Compétence bricolage</th>
             <th>Compétence cuisine</th>
             <th>Compétence éducation</th>
+        {% if session['Auth'].admin == 1 %}
+            <th>Éditer/Suppr.</th>
+        {% endif %}
         </tr>
         </thead>
         <tbody style="background: #7597ff">
         {% for user in users %}
-            <tr class="table-primary">
-                <td style="background: whitesmoke">
+            <tr>
+                <td>
                     <a href="/Profile/profile/{{ user.id }}" title="Profil de {{ user.login }}">
                         <img src="{{ user.avatar }}" height=75px alt="avatar de {{ user.login }}"/>
                     </a>
                 </td>
-                <td style="background: whitesmoke"><a href="/Profile/profile/{{ user.id }}" title="Profil de {{ user.login }}" class="badge badge-warning">{{ user.login }}</a></td>
-                <td style="background: whitesmoke">
+                <td><a href="/Profile/profile/{{ user.id }}" title="Profil de {{ user.login }}" class="badge badge-warning">{{ user.login }}</a></td>
+                <td>
                     {% if user.admin is same as("1") %}
                         Administrateur
                     {% elseif user.admin is same as("0") %}
                         Membre
                     {% endif %}
                 </td>
-                <td style="background: whitesmoke">{{ user.firstname }} {{ user.lastname }}</td>
-                <td style="background: whitesmoke">{{ user.description }}</td>
-                <td style="background: whitesmoke">
+                <td>{{ user.firstname }} {{ user.lastname }}</td>
+                <td>{{ user.description }}</td>
+                <td>
                     {% if user.bricolage is same as("1") %}
                         oui
                     {% elseif user.bricolage is same as("0") %}
                         non
                     {% endif %}
                 </td>
-                <td style="background: whitesmoke">
+                <td>
                     {% if user.cuisine is same as("1") %}
                         oui
                     {% elseif user.cuisine is same as("0") %}
                         non
                     {% endif %}
                 </td>
-                <td style="background: whitesmoke">
+                <td>
                     {% if user.education is same as("1") %}
                         oui
                     {% elseif user.education is same as("0") %}
                         non
                     {% endif %}
                 </td>
+            {% if session['Auth'].admin == 1 %}
+                <td class="text-center" ><a href="/Searchuser/editUser/{{ user.id }}" class="far fa-edit"></a>&nbsp;<a href="/Searchuser/delUser/{{ user.id }}" class="far fa-trash-alt"></a></td>
+            {% endif %}
+
             </tr>
         {% endfor %}
         </tbody>

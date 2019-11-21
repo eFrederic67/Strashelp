@@ -62,4 +62,33 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         $statement = $this->pdo->query("SELECT * FROM ".self::TABLE." ORDER BY id DESC LIMIT 1");
         return $statement->fetch();
     }
+
+    public function modifPost(int $id)
+    {
+        $statement = $this->pdo->prepare(
+            "UPDATE ". self::TABLE ." 
+            SET title=:title, type=:type, 
+            id_category=:id_category, start_hour=:start_hour,
+            end_hour=:end_hour, date_publication=:date_publication, 
+            text_annoucement=:text_annoucement, nbmin=:nbmin, nbmax=:nbmax WHERE id=:id"
+        );
+
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->bindValue('title', $_POST['title'], \PDO::PARAM_STR);
+        $statement->bindValue('type', $_POST['type'], \PDO::PARAM_INT);
+        $statement->bindValue('id_category', $_POST['id_category'], \PDO::PARAM_STR);
+        $statement->bindValue('start_hour', $_POST['start_hour'], \PDO::PARAM_STR);
+        $statement->bindValue('end_hour', $_POST['end_hour'], \PDO::PARAM_STR);
+        $statement->bindValue('date_publication', $_POST['date_publication'], \PDO::PARAM_STR);
+        $statement->bindValue('text_annoucement', $_POST['text_annoucement'], \PDO::PARAM_STR);
+        $statement->bindValue('nbmin', $_POST['nbmin'], \PDO::PARAM_INT);
+        $statement->bindValue('nbmax', $_POST['nbmax'], \PDO::PARAM_INT);
+        return $statement->execute() ;
+    }
+
+    public function deleteOnePost(int $id)
+    {
+        $statement = $this->pdo->prepare("DELETE FROM ".self::TABLE." WHERE id = :id");
+        $statement->execute(['id' => $id]);
+    }
 }

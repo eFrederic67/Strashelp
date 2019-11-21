@@ -46,26 +46,47 @@ class ProfileManager extends AbstractManager
      * @return bool
      */
 
-    public function update(array $post):bool
+    public function update(array $post, array $session):bool
     {
         if (strpos($_SESSION['Auth']['login'], '@')) {
             $test = 'email';
         } else {
             $test ='login';
         }
-
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table 
         SET `email` = :email, `login`=:pseudo, `adresse_1`=:adresse_1, `adresse_2`=:adresse_2,
-        `phone`=:phone, `description`=:description WHERE password=:pass AND $test=:login");
+        `phone`=:phone, `description`=:description, `avatar`=:avatar, `password`=:password,
+        `bricolage`=:bricolage, `cuisine`=:cuisine, `éducation`=:education,
+        `firstname`=:firstname, `lastname`=:lastname
+        WHERE password=:pass AND $test=:login");
+
         $statement->bindValue('pass', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
+        $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
+
         $statement->bindValue('email', $post['email'], \PDO::PARAM_STR);
         $statement->bindValue('pseudo', $post['login'], \PDO::PARAM_STR);
         $statement->bindValue('adresse_1', $post['adresse_1'], \PDO::PARAM_STR);
         $statement->bindValue('adresse_2', $post['adresse_2'], \PDO::PARAM_STR);
         $statement->bindValue('phone', $post['phone'], \PDO::PARAM_STR);
         $statement->bindValue('description', $post['description'], \PDO::PARAM_STR);
-        $statement->bindValue('login', $_SESSION['Auth']['login'], \PDO::PARAM_STR);
+        $statement->bindValue('bricolage', $post['bricolage'], \PDO::PARAM_INT);
+        $statement->bindValue('cuisine', $post['cuisine'], \PDO::PARAM_INT);
+        $statement->bindValue('education', $post['éducation'], \PDO::PARAM_INT);
+        $statement->bindValue('firstname', $post['firstname'], \PDO::PARAM_STR);
+        $statement->bindValue('lastname', $post['lastname'], \PDO::PARAM_STR);
+
+
+        if (isset($post['password']) && $post['password'] != "") {
+            $statement->bindValue('password', $post['password'], \PDO::PARAM_STR);
+        } else {
+            $statement->bindValue('password', $_SESSION['Auth']['pass'], \PDO::PARAM_STR);
+        }
+        if (isset($post['avatar']) && $post['avatar'] != "") {
+            $statement->bindValue('avatar', $_POST['avatar'], \PDO::PARAM_STR);
+        } else {
+            $statement->bindValue('avatar', $session['avatar'], \PDO::PARAM_STR);
+        }
 
         return $statement->execute() ;
     }
@@ -121,6 +142,9 @@ class ProfileManager extends AbstractManager
                 $errors['login'] = "Le login que vous avez choisi est déjà utilisé";
             }
         }
+        if ($post['passwordConf'] != $post['password']) {
+            $errors['password'] = "Les mots de passes entrés ne sont pas identiques";
+        }
         if ($post['email'] != $session['email']) {
             if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
                 if ($sessionManager->testDoublon('email', $post['email'])) {
@@ -135,5 +159,24 @@ class ProfileManager extends AbstractManager
             }
         }
         return $errors;
+    }
+
+    public function testCompetence()
+    {
+        if (isset($_POST['bricolage'])== 'on') {
+            $_POST['bricolage']= 1;
+        } else {
+            $_POST['bricolage']= 0;
+        }
+        if (isset($_POST['cuisine'])== 'on') {
+            $_POST['cuisine']= 1;
+        } else {
+            $_POST['cuisine']= 0;
+        }
+        if (isset($_POST['éducation'])== 'on') {
+            $_POST['éducation']= 1;
+        } else {
+            $_POST['éducation']= 0;
+        }
     }
 }

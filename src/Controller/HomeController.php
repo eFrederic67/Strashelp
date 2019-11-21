@@ -34,13 +34,19 @@ class HomeController extends AbstractController
             $lastPost = $homeManager->lastPosts($_SESSION['Auth']['id']);
             $alignementLast = (count($lastPost)>    2) ? "justify-content-start" : "justify-content-around";
 
+            $lastArticle = $homeManager->lastArticle();
+            $lastArticle = $this->trunc($lastArticle); // réduit la taille de l'article à une preview
+            $alignementBlog = (count($lastPost)>    2) ? "justify-content-start" : "justify-content-around";
+
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
                     'rendezVous' => $myAppointments,
                     'ilsOntBesoin' => $peopleInNeed,
                     'dernieresAnnonces' => $lastPost,
+                    'derniersArticles' => $lastArticle,
                     'alignement' => $alignement,
                     'alignementLast' => $alignementLast,
+                    'alignementBlog' => $alignementBlog,
             ]);
         } else {
             return $this->twig->render('Home/index.html.twig');
@@ -61,5 +67,13 @@ class HomeController extends AbstractController
             'ilsOntBesoin' => $peopleInNeed,
             'alignement' => $alignement,
             ]);
+    }
+
+    private function trunc(array $tab)
+    {
+        foreach ($tab as $key => $value) {
+            $tab[$key]['bodytext'] = substr($value['bodytext'], 0, 150)."… <i>(lire la suite)</i>";
+        }
+        return $tab;
     }
 }
