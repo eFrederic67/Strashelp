@@ -124,7 +124,7 @@ class SessionManager extends AbstractManager
         }
     }
 
-    private function testTypeMime($fichier, $type, $agretator) :bool
+/*    private function testTypeMime($fichier, $type, $agretator) :bool
     {
         foreach ($type as $item) {
             if ($fichier == $agretator.$item) {
@@ -133,8 +133,8 @@ class SessionManager extends AbstractManager
         }
         return false;
     }
-
-    public function testImage()
+*/
+/*    public function testImage()
     {
 
         $typeMimeAutorises = ['png','gif','jpeg','jpg'];
@@ -171,7 +171,7 @@ class SessionManager extends AbstractManager
                 return $uploadFile;
             }
         }
-    }
+    }*/
 
     public function cleanPhotosTemp():bool
     {

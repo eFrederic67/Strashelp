@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <label>Image d'en-tête</label>
-                        <div class="overlay-image" onclick="document.getElementById('imgEnTeteFile').click()">
+                        <div class="overlay-image" style="display: none" onclick="document.getElementById('imgEnTeteFile').click()" id="imgPreview">
                             <a href="" ><img class="image" src="{{ imgEnTete }}" alt="image d'en-tête" id="profilPic"/></a>
                             <div class="hover">
                                 <img class="image" src="{{ imgEnTete }}" alt="image d'en-tête" id="profilPicHover"/>
@@ -51,7 +51,7 @@
                                 <input type="hidden" name="MAX_FILE_SIZE" value="0" />
                             </div>
                         </div>
-                        <input type="file" name="fichier" id="imgEnTeteFile" onchange="readURL(this);"/>
+                        <input type="file" name="fichier" id="imgEnTeteFile" onchange="readURL(this);document.getElementById('imgPreview').style.display='block'"/>
 
                     </div>
                     <div class="mt-2">

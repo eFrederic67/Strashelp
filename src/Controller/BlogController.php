@@ -28,8 +28,28 @@ class BlogController extends AbstractController
         $blogManager = new BlogManager();
         $category = $blogManager->displayCategory();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump($_POST);
-            var_dump($_FILES);
+            // uploading de la photo
+            if ($_FILES['fichier']['name']) {
+                $addressImage = $blogManager->testImage('blog');
+                $_POST['image'] = "/".$addressImage;
+            } else {
+                switch ($_POST['id_category']) {
+                    case 1:
+                        $_POST['image'] = "/assest/images/Default_Bricolage.jpg";
+                        break;
+                    case 2:
+                        $_POST['image'] = "/assest/images/Default_Cuisine.jpg";
+                        break;
+                    case 3:
+                        $_POST['image'] = "/assest/images/Default_Education.jpg";
+                        break;
+                }
+            }
+
+            if ($blogManager->insertInDB($_POST)) {
+                $id = $blogManager->getLastEntry('article');
+                header('location:/Blog/article/'.$id['id']);
+            }
         } else {
             return $this->twig->render('Blog/addArticle.html.twig', [
                 'cname'=>$category,

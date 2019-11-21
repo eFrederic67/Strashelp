@@ -74,7 +74,7 @@ class SessionController extends AbstractController
                 $_POST['éducation']= 1;
             }
             if ($_FILES['fichier']['name'] !== '') {
-                $addressAvatar = $signUpManager->testImage();
+                $addressAvatar = $signUpManager->testImage('avatar');
                 $_POST['avatar'] = "/".$addressAvatar;
             }
             if (count($errors) == 0) {
