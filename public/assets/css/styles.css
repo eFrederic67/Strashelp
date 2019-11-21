@@ -18,7 +18,6 @@ nav ul {
   background: #138496;
   display: flex;
   justify-content: center;
-  position: fixed;
   top: 0px;
   z-index: 2000;
 }
@@ -26,7 +25,6 @@ nav ul {
   background: #138496;
   display: flex;
   justify-content: center;
-  position: fixed;
   width: 100%;
   top: 0px;
   z-index: 2000;
