@@ -31,6 +31,62 @@
     height: 200px;
 }
 
+.image_Card{
+    height: 50px;
+}
+
+/* partie connaissances sur le profil */
+
+.playerWall.detailed li {
+    display: inline-block;
+    background: #eee;
+    width: 258px;
+    margin-right: 5px;
+    margin-bottom: 8px;
+    border-radius: 3px;
+    padding: 0;
+}
+
+.playerWall.detailed li a:link, a:visited {
+    color: #4e2d15;
+    text-decoration: none;
+}
+
+.playerWall.detailed li a {
+    display: block;
+    height: 60px;
+    padding: 8px;
+    transition: background .2s;
+}
+.playerWall.detailed li a:hover {
+    background-color: darkgray;
+    transition: background .2s;
+    border-radius: 3px;
+
+}
+.playerWall.detailed li img {
+    margin-right: 8px;
+    float: left;
+    vertical-align: middle;
+}
+.playerWall li img {
+    border-radius: 3px;
+}
+.playerWall.detailed li .playerInfo {
+    float: left;
+    padding: 5px;
+}
+.playerWall.detailed li .playerInfo .username {
+    font-size: 14px;
+    font-weight: 700;
+}
+.playerWall.detailed li .playerInfo .game {
+    color: #777;
+    font-size: 12px;
+}
+.playerWall.detailed li img {
+    height: 50px;
+}
 
 
 

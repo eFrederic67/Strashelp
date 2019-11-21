@@ -124,18 +124,24 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $myprofile = $profileManager->session();
+        $otherprofile = $profileManager->selectAll();
         $searchManager = new SearchManager();
         $search = $searchManager->search();
-        $skills = $profileManager->skill($myprofile);
+        $friendManager = new FriendsManager();
+        $friend = $friendManager->selectAllUserFriends();
+        $myskills = $profileManager->skill($myprofile);
+        $otherprofile = $friendManager->skill($otherprofile);
         $annonces = $profileManager->annonces($myprofile);
 
         return $this->twig->render(
             'Profile/myprofile.html.twig',
             [
                 'myprofile' => $myprofile,
-                'skills' => $skills,
+                'myskills' => $myskills,
                 'annonces' => $annonces,
-                'search' => $search
+                'search' => $search,
+                'friend' => $friend,
+                'otherprofile' => $otherprofile,
             ]
         );
     }
