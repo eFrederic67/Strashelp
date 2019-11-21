@@ -138,7 +138,19 @@
      {% endfor %}
     </div>
     <h2 class="col-12 text-center my-4">Top Helpers</h2>
-    <h3 class="col-12 col-md-4 text-center my-4">Bricolage</h3>
-    <h3 class="col-12 col-md-4 text-center my-4">Cuisine</h3>
-    <h3 class="col-12 col-md-4 text-center my-4">Éducation</h3>
+    <div class="row col-12">
+        {% for topHelper in topHelpers %}
+        <div class="col-12 col-md-4">
+            <div class="card-body">
+                <div class="column justify-center text-center">
+                    <a href="Profile/Profile/{{ topHelper.0 }}">
+                        <img src="{{ topHelper.1 }}" height="200px">
+                    <br/>
+                    <h4>{{topHelper.2}}</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

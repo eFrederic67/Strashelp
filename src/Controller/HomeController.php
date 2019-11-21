@@ -37,6 +37,7 @@ class HomeController extends AbstractController
             $lastArticle = $homeManager->lastArticle();
             $lastArticle = $this->trunc($lastArticle); // réduit la taille de l'article à une preview
             $alignementBlog = (count($lastPost)>    2) ? "justify-content-start" : "justify-content-around";
+            $topHelpers = $homeManager->topHelpers();
 
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
@@ -47,6 +48,7 @@ class HomeController extends AbstractController
                     'alignement' => $alignement,
                     'alignementLast' => $alignementLast,
                     'alignementBlog' => $alignementBlog,
+                    'topHelpers' => $topHelpers,
             ]);
         } else {
             return $this->twig->render('Home/index.html.twig');
