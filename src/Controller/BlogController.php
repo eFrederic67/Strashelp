@@ -34,5 +34,4 @@ class BlogController extends AbstractController
         }
         return $tab;
     }
-
 }
