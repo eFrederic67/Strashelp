@@ -22,6 +22,11 @@ class BlogController extends AbstractController
         return $this->twig->render('Blog/article.html.twig', ['article' => $article]);
     }
 
+    public function addArticle()
+    {
+        return $this->twig->render('Blog/addArticle.html.twig');
+    }
+
     private function trunc(array $tab)
     {
         foreach ($tab as $key => $value) {
@@ -29,4 +34,5 @@ class BlogController extends AbstractController
         }
         return $tab;
     }
+
 }
