@@ -150,7 +150,7 @@ class ProfileController extends AbstractController
             $errors = $profileManager->testErrorInForm($_POST, $session);
             $profileManager->testCompetence();
             if ($_FILES['fichier']['name'] !== '') {
-                $addressAvatar = $signUpManager->testImage();
+                $addressAvatar = $signUpManager->testImage('avatars');
                 $_POST['avatar'] = "/".$addressAvatar;
             }
             if (count($errors) == 0) {
