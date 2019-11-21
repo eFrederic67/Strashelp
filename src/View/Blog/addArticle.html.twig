@@ -59,12 +59,12 @@
                             <label for="text_annoucement">Descriptif de votre annonce *</label>
                             <div>
                                 <i class="icon ion-android-create align-self-center"></i>
-                                <textarea id="editor" name="text_annoucement">{{ post.text_annoucement }}</textarea>
+                                <textarea id="editor" name="bodytext">{{ post.bodytext }}</textarea>
                             </div>
                         </div>
                     </div>
                         <div>
-                            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Ajouter votre annonce</button>
+                            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Créer un article</button>
                         </div>
             </form>
             </div>
@@ -73,9 +73,18 @@
 {% block javascript %}
 <script>
 ClassicEditor
-    .create( document.querySelector( '#editor' ) )
+    .create( document.querySelector( '#editor' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    } )
     .catch( error => {
-        console.error( error );
+        console.log( error );
     } );
 </script>
 {% endblock %}

@@ -30,6 +30,10 @@ nav ul {
   z-index: 2000;
 }
 
+.ck-editor__editable
+{
+  min-height: 200px !important;
+}
 .headerFlex {
   display: flex !important;
   width: 100%;
