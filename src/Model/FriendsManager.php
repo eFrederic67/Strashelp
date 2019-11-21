@@ -49,6 +49,14 @@ class FriendsManager extends AbstractManager
         return $statement->fetch();
     }
 
+    public function selectAllUserFriends()
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id_utilisateur=".$_SESSION['Auth']['id']);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
     public function add()
     {
         $statement = $this->pdo->prepare("INSERT INTO $this->table (id_utilisateur, id_friend) 
@@ -57,5 +65,19 @@ class FriendsManager extends AbstractManager
         $statement->bindValue('friend', $_POST['suivre'], \PDO::PARAM_INT);
 
         $statement->execute();
+    }
+
+    public function skill(array $profile)
+    {
+        foreach ($profile as $key) {
+            if ($profile[$key]['éducation'] == 1) {
+                $profile[$key]['éducation'] = 'Éducation';
+            } if ($profile[$key]['cuisine'] == 1) {
+                $profile[$key]['cuisine'] = 'Cuisine';
+            } if ($profile[$key]['bricolage'] == 1) {
+                $profile[$key]['bricolage'] = 'Bricolage';
+            }
+        }
+        return $profile;
     }
 }

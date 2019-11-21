@@ -30,6 +30,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#annonces" role="tab" aria-controls="annonces" aria-selected="false">Mes annonces</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#connaissances" role="tab" aria-controls="connaissances" aria-selected="false">Mes connaissances</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -42,9 +45,9 @@
                         <div class="col-md-4">
                             <div class="profile-work">
                                 <p class="Skill">Compétences</p>
-                                    <p>{{ skills.0 }}</p>
-                                    <p>{{ skills.1 }}</p>
-                                    <p>{{ skills.2 }}</p>
+                                    <p>{{ myskills.0 }}</p>
+                                    <p>{{ myskills.1 }}</p>
+                                    <p>{{ myskills.2 }}</p>
                             </div>
                         </div>
 
@@ -132,6 +135,28 @@
                                         {% endfor %}
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="tab-pane fade" id="connaissances" role="tabpanel" aria-labelledby="profile-tab">
+                                    <ul class="playerWall detailed">
+                                        {% for user in otherprofile %}
+                                            {% for myfriend in friend %}
+                                                  {% if user.id == myfriend.id_friend %}
+                                                      <li><a href="/profile/profile/{{ user.id }}"><img src="{{ user.avatar }}"/> <div class="playerInfo"><div class="username">{{ user.login }}</div><div class="game">
+                                                                      {% if user.éducation == 'Éducation' %}
+                                                                        {{ user.éducation }}
+                                                                      {% endif %}
+                                                                      {% if user.cuisine == 'Cuisine' %}
+                                                                        {{ user.cuisine }}
+                                                                      {% endif %}
+                                                                      {% if user.bricolage == 'Bricolage' %}
+                                                                        {{ user.bricolage }}
+                                                                      {% endif %}
+                                                                          </div></div></a></li>
+                                                  {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
