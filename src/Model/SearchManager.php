@@ -37,9 +37,13 @@ class SearchManager extends AbstractManager implements AddPostInterfaces, PostIn
         $statement->bindValue('id_user', $item['id_user'], \PDO::PARAM_INT);
         $statement->bindValue('type', $item['type'], \PDO::PARAM_INT);
         $statement->bindValue('id_category', $item['id_category'], \PDO::PARAM_STR);
-        $statement->bindValue('start_hour', $item['start_hour'], \PDO::PARAM_STR);
-        $statement->bindValue('end_hour', $item['end_hour'], \PDO::PARAM_STR);
-        $statement->bindValue('date_publication', $item['date_publication'], \PDO::PARAM_STR);
+
+        $startHour = $item['date_publication']." ".$item['start_hour'].":00";
+        $endHour = $item['date_publication']." ".$item['end_hour'].":00";
+
+        $statement->bindValue('start_hour', $startHour, \PDO::PARAM_STR);
+        $statement->bindValue('end_hour', $endHour, \PDO::PARAM_STR);
+        $statement->bindValue('date_publication', date("Y-m-d H:i:s"), \PDO::PARAM_STR);
         $statement->bindValue('text_annoucement', $item['text_annoucement'], \PDO::PARAM_STR);
         $statement->bindValue('nbmin', $item['nbmin'], \PDO::PARAM_INT);
         $statement->bindValue('nbmax', $item['nbmax'], \PDO::PARAM_INT);
