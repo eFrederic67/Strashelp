@@ -38,7 +38,7 @@ class SearchController extends AbstractController
                 $errors['text_annoucement'] = 'Merci de remplir ce champs';
             }
             if (!is_numeric($_POST['nbmin'])) {
-                $errors['nbmin'] = 1;
+                $_POST['nbmin'] = $_POST['nbmax'];
             }
 
             if (!is_numeric($_POST['nbmax'])) {
@@ -56,7 +56,7 @@ class SearchController extends AbstractController
             } else {
                 $categoryManager->addPost($_POST);
                 $getEntry = $categoryManager->getLastEntry();
-                header('Location: /Search/posts/'. $getEntry['id']);
+                header('Location: /search/posts/'. $getEntry['id']);
             }
         } else {
             $category = $categoryManager->displayCategory();
