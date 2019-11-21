@@ -30,9 +30,16 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="font-icon-example justify-content-around">
-                        <div class="item home text-danger"><a href="/signal/signaluser/{{ profile.id }}"><i class="fas fa-exclamation text-danger"></i><span>Signaler le profil</span></a></div>
+                    <div>
+                        <div class="font-icon-example justify-content-around">
+                            <form method="post" action="">
+                                <button type="submit" style="display:contents"><div class="item home text-danger"><i class="{{ connaissance.class }} fa-heart text-danger"></i><span>{{ connaissance.name }}</span></div></button>
+                                <input type="hidden" value="{{ profile.id }}" name="{{ connaissance.fonction }}">
+                            </form>
+                        </div>
+                        <div class="font-icon-example justify-content-around">
+                            <div class="item home text-danger"><a href="/signal/signaluser/{{ profile.id }}"><i class="fas fa-exclamation text-danger"></i><span>Signaler le profil</span></a></div>
+                        </div>
                     </div>
                 </div>
 
