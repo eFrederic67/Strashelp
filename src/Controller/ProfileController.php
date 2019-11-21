@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Model\FriendsManager;
 use App\Model\ProfileManager;
 use App\Model\SearchManager;
 use App\Model\SessionManager;
@@ -76,13 +77,45 @@ class ProfileController extends AbstractController
         } else {
             $profileManager = new profileManager();
             $profile = $profileManager->selectOneById($id);
+            $session = $profileManager->session();
+
             $searchManager = new SearchManager();
             $search = $searchManager->search();
+
+            $friendsManager = new FriendsManager();
+            $friends = $friendsManager->selectOneByIdUser($id);
+
             $skills = $profileManager->skill($profile);
             $annonces = $profileManager->annonces($profile);
+
+            if (!empty($friends)) {
+                $connaissance['fonction'] = 'supprimer';
+                $connaissance['name'] = 'Ne plus suivre';
+                $connaissance['class'] = 'fas';
+            } else {
+                $connaissance['fonction'] = 'suivre';
+                $connaissance['name'] = 'Suivre';
+                $connaissance['class'] = 'far';
+            }
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (!empty($friends)) {
+                    $friendsManager->delete();
+                } else {
+                    $friendsManager->add();
+                }
+                header('Location:/profile/profile/'.$id);
+            }
             return $this->twig->render(
                 'Profile/profile.html.twig',
-                ['profile' => $profile, 'skills' => $skills, 'annonces' => $annonces, 'search' => $search]
+                [
+                    'profile' => $profile,
+                    'skills' => $skills,
+                    'annonces' => $annonces,
+                    'search' => $search,
+                    'session' => $session,
+                    'friend' => $friends,
+                    'connaissance' => $connaissance
+                ]
             );
         }
     }
