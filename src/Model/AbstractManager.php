@@ -112,7 +112,7 @@ abstract class AbstractManager
 
         if ($erreurSize == '' && $erreurType == '') {
             // on récupère l'extension, par exemple "pdf"
-            $extension = pathinfo($_FILES['fichier']['name'].'/'.$rep, PATHINFO_EXTENSION);
+            $extension = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);
             // on concatène le nom de fichier unique avec l'extension récupérée
             $filename = $rep."_".uniqid() . '.' . $extension;
 

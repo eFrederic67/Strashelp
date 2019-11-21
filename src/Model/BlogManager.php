@@ -34,6 +34,5 @@ class BlogManager extends AbstractManager
         $statement->bindValue('date_publication', $post['date_publication']. " " . $post['end_hour'], \PDO::PARAM_STR);
 
         return ($statement->execute()) ? true : false;
-
     }
 }

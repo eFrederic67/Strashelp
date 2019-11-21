@@ -59,6 +59,7 @@ class SessionController extends AbstractController
         } else {
             // si le post est rempli parce que c'est un retour de formulaire
             // on teste les erreurs
+            var_dump($_POST);
             $signUpManager = new SessionManager();
             $errors = $signUpManager->testErrorInForm($_POST);
             if (!isset($_POST['avatar'])) {
@@ -74,9 +75,10 @@ class SessionController extends AbstractController
                 $_POST['éducation']= 1;
             }
             if ($_FILES['fichier']['name'] !== '') {
-                $addressAvatar = $signUpManager->testImage('avatar');
+                $addressAvatar = $signUpManager->testImage('avatars');
                 $_POST['avatar'] = "/".$addressAvatar;
             }
+            $_POST['description'] = htmlspecialchars(trim($_POST['description']), ENT_QUOTES);
             if (count($errors) == 0) {
                 // s'il le teste d'erreur est ok
                 // lancer les procédures pour ajouter la personne dans la base de donnée

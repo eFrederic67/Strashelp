@@ -101,7 +101,6 @@ class SessionManager extends AbstractManager
         foreach ($champsAInserer as $value) {
             if (null !== ($post[$value])) {
                 $requete .= "'".$post[$value]."', ";
-//                $requete .= "':".$value."', ";
             }
         }
         $requete = substr($requete, 0, strlen($requete)-2);
