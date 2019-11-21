@@ -32,4 +32,34 @@ class SearchuserManager extends AbstractManager
         $display->execute();
         return $display->fetchAll();
     }
+    public function modifUser(int $id)
+    {
+           $sql = "UPDATE ". self::TABLE ." 
+            SET email = :email, login=:login, adresse_1=:adresse_1, adresse_2=:adresse_2,
+            phone=:phone, description=:description";
+        if (isset($_POST['avatar'])) {
+            $sql .= " avatar=:avatar";
+        }
+        $sql .= " WHERE id=:id";
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->bindValue('email', $_POST['email'], \PDO::PARAM_STR);
+        $statement->bindValue('login', $_POST['login'], \PDO::PARAM_STR);
+        $statement->bindValue('adresse_1', $_POST['adresse_1'], \PDO::PARAM_STR);
+        $statement->bindValue('adresse_2', $_POST['adresse_2'], \PDO::PARAM_STR);
+        $statement->bindValue('phone', $_POST['phone'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $_POST['description'], \PDO::PARAM_STR);
+        if (isset($_POST['avatar'])) {
+            $statement->bindValue('avatar', $_POST['avatar'], \PDO::PARAM_STR);
+        }
+
+        return $statement->execute();
+    }
+
+    public function deleteOneUser(int $id)
+    {
+        $statement = $this->pdo->prepare("DELETE FROM ".self::TABLE." WHERE id = :id");
+        $statement->execute(['id' => $id]);
+    }
 }
