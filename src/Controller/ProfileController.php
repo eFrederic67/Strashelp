@@ -111,16 +111,15 @@ class ProfileController extends AbstractController
     {
         $profileManager = new profileManager();
         $session = $profileManager->session();
-
-
+        $signUpManager = new SessionManager();
+        $category = $signUpManager->displayCategory();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $signUpManager = new SessionManager();
             $errors = $profileManager->testErrorInForm($_POST, $session);
+            $profileManager->testCompetence();
             if ($_FILES['fichier']['name'] !== '') {
                 $addressAvatar = $signUpManager->testImage();
                 $_POST['avatar'] = "/".$addressAvatar;
             }
-
             if (count($errors) == 0) {
                 if (isset($_POST['password']) && $_POST['password'] != "") {
                     $_POST['password'] = sha1($_POST['password']);
@@ -138,6 +137,7 @@ class ProfileController extends AbstractController
                     [
                         'session' => $session,
                         'errors' => $errors,
+                        'category' => $category,
                     ]
                 );
             }
@@ -146,6 +146,7 @@ class ProfileController extends AbstractController
                 'Profile/edit.html.twig',
                 [
                     'session' => $session,
+                    'category' => $category,
                 ]
             );
         }
