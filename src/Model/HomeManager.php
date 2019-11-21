@@ -35,17 +35,19 @@ class HomeManager extends AbstractManager
         $cat[3] = ($category[0]['éducation']) ? 3 : 0 ;
         $cat = array_diff($cat, [0]);
         $cat = implode(",", $cat);
+        if (strlen($cat) > 0) {
+            $sql = 'SELECT post.id as id_post, post.type as type, post.title as title, category.name as category,
+            start_hour, end_hour, user.login as user, nbmin, nbmax, category.id FROM ' . $table . '
+            JOIN category ON id_category = category.id
+            JOIN user on user.id = id_user
+            WHERE id_user <> '.$id.' AND id_category in ('. $cat .') AND DATE(start_hour) >= CURDATE()';
 
-        $sql = 'SELECT post.id as id_post, post.type as type, post.title as title, category.name as category, 
-        start_hour, end_hour, user.login as user, nbmin, nbmax, category.id FROM ' . $table . '
-        JOIN category ON id_category = category.id
-        JOIN user on user.id = id_user 
-        WHERE id_user <> '.$id.' AND id_category in ('. $cat .') AND DATE(start_hour) >= CURDATE()';
+            $tableau = $this->pdo->query($sql)->fetchAll();
+            $tableau = $this->howManyAnswers($tableau);
 
-        $tableau = $this->pdo->query($sql)->fetchAll();
-        $tableau = $this->howManyAnswers($tableau);
-
-        return $tableau;
+            return $tableau;
+        }
+        return [];
     }
 
     public function lastPosts($id)
@@ -71,5 +73,12 @@ class HomeManager extends AbstractManager
             $tableau[$key]['reponse'] = $pouet['count(*)'];
         }
         return $tableau;
+    }
+
+    public function lastArticle()
+    {
+        $sql = "SELECT * FROM article ORDER BY date_publication DESC LIMIT 4";
+        $pouet = $this->pdo->query($sql)->fetchall();
+        return $pouet;
     }
 }

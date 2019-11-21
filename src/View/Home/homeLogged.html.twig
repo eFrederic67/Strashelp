@@ -8,6 +8,7 @@
     <h1 class="text-center">Bienvenue {{ firstname }}</h1>
 
     <h2 class="col-12 text-center my-4">Vos Rendez-vous</h2>
+    {% if rendezVous|length > 0 %}
     <table class="col-4 table table-striped">
         <thead class="thead-dark">
         <tr>
@@ -40,6 +41,10 @@
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <p class="text-center">Vous n'avez aucun rendez-vous prévu.</p>
+    {% endif %}
+{% if ilsOntBesoin|length > 0 %}
     <h2 class="col-12 text-center my-4"><a href="/home/theyNeedYou">Ils ont besoin de vous</a></h2>
 <div class="container row {{alignement}} col-12 text-white m-0">
     {% for need in ilsOntBesoin  %}
@@ -63,14 +68,14 @@
                     <div class="text-right">
                         <h4>{{ need.start_hour|date("H:i") }} ~ {{ need.end_hour|date("H:i") }}<br/></h4>
                         <span>{{ need.title }}<br/>
-                        <span>{{ need.user }}<br/>
+                        {{ need.user }}<br/>
                         {{need.reponse}}/{{need.nbmax}} personnes</span>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-
+{% endif %}
         <h2 class="col-12 text-center my-4"><a href="/search/search">Nouvelles annonces</a></h2>
         <div class="container row {{alignementLast}} col-12 text-white m-0">
         {% for lastPost in dernieresAnnonces  %}
@@ -109,7 +114,29 @@
         {% endfor %}
         </div>
 
-        <h2 class="col-12 text-center my-4">Top Actus</h2>
+                <h2 class="col-12 text-center my-4"><a href="/Blog/liste">Actus</a></h2>
+    <div class="container row {{alignementBlog}} col-12 m-0">
+            {% for article in derniersArticles %}
+                <div class="card col-12 col-sm-6 col-md-4 my-1 border-black" onclick="window.location.replace('/Blog/article/{{ article.id }}')">
+                    <img src="{{ article.image}}" class="card-img-top">
+                <h3>{{ article.category }}</h3>
+                <div class="card-body">
+                    <div class="column justify-content-between">
+                        <div>
+                            <h1>{{article.title}}</h1><br/>
+                            <i>{{article.category | capitalize}}</i>
+                        </div>
+                        <div class="text-left">
+                            {{ article.date_publication|date("d/m") }}
+                        </div>
+                    </div>
+                    <div class="text-justify">
+                        <p>{{ article.bodytext }}</p>
+                    </div>
+                </div>
+            </div>
+     {% endfor %}
+    </div>
     <h2 class="col-12 text-center my-4">Top Helpers</h2>
     <h3 class="col-12 col-md-4 text-center my-4">Bricolage</h3>
     <h3 class="col-12 col-md-4 text-center my-4">Cuisine</h3>
