@@ -18,7 +18,7 @@ nav ul {
   background: #138496;
   display: flex;
   justify-content: center;
-  position: fixed;
+  width: 100%;
   top: 0px;
   z-index: 2000;
 }
@@ -26,7 +26,6 @@ nav ul {
   background: #138496;
   display: flex;
   justify-content: center;
-  position: fixed;
   width: 100%;
   top: 0px;
   z-index: 2000;
@@ -210,15 +209,14 @@ a:hover .profilPicChange {
 }
 
 footer {
-  background-color: #FFA84F;
-  color: #02546B;
-  /* position: absolute;    === à voir pour les media queeries */
+  background-color: #138496;
+  color: white;
   bottom: 0;
   width:100%;
 }
 
 footer a {
-  color: #02546B;
+  color: white;
 }
 
 footer a:hover {
@@ -227,7 +225,7 @@ footer a:hover {
 }
 
 footer a:visited {
-  color: #AC5700;
+  color: white;
 }
 
 footer ul {
