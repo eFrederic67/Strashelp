@@ -6,6 +6,10 @@
     border-radius: 1em;
 }
 
+.edit_arround{
+    margin: 10px;
+}
+
 .input_center{
     display: flex;
     flex-direction: column;
