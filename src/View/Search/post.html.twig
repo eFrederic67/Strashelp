@@ -2,8 +2,8 @@
 
 {% block content %}
     <div class="card text-center row-2">
-        <div class="card-header">
-            <div>
+        <div class="card-header row justify-content-center">
+            <div class="">
             <h4 class="card-title">{{ item.title }}
                 <small>
                     proposé par :
@@ -15,8 +15,18 @@
             <div class="font-icon-example offset-3">
                 <div class="item">
                     <a href="/signal/signalpost/{{ item.id }}">
-                        <i class="fas fa-exclamation text-danger"></i><span>Signaler l'annonce</span></a>
+                        <i class="fas fa-exclamation text-danger"></i><span>Signaler</span></a>
                 </div>
+                {% if session['Auth'].admin == 1 %}
+                <div class="item">
+                    <a href="/Search/editPost/{{ item.id }}">
+                        <i class="fas fa-edit text-primary"></i><span>Editer</span></a>
+                </div>
+                <div class="item">
+                    <a href="/Search/delPost/{{ item.id }}">
+                        <i class="fas fa-trash-alt text-primary"></i><span>Supprimer</span></a>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="card-body">

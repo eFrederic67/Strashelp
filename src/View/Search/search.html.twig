@@ -4,9 +4,14 @@
     <table id="myTable" class="display" style="width:100%; background: whitesmoke">
         <thead>
         <tr>
+            {% if session['Auth'].admin == 1 %}
+            <td colspan="7">
+                {% else %}
             <td colspan="6">
+                {% endif %}
                 <a href="/Search/addPost" class="btn btn-primary text-center offset-5">Créer une annonce</a>
             </td>
+
         </tr>
         <tr>
             <th>Titre</th>
@@ -14,16 +19,22 @@
             <th>Heure de début</th>
             <th>Heure de fin</th>
             <th>Annonceur</th>
+        {% if session['Auth'].admin == 1 %}
+            <th>Éditer/Suppr.</th>
+        {% endif %}
         </tr>
         </thead>
         <tbody style="background: #7597ff">
         {% for searchid in search %}
-            <tr class="table-primary">
-                <td style="background: whitesmoke"><a href="/Search/Posts/{{ searchid.post_id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
-                <td style="background: whitesmoke">{{ searchid.start_day }}</td>
-                <td style="background: whitesmoke">{{ searchid.start_hour }}</td>
-                <td style="background: whitesmoke">{{ searchid.end_hour }}</td>
-                <td style="background: whitesmoke"><a href="/profile/profile/{{ searchid.id }}" class="badge badge-warning">{{ searchid.login }}</a></td>
+            <tr>
+                <td ><a href="/Search/Posts/{{ searchid.post_id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
+                <td >{{ searchid.start_day }}</td>
+                <td >{{ searchid.start_hour }}</td>
+                <td >{{ searchid.end_hour }}</td>
+                <td ><a href="/profile/profile/{{ searchid.id }}" class="badge badge-warning">{{ searchid.login }}</a></td>
+                {% if session['Auth'].admin == 1 %}
+                <td class="text-center" ><a href="/Search/editPost/{{ searchid.post_id }}" class="far fa-edit"></a>&nbsp;<a href="/Search/delPost/{{ searchid.post_id }}" class="far fa-trash-alt"></a></td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

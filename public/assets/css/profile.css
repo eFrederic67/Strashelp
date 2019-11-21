@@ -6,6 +6,10 @@
     border-radius: 1em;
 }
 
+.edit_arround{
+    margin: 10px;
+}
+
 .input_center{
     display: flex;
     flex-direction: column;
@@ -19,6 +23,12 @@
 .h1_center{
     text-align: center;
     margin: 0.5em;
+}
+
+
+.image{
+    width: auto;
+    height: 250px;
 }
 
 
@@ -38,8 +48,8 @@ body{
     text-align: center;
 }
 .profile-img img{
-    width: 50%;
-    height: 100%;
+    width: auto;
+    height: 250px;
 }
 .profile-img .file {
     position: relative;
