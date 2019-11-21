@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Model\BlogManager;
+use spec\GrumPHP\Task\Git\BlacklistSpec;
 
 class BlogController extends AbstractController
 {
@@ -24,7 +25,16 @@ class BlogController extends AbstractController
 
     public function addArticle()
     {
-        return $this->twig->render('Blog/addArticle.html.twig');
+        $blogManager = new BlogManager();
+        $category = $blogManager->displayCategory();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump($_POST);
+            var_dump($_FILES);
+        } else {
+            return $this->twig->render('Blog/addArticle.html.twig', [
+                'cname'=>$category,
+            ]);
+        }
     }
 
     private function trunc(array $tab)
