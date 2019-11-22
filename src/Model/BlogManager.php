@@ -49,6 +49,6 @@ class BlogManager extends AbstractManager
     public function delArticle($id)
     {
         $sql = "DELETE FROM article WHERE id =".$id;
-        $statement = $this->pdo->query($sql);
+        $this->pdo->query($sql);
     }
 }

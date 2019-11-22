@@ -11,7 +11,7 @@
 
         {% block content %}
         <h1 class="h3 text-center mt-2">Formulaire d'inscription</h1>
-        <form class="Session_form text-center border border-light p-4 col-4 offset-4" target="" method="POST" enctype="multipart/form-data">
+        <form class="Session_form text-center border border-light p-4 col-md-4 col-sm-8 col-12 offset-md-4 offset-sm-2" target="" method="POST" enctype="multipart/form-data">
                 <div>
                     <p>Vous devez être majeur et habiter Strasbourg<br/>
                         pour vous inscrire.</p>
@@ -20,15 +20,15 @@
                             <h5 class="h6 text-danger">{{ errors.dateOfBirth }}</h5>
                         {% endif %}
                         <div class="form-row">
-                            <div class="form-group col-md-3 offset-1">
+                            <div class="form-group col-md-3 offset-md-1 col-sm-8 offset-sm-2">
                                 <label for="dayOfBirth">Jour</label><br/>
                                 <input class="form-control text-center" type="number" id="dayOfBirth" name="dayOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" min="1" max="31" placeholder="jj" value="{{ dayOfBirth }}" required autofocus>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 offset-md-0 col-sm-8 offset-sm-2">
                                 <label for="monthOfBirth">Mois</label><br/>
                                 <input class="form-control text-center" type="number" id="monthOfBirth" name="monthOfBirth" pattern="[0-9]{2}" minlength="1" maxlength="2" min="1" max="12" placeholder="mm" value="{{ monthOfBirth }}" required>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-4 offset-md-0 col-sm-8 offset-sm-2">
                                 <label for="yearOfBirth">Année</label><br/>
                                 <input class="form-control text-center" type="number" id="yearOfBirth" name="yearOfBirth" pattern="^[0-9]*$" minlength="4" maxlength="4"  min="1920" max="2025" placeholder="aaaa" value="{{ yearOfBirth }}" required>
                             </div>
