@@ -179,4 +179,13 @@ class ProfileManager extends AbstractManager
             $_POST['éducation']= 0;
         }
     }
+
+    public function admin(array $profile)
+    {
+        $statement = $this->pdo->prepare("UPDATE $this->table 
+        SET `admin`=:admin WHERE `id`=:id ");
+        $statement->bindValue('id', $profile['id'], \PDO::PARAM_INT);
+        $statement->bindValue('admin', $_POST['admin'], \PDO::PARAM_STR);
+        return $statement->execute() ;
+    }
 }

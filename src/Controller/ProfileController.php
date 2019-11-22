@@ -98,10 +98,14 @@ class ProfileController extends AbstractController
                 $connaissance['class'] = 'far';
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (!empty($friends)) {
-                    $friendsManager->delete();
+                if ($_POST['admin'] == 1 or $_POST['admin'] == 0) {
+                    $profileManager->admin($profile);
                 } else {
-                    $friendsManager->add();
+                    if (!empty($friends)) {
+                        $friendsManager->delete();
+                    } else {
+                        $friendsManager->add();
+                    }
                 }
                 header('Location:/profile/profile/'.$id);
             }

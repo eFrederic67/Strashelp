@@ -18,9 +18,25 @@
                             <h5>
                                 Profil de {{ profile.firstname }}
                             </h5>
-                            <h6>
-                                {{ skills.membre }}
-                            </h6>
+                            <div class="row align-items-center" style="margin-left: 0px">
+                                <h6>{{ skills.membre }}</h6>
+                                {% if skills.membre != 'Administrateur' and session.admin == '1'%}
+                                <div class="font-icon-example justify-content-around">
+                                    <form method="post" action="">
+                                        <button type="submit" style="display:contents"><div class="item home text-danger"><i class="admin_icon fas fa-user-shield text-danger"></i><span>Ajout admin</span></div></button>
+                                        <input type="hidden" name="admin" value="1">
+                                    </form>
+                                </div>
+                                {% endif %}
+                                {% if skills.membre == 'Administrateur' and session.admin == '1'%}
+                                    <div class="font-icon-example justify-content-around">
+                                        <form method="post" action="">
+                                            <button type="submit" style="display:contents"><div class="item home text-danger"><i class="admin_icon fas fa-user-shield text-danger"></i><span>Suppr admin</span></div></button>
+                                            <input type="hidden" name="admin" value="0">
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">À propos</a>
