@@ -7,9 +7,8 @@
                 <form class="md-form" method="post">
                     <div>
                         <div class="mt-2">
-                            <label for="name">Titre de l'annonce*</label>
+                            <label for="title">Titre de l'annonce*</label>
                                 <input class="form-control" type="text" autocomplete="off" required="" value="{{ post.title }}" placeholder="Nom de l'annonce" name="title">
-                            </div>
                         </div>
                     </div>
 
@@ -29,7 +28,7 @@
                                 </fieldset>
 
                             <div class="mt-2">
-                                <label>Type d'annonce</label>
+                                <label for="id_category">Type d'annonce</label>
                                 <select name="id_category" class="custom-select mdb-select" id="id_category">
                                     {% for cnameid in cname %}
                                         <option value="{{ cnameid.id }}">{{ cnameid.name | capitalize}}</option>
@@ -42,7 +41,7 @@
                     </div>
                     <div class="mt-2">
                         <div>
-                            <label for="Date">Date</label>
+                            <label for="date_publication">Date</label>
                             <div>
                                 <input class="form-control datepicker" type="date" autocomplete="off" name="date_publication" value="{{ post.date_publication }}">
                             </div>
@@ -84,9 +83,8 @@
                         <div>
                             <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Ajouter votre annonce</button>
                         </div>
-            </form>
+                </form>
             </div>
-        </div>
 {% endblock %}
 {% block javascript %}
 <script>
