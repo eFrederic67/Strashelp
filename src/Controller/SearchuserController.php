@@ -32,7 +32,7 @@ class SearchuserController extends AbstractController
             }
             if ($_FILES['fichier']['name'] !== '') {
                 $editAvManager = new SessionManager();
-                $addressAvatar = $editAvManager->testImage();
+                $addressAvatar = $editAvManager->testImage('avatars');
                 $_POST['avatar'] = "/".$addressAvatar;
             }
 

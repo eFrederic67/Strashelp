@@ -96,8 +96,7 @@ class SessionController extends AbstractController
                         'admin' => 0,
                     );
                     $signUpManager->cleanPhotosTemp();
-                    $idUser = $signUpManager->getLastUser();
-                    header("Location:/Profile/myprofile/".$idUser['id']);
+                    header("Location:/Profile/myprofile/");
                 }
             } else {
                 // s'il y a des erreurs on reloade la page
