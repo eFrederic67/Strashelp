@@ -142,14 +142,14 @@
                                             {% for myfriend in friend %}
                                                   {% if user.id == myfriend.id_friend %}
                                                       <li><a href="/profile/profile/{{ user.id }}"><img src="{{ user.avatar }}"/> <div class="playerInfo"><div class="username">{{ user.login }}</div><div class="game">
-                                                                      {% if user.éducation == 'Éducation' %}
-                                                                        {{ user.éducation }}
+                                                                      {% if user.éducation == '1' %}
+                                                                          Éducation
                                                                       {% endif %}
-                                                                      {% if user.cuisine == 'Cuisine' %}
-                                                                        {{ user.cuisine }}
+                                                                      {% if user.cuisine == '1' %}
+                                                                        Cuisine
                                                                       {% endif %}
-                                                                      {% if user.bricolage == 'Bricolage' %}
-                                                                        {{ user.bricolage }}
+                                                                      {% if user.bricolage == '1' %}
+                                                                        Bricolage
                                                                       {% endif %}
                                                                           </div></div></a></li>
                                                   {% endif %}

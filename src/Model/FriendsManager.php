@@ -66,18 +66,4 @@ class FriendsManager extends AbstractManager
 
         $statement->execute();
     }
-
-    public function skill(array $profile)
-    {
-        foreach ($profile as $key) {
-            if ($profile[$key]['éducation'] == 1) {
-                $profile[$key]['éducation'] = 'Éducation';
-            } if ($profile[$key]['cuisine'] == 1) {
-                $profile[$key]['cuisine'] = 'Cuisine';
-            } if ($profile[$key]['bricolage'] == 1) {
-                $profile[$key]['bricolage'] = 'Bricolage';
-            }
-        }
-        return $profile;
-    }
 }

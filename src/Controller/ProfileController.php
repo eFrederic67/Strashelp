@@ -130,7 +130,6 @@ class ProfileController extends AbstractController
         $friendManager = new FriendsManager();
         $friend = $friendManager->selectAllUserFriends();
         $myskills = $profileManager->skill($myprofile);
-        $otherprofile = $friendManager->skill($otherprofile);
         $annonces = $profileManager->annonces($myprofile);
 
         return $this->twig->render(
