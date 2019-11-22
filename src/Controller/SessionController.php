@@ -59,7 +59,6 @@ class SessionController extends AbstractController
         } else {
             // si le post est rempli parce que c'est un retour de formulaire
             // on teste les erreurs
-            var_dump($_POST);
             $signUpManager = new SessionManager();
             $errors = $signUpManager->testErrorInForm($_POST);
             if (!isset($_POST['avatar'])) {
@@ -98,7 +97,7 @@ class SessionController extends AbstractController
                     );
                     $signUpManager->cleanPhotosTemp();
                     $idUser = $signUpManager->getLastUser();
-                    header("Location:/Profile/profile/".$idUser['id']);
+                    header("Location:/Profile/myprofile/".$idUser['id']);
                 }
             } else {
                 // s'il y a des erreurs on reloade la page
