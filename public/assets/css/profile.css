@@ -35,6 +35,10 @@
     height: 50px;
 }
 
+.admin_icon{
+    font-size: 1em!important;
+}
+
 /* partie connaissances sur le profil */
 
 .playerWall.detailed li {
