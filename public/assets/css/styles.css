@@ -6,6 +6,9 @@ body {
   height: 100%;
 }
 
+nav {
+  z-index: 999;
+}
 nav ul {
   padding: 0 0 10px 0;
   margin: 0;
@@ -361,8 +364,6 @@ footer h4{
     top:calc(100% - 70px);
     background: #138496;
     justify-content: center;
-
-    z-index: 2000;
   }
 
   nav {
