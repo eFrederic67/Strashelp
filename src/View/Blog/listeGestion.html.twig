@@ -3,7 +3,7 @@
 {% block content %}
 <div class="mt-4"></div>
 {% if session['Auth'].admin == 1 %}
-    <table id="myTable" class="display mt-4" style="width:100%; background: whitesmoke">
+    <table id="myTable" class="display mt-4 offset-md-1 col-md-10 col-12 my-2" style="width:100%; background: whitesmoke">
         <thead>
         <tr>
             <th>id</th>
@@ -26,8 +26,7 @@
                 <td>{{ blog.catid }}</td>
                 <td>{{ blog.date_creation }}</td>
                 <td>{{ blog.bodytext | slice(0,30) | raw }} …</td>
-                <td class="text-center" ><a href="/Blog/editArticle/{{ blog.artid }}" class="far fa-edit"></a>&nbsp;<a href="/Blog/delArticle/{{ blog.artid }}" class="far fa-trash-alt"></a></td>
-
+                <td><a href="/Blog/editArticle/{{ blog.artid }}" class="far fa-edit"></a>&nbsp;<a href="/Blog/delArticle/{{ blog.artid }}" class="far fa-trash-alt"></a></td>
             </tr>
         {% endfor %}
         </tbody>

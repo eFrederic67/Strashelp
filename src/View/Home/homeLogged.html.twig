@@ -8,40 +8,71 @@
     <h1 class="text-center">Bienvenue {{ firstname }}</h1>
 
     <h2 class="col-12 text-center my-4">Vos Rendez-vous</h2>
-    {% if rendezVous|length > 0 %}
-    <table class="col-4 table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <td>Type</td>
-            <td>Catégorie</td>
-            <td>Date</td>
-            <td>Heure début</td>
-            <td>Heure heure fin</td>
-            <td>Titre</td>
-            <td>Combien de personnes ont répondu</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for rdv in rendezVous  %}
-            <tr>
-                <td>
-                    {% if rdv.type == 0 %}
-                        Offre
-                    {% else %}
-                        Demande
-                    {% endif %}
-                </td>
-                <td>{{ rdv.cat | capitalize }}</td>
-                <td>{{ rdv.start_hour|date("d/m/Y") }}</td>
-                <td>{{ rdv.start_hour|date('H:i') }}</td>
-                <td>{{ rdv.end_hour|date('H:i') }}</td>
-                <td>{{ rdv.title }}</td>
-                <td>{{ rdv.reponse }}</td>
-            </tr>
+    <div class="col-12 row">
+    {% if rendezVousOffre|length > 0 %}
+    <div class="col-12 col-md-6">
+        <h4 class="text-center">Offre</h4>
+        {% for rdv in rendezVousOffre  %}
+        {% if rdv.cat == 'bricolage' %}
+            <div class="card col-12 my-1 bricolage border-white clickable" onclick="window.location.replace('/Search/posts/{{ rdv.id }}')">
+        {% elseif rdv.cat == 'cuisine' %}
+            <div class="card col-12 my-1 cuisine border-white clickable" onclick="window.location.replace('/Search/posts/{{ rdv.id }}')">
+        {% else %}
+            <div class="card col-12 my-1 education border-white clickable" onclick="window.location.replace('/Search/posts/{{ rdv.id }}')">
+        {% endif %}
+            <div class="card-body text-white row justify-content-between align-baseline p-1">
+                <div class="column justify-left">
+                    <h1>{{ rdv.start_hour|date("d/m") }}</h1>
+                </div>
+                <div class="text-right align-baseline">
+                    <h4>{{ rdv.start_hour|date("H:i") }} ~ {{ rdv.end_hour|date("H:i") }}</h4>
+                </div>
+            </div>
+            <div class="card-body text-white row justify-content-between align-baseline p-1">
+                <div class="">
+                    {{ rdv.title }}
+                </div>
+                <div class="">
+                        {{rdv.reponse}}/{{rdv.nbmax}} réponses</span>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
+            </div>
+    {% endif %}
+    {% if rendezVousDemande|length > 0 %}
+    <div class="col-12 col-md-6">
+            <h4 class="text-center">Demande</h4>
+        {% for rdv in rendezVousDemande %}
+        {% if rdv.cat == 'bricolage' %}
+            <div class="card col-12 my-1 bricolage border-white clickable" onclick="window.location.replace('/Search/posts/{{ rdv.id }}')">
+        {% elseif rdv.cat == 'cuisine' %}
+            <div class="card col-12 my-1 cuisine border-white clickable" onclick="window.location.replace('/Search/posts/{{ rdv.id }}')">
+        {% else %}
+            <div class="card col-12 my-1 education border-white clickable" onclick="window.location.replace('/Search/posts/{{ rdv.id }}')">
+        {% endif %}
+            <div class="card-body text-white row justify-content-between align-baseline p-1">
+                <div class="column justify-left">
+                    <h1>{{ rdv.start_hour|date("d/m") }}</h1>
+                </div>
+                <div class="text-right align-baseline">
+                    <h4>{{ rdv.start_hour|date("H:i") }} ~ {{ rdv.end_hour|date("H:i") }}</h4>
+                </div>
+            </div>
+            <div class="card-body text-white row justify-content-between align-baseline p-1">
+                <div class="">
+                    {{ rdv.title }}
+                </div>
+                <div class="">
+                        {{rdv.reponse}}/{{rdv.nbmax}} réponses</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+            </div>
+    {% endif %}
+            </div>
+    {% if rendezVousDemande|length == 0 and rendezVousOffre|length == 0 %}
         <p class="text-center">Vous n'avez aucun rendez-vous prévu.</p>
     {% endif %}
 {% if ilsOntBesoin|length > 0 %}
