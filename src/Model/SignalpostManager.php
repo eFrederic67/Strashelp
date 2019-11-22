@@ -31,10 +31,10 @@ class SignalpostManager extends AbstractManager
                 $statement = $this->pdo->prepare($query);
 
                 // $statement->bindValue(':post_title', $postTitle, PDO::PARAM_STR);
-                $statement->bindValue(':user_id', $signalingUserId, PDO::PARAM_STR);
-                $statement->bindValue(':user_login', $signalingUserLogin, PDO::PARAM_STR);
-                $statement->bindValue(':post_id', $id, PDO::PARAM_STR);
-                $statement->bindValue(':alert_message', $alertMessage, PDO::PARAM_STR);
+                $statement->bindValue('user_id', $signalingUserId, PDO::PARAM_STR);
+                $statement->bindValue('user_login', $signalingUserLogin, PDO::PARAM_STR);
+                $statement->bindValue('post_id', $id, PDO::PARAM_STR);
+                $statement->bindValue('alert_message', $alertMessage, PDO::PARAM_STR);
 
                 $statement->execute();
 
