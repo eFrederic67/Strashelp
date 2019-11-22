@@ -21,6 +21,7 @@ class SearchuserController extends AbstractController
         $user = $userManager->displayUsers();
         return $this->twig->render('Searchuser/user.html.twig', ['users' => $user]);
     }
+
     public function editUser(int $id): string
     {
         $editManager = new SearchuserManager();
@@ -32,7 +33,7 @@ class SearchuserController extends AbstractController
             }
             if ($_FILES['fichier']['name'] !== '') {
                 $editAvManager = new SessionManager();
-                $addressAvatar = $editAvManager->testImage();
+                $addressAvatar = $editAvManager->testImage('avatars');
                 $_POST['avatar'] = "/".$addressAvatar;
             }
 
@@ -54,6 +55,7 @@ class SearchuserController extends AbstractController
             ]
         );
     }
+
     public function delUser(int $id)
     {
         $beastManager = new SearchuserManager();

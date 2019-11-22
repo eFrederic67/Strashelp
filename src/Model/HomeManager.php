@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Model;
 
 use DateInterval;
@@ -8,9 +7,7 @@ use DateTime;
 
 class HomeManager extends AbstractManager
 {
-
     const TABLE = 'user';
-
 
     public function __construct()
     {
@@ -37,10 +34,10 @@ class HomeManager extends AbstractManager
         $cat = implode(",", $cat);
         if (strlen($cat) > 0) {
             $sql = 'SELECT post.id as id_post, post.type as type, post.title as title, category.name as category,
-            start_hour, end_hour, user.login as user, nbmin, nbmax, category.id FROM ' . $table . '
-            JOIN category ON id_category = category.id
-            JOIN user on user.id = id_user
-            WHERE id_user <> '.$id.' AND id_category in ('. $cat .') AND DATE(start_hour) >= CURDATE()';
+                    start_hour, end_hour, user.login as user, nbmin, nbmax, category.id FROM ' . $table . '
+                    JOIN category ON id_category = category.id
+                    JOIN user on user.id = id_user
+                    WHERE id_user <> '.$id.' AND id_category in ('. $cat .') AND DATE(start_hour) >= CURDATE()';
 
             $tableau = $this->pdo->query($sql)->fetchAll();
             $tableau = $this->howManyAnswers($tableau);
