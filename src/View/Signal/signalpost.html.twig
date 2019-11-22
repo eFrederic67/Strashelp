@@ -9,19 +9,21 @@
                         Signaler l'annonce {{ post.title }}
                     </h3>
                 </div>
-            <div class="card-body">
+            <div class="card-body text-center my-2">
                 <label for="themeList">Motif du signalement :</label>
+                <br/>
                     <SELECT id="themeList" name="theme" size="1" required>
                         <OPTION value="">--Choisir dans la liste--
                         <OPTION value="Scam">Arnaque, spam ou fausse identité
                         <OPTION value="Fee">Propose/recherche un service payant
                         <OPTION value="Other">AUTRES
                     </SELECT>
-                <div class="card-text">
+                <div class="card-text text-center">
                 <label for="alert">Merci de préciser :</label>
+                    <br/>
                 <textarea id="alert" name="alert_message" required autofocus placeholder="Entrez votre message"></textarea>
                 </div>
-                <div class="button text-center">
+                <div class="button text-center my-3">
                     <input type="submit" value="Valider">
                     <div style="clear:both"></div>
                 </div>
