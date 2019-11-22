@@ -7,12 +7,16 @@
         <h3>
             Demande d'aide
         </h3>
-        <div class="hint">
+        <div class="card hint" style="width: 80%;">
+            <div class="card-body hint">
             Avant d'envoyer un message, n'hésitez pas à consulter les réponses aux <a href="/Home/faq">questions les plus fréquentes</a>.
+            </div>
         </div>
-        <div class="hint">
+        <div class="card hint" style="width: 80%;">
+            <div class="card-body hint">
             Pour vos demandes concernant l'adhésion à l'association, merci d'écrire à <a href="mailto:adhesion@strashelp.org">cette adresse</a>.<br>
             Pour les questions d'ordre plus général, ou un contact professionnel, merci d'écrire à <a href="mailto:info@strashelp.org">cette adresse</a>.
+            </div>
         </div>
         <input type="hidden" value="{{ user.id }}" name="user_id">
         <input type="hidden" value="{{ user.message_date }}" name="message_date">

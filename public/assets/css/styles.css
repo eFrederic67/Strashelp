@@ -223,6 +223,13 @@ a:hover .profilPicChange {
   text-decoration: none;
 }
 
+.card .hint{
+  background-color: #FFC890 !important;
+}
+.card-body .hint{
+  color: darkred !important;
+}
+
 footer {
   background-color: #138496;
   color: white;
