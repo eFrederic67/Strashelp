@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller;
 
 use App\Model\SearchManager;
+use App\Model\ParticipateManager;
 
 class SearchController extends AbstractController
 {
@@ -73,7 +75,15 @@ class SearchController extends AbstractController
     {
         $itemManager = new SearchManager();
         $item = $itemManager->post($id);
-        return $this->twig->render('Search/post.html.twig', ['item' => $item,]);
+        $nbReponses = $itemManager->howManyAnswers($item);
+
+        return $this->twig->render(
+            'Search/post.html.twig',
+            [
+                'item' => $item,
+                'nb_reponses' => $nbReponses,
+            ]
+        );
     }
 
     public function editPost(int $id): string
@@ -116,5 +126,26 @@ class SearchController extends AbstractController
         $beastManager->deleteOnePost($id);
 
         header('Location: /search/search');
+    }
+
+    public function participate($id)
+    {
+        $participateManager = new ParticipateManager();
+        $nbMax = $participateManager->getNbMax($id);
+        $participation = $participateManager->checkParticipation($id);
+        $addButton = $participateManager->addParticipation($id);
+        $deleteButton = $participateManager->deleteParticipation($id);
+        $author = $participateManager->selectAuthorByPostId($id);
+
+        return $this->twig->render(
+            'Search/post.html.twig',
+            [
+                'add_button' => $addButton,
+                'delete_button' => $deleteButton,
+                'author' => $author,
+                'nbmax' => $nbMax,
+                'participation' => $participation,
+            ]
+        );
     }
 }

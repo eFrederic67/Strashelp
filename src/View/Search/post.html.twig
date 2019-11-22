@@ -4,13 +4,13 @@
     <div class="card text-center row-2">
         <div class="card-header row justify-content-center">
             <div class="">
-            <h4 class="card-title">{{ item.title }}
-                <small>
-                    proposé par :
-                    <a href="/profile/profile/{{ item.id }}">{{ item.login }}</a>
-                </small>
-            </h4>
-            <h5 class="card-title">Le {{ item.start_day }} de {{ item.start_hour }} à {{ item.end_hour }}</h5>
+                <h4 class="card-title">{{ item.title }}
+                    <small>
+                        proposé par :
+                        <a href="/profile/profile/{{ item.id }}">{{ item.login }}</a>
+                    </small>
+                </h4>
+                <h5 class="card-title">Le {{ item.start_day }} de {{ item.start_hour }} à {{ item.end_hour }}</h5>
             </div>
             <div class="font-icon-example offset-3">
                 <div class="item">
@@ -18,14 +18,14 @@
                         <i class="fas fa-exclamation text-danger"></i><span>Signaler</span></a>
                 </div>
                 {% if session['Auth'].admin == 1 %}
-                <div class="item">
-                    <a href="/Search/editPost/{{ item.id }}">
-                        <i class="fas fa-edit text-primary"></i><span>Editer</span></a>
-                </div>
-                <div class="item">
-                    <a href="/Search/delPost/{{ item.id }}">
-                        <i class="fas fa-trash-alt text-primary"></i><span>Supprimer</span></a>
-                </div>
+                    <div class="item">
+                        <a href="/Search/editPost/{{ item.id }}">
+                            <i class="fas fa-edit text-primary"></i><span>Éditer</span></a>
+                    </div>
+                    <div class="item">
+                        <a href="/Search/delPost/{{ item.id }}">
+                            <i class="fas fa-trash-alt text-primary"></i><span>Supprimer</span></a>
+                    </div>
                 {% endif %}
             </div>
         </div>
@@ -33,16 +33,36 @@
             <p class="card-text text-justify">{{ item.text_annoucement | raw }}</p>
         </div>
         <div class="card-footer text-muted">
-            <a href="#!" class="btn btn-dark">Intéressé</a>
+            <div id="form">
+                {% if not item.login == session.Auth.login %}
+                    {% if participation > 0 %}
+                        <div class="button">
+                            <input type="submit" value="Annuler ma participation">
+                            <div style="clear:both"></div>
+                        </div>
+                    {% else %}
+                        {% if (nb_reponses.reponse | number_format) < item.nbmax %}
+                            <div class="button">
+                                <input type="submit" value="Je participe">
+                                <div style="clear:both"></div>
+                            </div>
+                        {% else %}
+                            <p>* Nombre maximum de participations déjà atteint *</p>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
             <br/>
-            Type d'annonce : {{ item.catname | capitalize}}
+            Nombres de helpers déjà inscrits : {{ nb_reponses.reponse }}
             <br/>
-            Nombres de personnes demandés
+            Nombre de helpers demandé :
             {% if item.nbmin == item.nbmax %}
-                Max <strong>{{ item.nbmax }}</strong>
+                <strong>{{ item.nbmax }}</strong> au maximum
             {% else %}
-                Min <strong>{{ item.nbmin }}</strong> | Max <strong>{{ item.nbmax }}</strong>
+                entre <strong>{{ item.nbmin }}</strong> et <strong>{{ item.nbmax }}</strong>
             {% endif %}
+            <br/>
+            Type d'annonce : {{ item.catname | capitalize }}
         </div>
     </div>
 {% endblock %}

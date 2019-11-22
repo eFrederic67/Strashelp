@@ -130,4 +130,20 @@ abstract class AbstractManager
             }
         }
     }
+
+    public function howManyAnswers($tableau)
+    {
+        if (isset($tableau['id'])) {
+            $sql = "SELECT count(*) FROM response WHERE id_post =".$tableau['id'];
+            $pouet = $this->pdo->query($sql)->fetch();
+            $tableau['reponse'] = $pouet['count(*)'];
+        } else {
+            foreach ($tableau as $key => $value) {
+                $sql = "SELECT count(*) FROM response WHERE id_post =".$value['id'];
+                $pouet = $this->pdo->query($sql)->fetch();
+                $tableau[$key]['reponse'] = $pouet['count(*)'];
+            }
+        }
+        return $tableau;
+    }
 }

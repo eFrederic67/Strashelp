@@ -335,7 +335,7 @@ footer h4{
 }
 
 @media (min-width: 768px) {
-  li {
+  footer li {
     font-size: 12px;
   }
   .font-icon-example .item {
@@ -350,7 +350,7 @@ footer h4{
 }
 
 @media (max-width: 767px) {
-  li {
+  footer li {
     font-size: 11px;
   }
 
@@ -405,12 +405,10 @@ footer h4{
 }
 
 @media (min-width: 401px) and (max-width: 766px) {
-  li {
+  footer li {
     font-size: 11px;
   }
 }
-
-
 
 @media (max-width: 400px) {
   h1 {
