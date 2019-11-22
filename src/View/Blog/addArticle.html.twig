@@ -2,7 +2,7 @@
 
 {% block content %}
         <div class="card col-12 col-md-6 offset-md-3 my-4">
-                <h1 class="card-header info-color white-text text-center py-4">Créer un article</h1>
+                <h1 class="card-header info-color white-text text-center py-4">{{ titre }} un article</h1>
             <div class="card-body px-lg-5 pt-0">
                 <form class="md-form" method="post" enctype="multipart/form-data">
                     <div>
@@ -30,13 +30,13 @@
                         <div class="col-md-8 col-12">
                             <label for="Date">Date de parution</label>
                             <div>
-                                <input class="form-control datepicker" type="date" autocomplete="off" name="date_publication" value="{{ post.date_publication }}">
+                                <input class="form-control datepicker" type="date" autocomplete="off" name="date_publication" value="{{ post.date_publication | date("Y-m-d") }}">
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
                             <label>Heure de parution</label>
                             <div>
-                                <input class="form-control datepicker text-center" type="time" autocomplete="off" name="end_hour" required value="{{ post.end_hour }}">
+                                <input class="form-control datepicker text-center" type="time" autocomplete="off" name="end_hour" required value="{{ post.date_publication | date("H:i") }}">
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                         <div>
-                            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Créer un article</button>
+                            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">{{ titre }} un article</button>
                         </div>
             </form>
             </div>

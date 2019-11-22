@@ -94,10 +94,11 @@ class HomeManager extends AbstractManager
 
         $temp = [];
         for ($i = 0; $i < 3; $i++) {
-            $temp[$i] = array_search(max($tableau2),$tableau2);
+            $temp[$i] = array_search(max($tableau2), $tableau2);
             unset($tableau2[$temp[$i]]);
         }
 
+        $topHelpers =[];
         for ($i = 0; $i < 3; $i++) {
             $sql = "SELECT user.id, user.avatar, user.login FROM user WHERE id=" . $temp[$i];
             $topHelpers[$i] = $this->pdo->query($sql)->fetch(\PDO::FETCH_NUM);

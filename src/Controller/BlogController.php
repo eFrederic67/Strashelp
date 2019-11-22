@@ -53,9 +53,45 @@ class BlogController extends AbstractController
         } else {
             return $this->twig->render('Blog/addArticle.html.twig', [
                 'cname'=>$category,
+                'titre' => 'Créer'
+
             ]);
         }
     }
+
+    public function listeGestion()
+    {
+        $blogManager = new BlogManager();
+        $blogs = $blogManager->getAllJoined();
+        return $this->twig->render('Blog/listeGestion.html.twig', [
+            'blogs' => $blogs,
+        ]);
+    }
+
+    public function delArticle($id)
+    {
+        $blogManager = new BlogManager();
+
+        $blogManager->delArticle($id);
+
+        $blogs = $blogManager->getAllJoined();
+        return $this->twig->render('Blog/listeGestion.html.twig', [
+            'blogs' => $blogs,
+        ]);
+    }
+
+    public function editArticle($id)
+    {
+        $blogManager = new BlogManager();
+        $category = $blogManager->displayCategory();
+        $post = $blogManager->selectOneById($id);
+        return $this->twig->render('Blog/addArticle.html.twig', [
+            'cname'=>$category,
+            'post'=>$post,
+            'titre' => 'Modifier'
+        ]);
+    }
+
 
     private function trunc(array $tab)
     {

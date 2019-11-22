@@ -18,6 +18,10 @@ nav ul {
   cursor: pointer !important;
 }
 
+.logoHeader {
+  width: 50px;
+}
+
 .backgroundUnlogged {
   background: #138496;
   display: flex;
