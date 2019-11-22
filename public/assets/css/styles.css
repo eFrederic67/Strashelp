@@ -492,3 +492,7 @@ footer h4{
     font-size: 24px;
   }
 }
+
+.unloggedfooter{
+  position: fixed;
+}
