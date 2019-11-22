@@ -34,8 +34,7 @@
         </div>
         <div class="card-footer text-muted">
             <div id="form">
-                {# Corriger la 1ère condition qui suit #}
-                {% if not item.id == author %}
+                {% if not item.login == session.Auth.login %}
                     {% if participation > 0 %}
                         <div class="button">
                             <input type="submit" value="Annuler ma participation">
