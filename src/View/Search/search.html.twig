@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Rechercher une annonce{% endblock %}
 {% block content %}
-    <table id="myTable" class="display" style="width:100%; background: whitesmoke">
+    <table id="myTable" class="display offset-md-1 col-md-10 col-12 my-2" style="width:100%; background: whitesmoke">
         <thead>
         <tr>
             {% if session['Auth'].admin == 1 %}
@@ -27,13 +27,13 @@
         <tbody style="background: #7597ff">
         {% for searchid in search %}
             <tr>
-                <td ><a href="/Search/Posts/{{ searchid.post_id }}" class="badge badge-warning"> {{ searchid.title }}</a></td>
+                <td ><a href="/Search/Posts/{{ searchid.post_id }}" class="badge badge-warning" title="Annonce {{ searchid.title }}"> {{ searchid.title }}</a></td>
                 <td >{{ searchid.start_day }}</td>
                 <td >{{ searchid.start_hour }}</td>
                 <td >{{ searchid.end_hour }}</td>
                 <td ><a href="/profile/profile/{{ searchid.id }}" class="badge badge-warning">{{ searchid.login }}</a></td>
                 {% if session['Auth'].admin == 1 %}
-                <td class="text-center" ><a href="/Search/editPost/{{ searchid.post_id }}" class="far fa-edit"></a>&nbsp;<a href="/Search/delPost/{{ searchid.post_id }}" class="far fa-trash-alt"></a></td>
+                <td class="text-center" ><a href="/Search/editPost/{{ searchid.post_id }}" class="far fa-edit" title="Profil de {{ searchid.login }}"></a>&nbsp;<a href="/Search/delPost/{{ searchid.post_id }}" class="far fa-trash-alt"></a></td>
                 {% endif %}
             </tr>
         {% endfor %}
