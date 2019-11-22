@@ -14,11 +14,11 @@ class HomeManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectBySection($table, $id)
+    public function selectBySection($table, $id, $type)
     {
         $tableau = $this->pdo->query('SELECT *, category.name as cat FROM '.$table.'
          JOIN category ON category.id = id_category
-         WHERE id_user ='.$id.' AND DATE(start_hour) >= CURDATE()')->fetchAll();
+         WHERE id_user ='.$id.' AND post.type = '. $type .' AND DATE(start_hour) >= CURDATE()')->fetchAll();
         $tableau = $this->howManyAnswers($tableau);
         return $tableau;
     }
@@ -41,7 +41,6 @@ class HomeManager extends AbstractManager
 
             $tableau = $this->pdo->query($sql)->fetchAll();
             $tableau = $this->howManyAnswers($tableau);
-
             return $tableau;
         }
         return [];

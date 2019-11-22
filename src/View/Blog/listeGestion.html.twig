@@ -26,8 +26,7 @@
                 <td>{{ blog.catid }}</td>
                 <td>{{ blog.date_creation }}</td>
                 <td>{{ blog.bodytext | slice(0,30) | raw }} …</td>
-                <td class="text-center" ><a href="/Blog/editArticle/{{ blog.artid }}" class="far fa-edit"></a>&nbsp;<a href="/Blog/delArticle/{{ blog.artid }}" class="far fa-trash-alt"></a></td>
-
+                <td><a href="/Blog/editArticle/{{ blog.artid }}" class="far fa-edit"></a>&nbsp;<a href="/Blog/delArticle/{{ blog.artid }}" class="far fa-trash-alt"></a></td>
             </tr>
         {% endfor %}
         </tbody>

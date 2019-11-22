@@ -28,7 +28,8 @@ class HomeController extends AbstractController
         // Si le type EST loggué, on l'envoie sur la page d'accueil des loggués
         if (isset($_SESSION['Auth']) && isset($_SESSION['Auth']['login']) && isset($_SESSION['Auth']['pass'])) {
             $homeManager = new HomeManager();
-            $myAppointments = $homeManager->selectBySection('post', $_SESSION['Auth']['id']);
+            $myAppointmentsOffres = $homeManager->selectBySection('post', $_SESSION['Auth']['id'], '0');
+            $myAppointmentsDdes = $homeManager->selectBySection('post', $_SESSION['Auth']['id'], '1');
             $peopleInNeed = $homeManager->peopleInNeed('post', $_SESSION['Auth']['id']);
             $alignement = (count($peopleInNeed)>    3) ? "justify-content-start" : "justify-content-around";
             $lastPost = $homeManager->lastPosts($_SESSION['Auth']['id']);
@@ -41,7 +42,8 @@ class HomeController extends AbstractController
 
             return $this->twig->render('Home/homeLogged.html.twig', [
                     'firstname' => $_SESSION['Auth']['firstname'],
-                    'rendezVous' => $myAppointments,
+                    'rendezVousOffre' => $myAppointmentsOffres,
+                    'rendezVousDemande' => $myAppointmentsDdes,
                     'ilsOntBesoin' => $peopleInNeed,
                     'dernieresAnnonces' => $lastPost,
                     'derniersArticles' => $lastArticle,
