@@ -35,4 +35,20 @@ class BlogManager extends AbstractManager
 
         return ($statement->execute()) ? true : false;
     }
+
+    public function getAllJoined()
+    {
+        $statement = $this->pdo->query("SELECT article.*, article.id as artid, user.id as userid, user.login, 
+        category.id, category.name as catid, article.bodytext as bodytext FROM ".self::TABLE. "
+        JOIN user ON user.id = id_user
+        JOIN category ON id_category = category.id");
+
+        return $statement->fetchAll();
+    }
+
+    public function delArticle($id)
+    {
+        $sql = "DELETE FROM article WHERE id =".$id;
+        $statement = $this->pdo->query($sql);
+    }
 }

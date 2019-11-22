@@ -17,6 +17,14 @@ nav ul {
   z-index: 1;
 }
 
+.clickable {
+  cursor: pointer !important;
+}
+
+.logoHeader {
+  width: 50px;
+}
+
 .backgroundUnlogged {
   background: #138496;
   display: flex;

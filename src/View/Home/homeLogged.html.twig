@@ -49,13 +49,13 @@
 <div class="container row {{alignement}} col-12 text-white m-0">
     {% for need in ilsOntBesoin  %}
     {% if need.category == 'bricolage' %}
-    <div class="card col-12 col-md-3 my-1 bricolage border-white" onclick="window.location.replace('/Search/posts/{{ need.id_post }}')">
+    <div class="card col-12 col-md-3 my-1 bricolage border-white clickable" onclick="window.location.replace('/Search/posts/{{ need.id_post }}')">
         {% elseif need.category == 'cuisine' %}
-        <div class="card col-12 col-md-3 my-1 cuisine border-white" onclick="window.location.replace('/Search/posts/{{ need.id_post }}')">
+        <div class="card col-12 col-md-3 my-1 cuisine border-white clickable" onclick="window.location.replace('/Search/posts/{{ need.id_post }}')">
             {% else %}
-            <div class="card col-12 col-md-3 my-1 education border-white" onclick="window.location.replace('/Search/posts/{{ need.id_post }}')">
+            <div class="card col-12 col-md-3 my-1 education border-white clickable" onclick="window.location.replace('/Search/posts/{{ need.id_post }}')">
                 {% endif %}
-                <div class="card-body">
+                <div class="card-body   ">
                     <div class="column justify-left">
                         <div>
                             <i>{{need.category | capitalize}}</i>
@@ -131,14 +131,26 @@
                         </div>
                     </div>
                     <div class="text-justify">
-                        <p>{{ article.bodytext }}</p>
+                        <p>{{ article.bodytext | raw }}</p>
                     </div>
                 </div>
             </div>
      {% endfor %}
     </div>
     <h2 class="col-12 text-center my-4">Top Helpers</h2>
-    <h3 class="col-12 col-md-4 text-center my-4">Bricolage</h3>
-    <h3 class="col-12 col-md-4 text-center my-4">Cuisine</h3>
-    <h3 class="col-12 col-md-4 text-center my-4">Éducation</h3>
+    <div class="row col-12">
+        {% for topHelper in topHelpers %}
+        <div class="col-12 col-md-4">
+            <div class="card-body">
+                <div class="column justify-center text-center">
+                    <a href="Profile/Profile/{{ topHelper.0 }}">
+                        <img src="{{ topHelper.1 }}" height="200px">
+                    <br/>
+                    <h4>{{topHelper.2}}</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

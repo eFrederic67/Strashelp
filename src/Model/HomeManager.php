@@ -78,4 +78,29 @@ class HomeManager extends AbstractManager
         $pouet = $this->pdo->query($sql)->fetchall();
         return $pouet;
     }
+
+    public function topHelpers()
+    {
+        $sql = "SELECT user.id, user.avatar, user.login FROM user JOIN friend ON user.id = friend.id_friend";
+        $pouet = $this->pdo->query($sql)->fetchall(\PDO::FETCH_NUM);
+        $tableau = [];
+        foreach ($pouet as $key => $value) {
+            $tableau[$key] = $value[0];
+        }
+        $tableau2 = array_count_values($tableau);
+
+        $temp = [];
+        for ($i = 0; $i < 3; $i++) {
+            $temp[$i] = array_search(max($tableau2), $tableau2);
+            unset($tableau2[$temp[$i]]);
+        }
+
+        $topHelpers =[];
+        for ($i = 0; $i < 3; $i++) {
+            $sql = "SELECT user.id, user.avatar, user.login FROM user WHERE id=" . $temp[$i];
+            $topHelpers[$i] = $this->pdo->query($sql)->fetch(\PDO::FETCH_NUM);
+        }
+
+        return $topHelpers;
+    }
 }
