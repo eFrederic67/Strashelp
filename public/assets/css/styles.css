@@ -235,6 +235,7 @@ footer {
   color: white;
   bottom: 0;
   width:100%;
+  margin-top: 180px;
 }
 
 footer a {
@@ -277,6 +278,18 @@ footer ul {
 
 .footer {
   justify-content: center;
+}
+
+.page_wrap {
+  min-height: 100%;
+  margin-bottom: -180px;
+}
+.page_wrap:after {
+  content: "";
+  display: block;
+}
+.site_footer, .page-wrap:after {
+  height: 180px;
 }
 
 .child {
@@ -370,6 +383,15 @@ footer h4{
 @media (max-width: 767px) {
   footer li {
     font-size: 11px;
+  }
+  footer{
+    margin-top: 250px;
+  }
+  .page_wrap {
+    margin-bottom: -230px;
+  }
+  .site_footer{
+    margin-bottom: 50px;
   }
 
   .background {
